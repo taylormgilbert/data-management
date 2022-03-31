@@ -1,0 +1,4 @@
+# Slingsby_TaylorPlots
+Supplementary Data and R Markdown workflows for Slingsby et al. "Intensifying post-fire weather and biological invasion drive species loss in a Mediterranean-type biodiversity hotspot"
+
+All data and repeatable R code work flows (R Markdown) used in the study are available. Versioned updates fixing any errors etc will be maintained through Figshare. Code and data are provided under the MIT license, but where possible we would appreciate users acknowledging "the South African Environmental Observation Network (SAEON) and partners" and citing our paper and/or the original data source outlined in the paper. We would also see it as a courtesy to inform the lead author of your intended use of the data. Co-authorship is not a prerequisite, but we would like to minimize duplication of effort and/or warn users where their plans for the data do not seem appropriate.

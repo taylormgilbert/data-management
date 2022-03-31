@@ -1,0 +1,51 @@
+# Tidy Data
+
+This section is a demonstration of some of the _Tidyverse_ tools for wrangling and tidying your data, but first you need to get your data into a digital format...
+
+<br>
+
+## Data entry
+
+Before we start, I should highlight that one very good way of reducing errors in data entry and improving quality assurance and quality control (QA/QC) is to make use of various forms of **data validation** like **drop down lists** and **conditional formatting**. These can be used to limit data types (i.e. avoids you entering text into a numeric column or vice versa), or limiting the range of values entered (e.g. 0 to 100 for percentages), or just highlighting values that are possible, but rare, and should be double-checked, like 100m tall trees. Unit errors are incredibly common in ecological data entry, especially for things like plant height where you may be measuring 20cm tall grasses and 20m tall trees!!! Drop down lists really come into their own when you're working with lots of different Latin species names etc. Typos, spelling errors and synonyms can take weeks of work to fix! Restricting the names to a drop-down list from a known published taxonomic resource really makes a huge difference! 
+
+[Here's an example](https://docs.google.com/spreadsheets/d/1LB_guWKrc-EAD8cwD3fdnYrZkoalTory4q24styxdGA/edit?usp=sharing) from a vegetation plot survey I ran. If you go to the `PlotTemplate` sheet, you'll see that the first two columns `Plot_Quadrat` and `AcceptedSpecies` are drop-down lists that reference the `SiteData` and `AcceptedSpecies` spreadsheets respectively. These prevent you from entering species data without having collected the site data first (it's easy to forget if you're doing lots of sites) and then limits the names you can use in turn.
+
+I'm not going to go into how to do data validation in spreadsheets, but here are links for:
+
+* [Microsoft Excel](https://support.microsoft.com/en-us/topic/fef13169-0a84-4b92-a5ab-d856b0d7c1f7#ID0EAABAAA=Data_validation&ID0EBBD=Data_validation)
+* [Google Sheets](https://cloud.google.com/blog/products/g-suite/pro-tip-how-create-dropdown-list-google-sheets-and-pointers-conditional-formatting)
+
+I'm sure there are plenty of other online resources too.
+
+<br>
+
+## Tidy data and data wrangling
+
+As you know from the readings for the course, there are many reasons why you should keep your data in _tidy_ format [@Wickham2014]. Unfortunately, as my spreadsheet above demonstrates, it's not always convenient to enter your data in _tidy_ format, so you inevitably end out needing to do post-entry data formatting. A major problem here is that doing the reformatting manually creates opportunities for introducing errors. This is where it's a major advantage if you know how to _wrangle_ your data in a coding language like R or Python. This is not to say that coded data wrangling cannot introduce errors!!! You should always do sanity checks!!! But I'd suspect that most of the errors you can make with code will be very obvious, because the outcome is usually spectacularly different to the input.
+
+The rest of this section provides a demonstration of some of the functionality of the [_tidyverse_](https://www.tidyverse.org/) set of R packages, and some of the more common data wrangling errors made in R.
+
+<br>
+
+## The dataset
+
+This tutorial relies on data provided as supplementary material for the paper Slingsby et al. 2017. Intensifying postfire weather and biological invasion drive species loss in a Mediterranean-type biodiversity hotspot. _Proceedings of the National Academy of Sciences_. http://dx.doi.org/10.1073/pnas.1619014114. 
+
+The data can be downloaded as one ~13MB MicroSoft Excel (.xlsx) file [here](https://www.pnas.org/highwire/filestream/29863/field_highwire_adjunct_files/0/pnas.1619014114.sd01.xlsx). We're also going to use the same dataset, but as a set of comma separated value (.csv) text files, that you can download and unzip from [here](https://figshare.com/articles/dataset/Slingsby_TaylorPlots/4737358).
+
+
+<br>
+
+## Reading data
+
+R has a number of different packages to read in data, and there's even a few that work with different tabular data types just within the _tidyverse_. These include:
+
+* [_readr_]() for text files
+* [_readxl_]() for Microsoft Excel files (.xls or .xlsx)
+* [_googlesheets4_]() for reading data directly from a Google Sheet
+
+There's [others too](https://www.tidyverse.org/packages/#import) that can scrape data from web pages, interact with web APIs or directly with local or online databases.
+
+Fortunately, within the _tidyverse_ similar syntax can be used across most packages. Check out the [cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf). Let's start with _readr_:
+
+

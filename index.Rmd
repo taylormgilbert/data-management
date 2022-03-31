@@ -33,10 +33,15 @@ The core outcomes/concepts I hope you’ll come away with:
 
 * Familiarity with the concepts and understand the need for Open, Reproducible Science
 * Familiarity with The Data Life Cycle
+* Some data management and handling skills
 
-## Lectures
+## Lectures/Discussions/Tutorials
 
-Lectures will be held live in person in BIO LT1 from 10AM to 12PM from the 4th to the 7th April unless otherwise announced on Vula. 
+These will be held live in person in BIO LT1 from 10AM to 12PM from the 4th to the 7th April unless otherwise announced on Vula. 
 
 I’ll be adding to (and mostly teaching from) these online course notes as we go along.
+
+## Deliverables
+
+
 

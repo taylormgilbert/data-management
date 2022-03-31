@@ -1,0 +1,347 @@
+---
+title: "Analysis of Climate-driven Shifts in Species Composition"
+author: "Jasper Slingsby"
+date: "9 March 2017"
+output: pdf_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(doSNOW)
+library(foreach)
+library(MCMCpack)
+library(ggplot2)
+library(gdata)
+
+datwd <- "" #Set your working directory here
+```
+
+<br>
+
+This script uses *MCMCregress()* from R library(MCMCpack) to estimate each species' mean maximum temperature tolerance and then estimate and compare the mean maximum temperature tolerance for each set of species unique to each vegetation survey. We repeat this with 3 separate climate data sources. *This entire script take ~10 minutes to run on a 2015 MacBook-Pro x86_64*.
+
+<br>
+
+The extracted climate data:
+
+<br>
+
+```{r, echo=FALSE}
+
+###Get lists of species unique to each study
+
+#Get plots of interest
+plots <- c(1, 2, 3,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 21, 22, 27, 28, 29, 31, 34, 37, 38, 39, 40, 44, 45, 47, 48, 49, 50, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 75, 76, 78, 79, 82, 83, 88, 92)
+CP_plots <- paste0("CP_", plots)
+
+#Get species to exclude (not perennial, ferns, and one alien seedling)
+if(file.exists("excluded_spp.csv")) {
+exclude <- unlist(read.csv(paste0(datwd,"excluded_spp.csv"), row.names = 1, stringsAsFactors = F))
+} else {
+exclude <- unlist(read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "excluded_spp", row.names = 1, stringsAsFactors = F))
+}
+
+#Get vegetation data
+if(file.exists("veg1966.csv")) { #Assuming if one exists they all exist
+veg66 <- read.csv(paste0(datwd,"veg1966.csv"), row.names = 1, check.names=FALSE)
+veg96 <- read.csv(paste0(datwd,"veg1996.csv"), row.names = 1, check.names=FALSE)
+veg10 <- read.csv(paste0(datwd,"veg2010.csv"), row.names = 1, check.names=FALSE)
+} else {
+veg66 <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "veg1966", row.names = 1, check.names=FALSE)
+veg96 <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "veg1996", row.names = 1, check.names=FALSE)
+veg10 <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "veg2010", row.names = 1, check.names=FALSE)
+}
+
+#Trim veg data to focal plots and species
+veg66 <- veg66[which(rownames(veg66)%in%CP_plots), -which(colnames(veg66)%in%exclude)]
+veg66 <- veg66[,which(colSums(veg66)>0)]
+veg96 <- veg96[which(rownames(veg96)%in%CP_plots), -which(colnames(veg96)%in%exclude)]
+veg96 <- veg96[,which(colSums(veg96)>0)]
+veg10 <- veg10[which(rownames(veg10)%in%CP_plots), -which(colnames(veg10)%in%exclude)]
+veg10 <- veg10[,which(colSums(veg10)>0)]
+
+#Get lists of species unique to each study
+unique_nms <- list()
+unique_nms[[1]] <- colnames(veg66)[-which(colnames(veg66)%in%c(colnames(veg96), colnames(veg10)))]
+unique_nms[[2]] <- colnames(veg96)[-which(colnames(veg96)%in%c(colnames(veg66), colnames(veg10)))]
+unique_nms[[3]] <- colnames(veg10)[-which(colnames(veg10)%in%c(colnames(veg66), colnames(veg96)))]
+names(unique_nms) <- c("1966", "1996", "2010")
+
+
+### Run models to estimate species climate tolerances in parallel for all species - Note that we have set it up that you could easily adapt the code to look at various quantiles etc as well as or instead of the means. We focused on the means as is is simplest and possibly least bias by varied sampling effort (number of species records).
+
+#Get climate data
+if(file.exists("speciesclimatedata.csv")) {
+clim <- read.csv(paste0(datwd,"speciesclimatedata.csv"), stringsAsFactors = F, row.names = 1)
+} else {
+clim <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "speciesclimatedata", stringsAsFactors = F, row.names = 1)
+}
+
+head(clim)
+spp = sort(unique(clim$Species))
+
+#Set up task order
+chop.tasks=function(x,n) split(x, cut(seq_along(x), n, labels = FALSE))
+use = c("tmax_Wi", "tmax_Hi", "tmax_Sc")
+ntasks = 3
+task.split=chop.tasks(use,ntasks)
+task.track=chop.tasks(1:length(use),ntasks)
+
+#Set up cluster
+cl=makeCluster(ntasks, type = "SOCK")
+registerDoSNOW(cl)
+
+#Run all
+out <- foreach(i = 1:ntasks,.packages=c("MCMCpack")) %dopar% {
+    #outX = vector("list", length(task.split[[i]]))
+    outk = vector("list", 2)
+    #outt = vector("list", 2)
+
+    for(k in 1:length(task.split[[i]])) # loop of species within tasks
+    {
+    formnm = task.split[[i]][k]
+    form = formula(paste0(formnm, " ~ 1"))
+    resM = matrix(NaN, length(spp), 2); colnames(resM) = paste0(formnm, c("_M", "_Sd")) #, "_q.05", "_q.25", "_q.75", "_q.95", "_median")) #If you want to do quantiles
+    resSD = matrix(NaN, length(spp), 2); colnames(resSD) = paste0(formnm, c("_M_sd", "_Sd_sd")) #, "_q.05_sd", "_q.25_sd", "_q.75_sd", "_q.95_sd", "_median_sd")) #If you want to do quantiles
+    tryM = matrix(NaN, length(spp), 2)
+
+    for(j in 1:length(spp)){
+      spc = clim[which(clim$Species==spp[j]),c(1,which(colnames(clim)==formnm))]
+      m1 = try(MCMCregress(formula = form, data = spc, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0))
+      if(class(m1) =="mcmc")
+      {
+      resM[j,1:2] = apply(m1, MARGIN = 2, mean, na.rm=T)
+      resSD[j,1:2] = apply(m1, MARGIN = 2, sd, na.rm=T)
+      }
+      # m2 = try(MCMCquantreg(formula = form, data = spc, tau=0.05, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)) #If you want to do quantiles
+      # if(class(m2) =="mcmc")
+      # {
+      # resM[j,3] = mean(m2, na.rm=T)
+      # resSD[j,3] = sd(m2, na.rm=T)
+      # }
+      # m3 = try(MCMCquantreg(formula = form, data = spc, tau=0.25, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0))
+      # if(class(m3) =="mcmc")
+      # {
+      # resM[j,4] = mean(m3, na.rm=T)
+      # resSD[j,4] = sd(m3, na.rm=T)
+      # }
+      # m4 = try(MCMCquantreg(formula = form, data = spc, tau=0.75, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0))
+      # if(class(m4) =="mcmc")
+      # {
+      # resM[j,5] = mean(m4, na.rm=T)
+      # resSD[j,5] = sd(m4, na.rm=T)
+      # }
+      # m5 = try(MCMCquantreg(formula = form, data = spc, tau=0.95, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0))
+      # if(class(m5) =="mcmc")
+      # {
+      # resM[j,6] = mean(m5, na.rm=T)
+      # resSD[j,6] = sd(m5, na.rm=T)
+      # }
+      # m6 = try(MCMCquantreg(formula = form, data = spc, tau=0.5, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0))
+      # if(class(m6) =="mcmc")
+      # {
+      # resM[j,7] = mean(m6, na.rm=T)
+      # resSD[j,7] = sd(m6, na.rm=T)
+      # }
+    }
+
+    outk[[k]]=list(resM, resSD)
+    }
+  outk
+  }
+
+#Kill children...
+stopCluster(cl)
+
+
+names(out) = unlist(task.split) 
+tmax = as.data.frame(cbind(out[[1]][[1]][[1]], out[[2]][[1]][[1]], out[[3]][[1]][[1]])) #Messy, sorry
+tmax$Species <- spp
+
+### Set up inputs for estimation for species sets
+#Set up inputs dataframe
+uspp <- data.frame(Species = unlist(unique_nms), Survey = as.factor(c(rep("1966", length(unique_nms[[1]])), rep("1996", length(unique_nms[[2]])), rep("2010", length(unique_nms[[3]])))))
+
+#uspp$Species[-which(uspp$Species%in%rownames(tmax))] #Two species that are endemic to the reserve and have only 1 locality record each (the reserve), so they were excluded from the analysis
+
+usppdat <- merge(tmax, uspp)
+
+```
+
+<br>
+
+##Schulze et al. 2007
+
+<br>
+
+Schulze RE (2007) South African Atlas of Climatology and Agrohydrology., (Water Research Commission, Pretoria, RSA, WRC Report 1489/1/06,), Technical report.
+
+<br>
+
+```{r, echo=FALSE, fig.width=11.4, fig.height=6}
+
+###Run model
+fit_Sc <- MCMCregress(tmax_Sc_M ~ Survey, data = usppdat, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)
+
+modsumS <- data.frame(Maximum_Temperature = c(fit_Sc[,1], fit_Sc[,1]+fit_Sc[,2],fit_Sc[,1]+fit_Sc[,3]),  Survey = c(rep("1966", nrow(fit_Sc)), rep("1996", nrow(fit_Sc)), rep("2010", nrow(fit_Sc))))
+               
+PS <-  ggplot(modsumS) + 
+  geom_density(aes(Maximum_Temperature, fill = Survey, colour = Survey, linetype = Survey), alpha = 0.25) + 
+  scale_fill_grey(start = 0.8, end = 0.2) + 
+  scale_colour_grey(start = 0, end = 0) +
+  scale_linetype_manual(values = c(2,3,1)) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(), axis.line = element_line(),
+panel.grid.minor = element_blank(), panel.border = element_blank()) + # , legend.position="none"
+  labs(title = " ", x = expression("Mean Maximum Temperature "( degree*C)), y = "Density")
+
+PS
+
+#ggsave(paste0(datwd,"Fig 3", Sys.Date(), ".pdf"), width=11.4, height=6, units = "cm", dpi=600, plot=PS)
+
+summary(fit_Sc)
+
+```
+
+<br>
+
+##Hijmans et al. 2005
+
+<br>
+
+Hijmans RJ, Cameron SE, Parra JL, Jones PG, Jarvis A (2005) Very high resolution interpolated climate surfaces for global land areas. International Journal of Climatology 25(15):1965– 1978.
+
+<br>
+
+```{r, echo=FALSE, fig.width=11.4, fig.height=6}
+
+###Run model
+fit_Hi <- MCMCregress(tmax_Hi_M ~ Survey, data = usppdat, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)
+
+modsumH <- data.frame(Maximum_Temperature = c(fit_Hi[,1], fit_Hi[,1]+fit_Hi[,2],fit_Hi[,1]+fit_Hi[,3]),  Survey = c(rep("1966", nrow(fit_Hi)), rep("1996", nrow(fit_Hi)), rep("2010", nrow(fit_Hi))))
+               
+PH <-  ggplot(modsumH) + 
+  geom_density(aes(Maximum_Temperature, fill = Survey, colour = Survey, linetype = Survey), alpha = 0.25) +
+  scale_fill_grey(start = 0.8, end = 0.2) + 
+  scale_colour_grey(start = 0, end = 0) +
+  scale_linetype_manual(values = c(2,3,1)) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(), axis.line = element_line(),
+panel.grid.minor = element_blank(), panel.border = element_blank()) + # , legend.position="none"
+  labs(title = " ", x = expression("Mean Maximum Temperature "( degree*C)), y = "Density")
+
+PH
+
+summary(fit_Hi)
+
+```
+
+<br>
+
+##Wilson and Silander 2014
+
+<br>
+
+Wilson AM, Silander JA (2014) Estimating uncertainty in daily weather interpolations: a Bayesian framework for developing climate surfaces. International Journal of Climatology 34(8):2573–2584.
+
+<br>
+
+```{r, echo=FALSE, fig.width=11.4, fig.height=6}
+
+###Run model
+fit_Wi <- MCMCregress(tmax_Wi_M ~ Survey, data = usppdat, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)
+
+modsumW <- data.frame(Maximum_Temperature = c(fit_Wi[,1], fit_Wi[,1]+fit_Wi[,2],fit_Wi[,1]+fit_Wi[,3]),  Survey = c(rep("1966", nrow(fit_Wi)), rep("1996", nrow(fit_Wi)), rep("2010", nrow(fit_Wi))))
+       
+P <-  ggplot(modsumW) + 
+  geom_density(aes(Maximum_Temperature, fill = Survey, colour = Survey, linetype = Survey), alpha = 0.25) +
+  scale_fill_grey(start = 0.8, end = 0.2) + 
+  scale_colour_grey(start = 0, end = 0) +
+  scale_linetype_manual(values = c(2,3,1)) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(), axis.line = element_line(),
+panel.grid.minor = element_blank(), panel.border = element_blank()) + # , legend.position="none"
+  labs(title = " ", x = expression("Mean Maximum Temperature "( degree*C)), y = "Density")
+  
+P
+
+summary(fit_Wi)
+
+###Fig. S3
+modsumS$Dataset <- rep("Schulze", nrow(modsumS))
+modsumH$Dataset <- rep("Hijmans", nrow(modsumS))
+modsumW$Dataset <- rep("Wilson", nrow(modsumS))
+
+modsumU <- rbind(modsumS, modsumH, modsumW)
+
+PU <-  ggplot(modsumU) + 
+  geom_density(aes(Maximum_Temperature, fill = Survey, colour = Survey, linetype = Survey), alpha = 0.25) +
+  scale_fill_grey(start = 0.8, end = 0.2) + 
+  scale_colour_grey(start = 0, end = 0) +
+  scale_linetype_manual(values = c(2,3,1)) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(), axis.line = element_line(),
+panel.grid.minor = element_blank(), panel.border = element_blank()) + # , legend.position="none"
+  labs(title = " ", x = expression("Mean Maximum Temperature "( degree*C)), y = "Density") +
+  facet_wrap(~ Dataset, ncol = 3, scales="free_x")
+  
+#ggsave(paste0(datwd,"Fig. S3 ", Sys.Date(), ".pdf"), width=17.8, height=6, units = "cm", dpi=600, plot=PU)
+
+```
+
+<br>
+
+## Run all 3 models for the sets of all species from each survey
+
+<br>
+
+```{r, echo=FALSE, fig.width=11.4, fig.height=6}
+
+#Set up inputs dataframe
+aspp <- data.frame(Species = c(colnames(veg66), colnames(veg96), colnames(veg10)), Survey = as.factor(c(rep("1966", ncol(veg66)), rep("1996", ncol(veg96)), rep("2010", ncol(veg10)))))
+
+asppdat <- merge(tmax, aspp)
+
+#aspp$Species[-which(aspp$Species%in%rownames(tmax))] #Species that are either endemic to the reserve or have no other locality data (i.e. have only 1 locality record each (the reserve), so they were excluded from the analysis)
+
+###Run models
+fit_ScA <- MCMCregress(tmax_Sc_M ~ Survey, data = asppdat, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)
+
+fit_HiA <- MCMCregress(tmax_Hi_M ~ Survey, data = asppdat, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)
+
+fit_WiA <- MCMCregress(tmax_Wi_M ~ Survey, data = asppdat, burnin = 1000, mcmc = 10000, thin = 1, verbose = 0)
+
+modsumSA <- data.frame(Maximum_Temperature = c(fit_ScA[,1], fit_ScA[,1]+fit_ScA[,2],fit_ScA[,1]+fit_ScA[,3]),  Survey = c(rep("1966", nrow(fit_ScA)), rep("1996", nrow(fit_ScA)), rep("2010", nrow(fit_ScA))), Dataset = "Schulze")
+
+modsumHA <- data.frame(Maximum_Temperature = c(fit_HiA[,1], fit_HiA[,1]+fit_HiA[,2],fit_HiA[,1]+fit_HiA[,3]),  Survey = c(rep("1966", nrow(fit_HiA)), rep("1996", nrow(fit_HiA)), rep("2010", nrow(fit_HiA))), Dataset = "Hijmans")
+
+modsumWA <- data.frame(Maximum_Temperature = c(fit_WiA[,1], fit_WiA[,1]+fit_WiA[,2],fit_WiA[,1]+fit_WiA[,3]),  Survey = c(rep("1966", nrow(fit_WiA)), rep("1996", nrow(fit_WiA)), rep("2010", nrow(fit_WiA))), Dataset = "Wilson")
+
+modsumA <- rbind(modsumSA, modsumHA, modsumWA)
+
+PA <-  ggplot(modsumA) + 
+  geom_density(aes(Maximum_Temperature, fill = Survey, colour = Survey, linetype = Survey), alpha = 0.25) +
+  scale_fill_grey(start = 0.8, end = 0.2) + 
+  scale_colour_grey(start = 0, end = 0) +
+  scale_linetype_manual(values = c(2,3,1)) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(), axis.line = element_line(),
+panel.grid.minor = element_blank(), panel.border = element_blank()) + # , legend.position="none"
+  labs(title = " ", x = expression("Mean Maximum Temperature "( degree*C)), y = "Density") +
+  facet_wrap(~ Dataset, ncol = 3, scales="fixed")
+  
+#ggsave(paste0(datwd,"Fig. S4 ", Sys.Date(), ".pdf"), width=17.8, height=6, units = "cm", dpi=600, plot=PA)
+
+PA
+
+mods <- list(fit_ScA, fit_HiA, fit_WiA)
+names(mods) <- c("Schulze", "Hijmans", "wilson")
+
+lapply(mods, summary)
+
+```
+
+<br>
+
+There are very small differences among years (0.02 to 0.05 of a degree C) with no confidence in them differing between years. Note that a large proportion of species (`r ceiling(100*(length(unique(aspp$Species))-length(unique(uspp$Species)))/length(unique(aspp$Species)))`%) were stable across time periods at the study level, overwhelming any signal of change in the macro-climatic tolerances. We do not expect species that have not encountered fire and/or unfavorable post-fire weather conditions during the study period to have responded to changes in climate. Similarly, climatic variation among plots and cooler sites within the study area may have allowed species with lower temperature tolerance to persist. It thus makes most sense to compare only species unique to each survey (i.e. those that that did turnover at the study level).
+
+<br>

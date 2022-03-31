@@ -1,0 +1,565 @@
+---
+title: "Vegetation Data Analyses"
+author: "Jasper Slingsby"
+date: "9 March 2017"
+output: pdf_document
+---
+  
+```{r, echo=FALSE, message=FALSE}
+library(ggplot2) #You may need to install these with ?install.packages first
+library(dplyr)
+library(MCMCglmm)
+library(knitr)
+library(xtable)
+library(betapart)
+library(gdata)
+
+#Set random number generator seed to make results reproducibly
+#set.seed(9750)
+set.seed(9570)
+
+datwd <- "" #Set your working directory here
+```
+
+```{r, echo = F}
+#Get plots of interest
+plots <- c(1, 2, 3,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 21, 22, 27, 28, 29, 31, 34, 37, 38, 39, 40, 44, 45, 47, 48, 49, 50, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 75, 76, 78, 79, 82, 83, 88, 92)
+CP_plots <- paste0("CP_", plots)
+
+#Get species to exclude (not perennial, ferns, and one alien seedling)
+if(file.exists("excluded_spp.csv")) {
+exclude <- unlist(read.csv(paste0(datwd,"excluded_spp.csv"), row.names = 1, stringsAsFactors = F))
+} else {
+exclude <- unlist(read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "excluded_spp", row.names = 1, stringsAsFactors = F))
+}
+
+#Get vegetation data
+if(file.exists("veg1966.csv")) { #Assuming if one exists they all exist
+veg66 <- read.csv(paste0(datwd,"veg1966.csv"), row.names = 1, check.names=FALSE)
+veg96 <- read.csv(paste0(datwd,"veg1996.csv"), row.names = 1, check.names=FALSE)
+veg10 <- read.csv(paste0(datwd,"veg2010.csv"), row.names = 1, check.names=FALSE)
+} else {
+veg66 <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "veg1966", row.names = 1, check.names=FALSE)
+veg96 <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "veg1996", row.names = 1, check.names=FALSE)
+veg10 <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "veg2010", row.names = 1, check.names=FALSE)
+}
+
+#Trim veg data to focal plots and species
+veg66 <- veg66[which(rownames(veg66)%in%CP_plots), -which(colnames(veg66)%in%exclude)]
+veg66 <- veg66[,which(colSums(veg66)>0)]
+veg96 <- veg96[which(rownames(veg96)%in%CP_plots), -which(colnames(veg96)%in%exclude)]
+veg96 <- veg96[,which(colSums(veg96)>0)]
+veg10 <- veg10[which(rownames(veg10)%in%CP_plots), -which(colnames(veg10)%in%exclude)]
+veg10 <- veg10[,which(colSums(veg10)>0)]
+
+#Convert presence/absence matrices from abundance classes (See Taylor et al 1983 or Privett et al. 2000 for details)
+veg66p <- ifelse(veg66 > 0, 1, 0) 
+veg96p <- ifelse(veg96 > 0, 1, 0) 
+veg10p <- ifelse(veg10 > 0, 1, 0) 
+
+#Get trait data
+if(file.exists("traits.csv")) {
+trt <- read.csv(paste0(datwd,"traits.csv"), stringsAsFactors = F, row.names = 1)
+} else {
+trt <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "traits", stringsAsFactors = F, row.names = 1)
+}
+
+#Get environmental and postfire weather data
+if(file.exists("enviroment.csv")) {
+env <- read.csv(paste0(datwd,"enviroment.csv"), stringsAsFactors = F, row.names = 1)
+} else {
+env <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "enviroment", stringsAsFactors = F, row.names = 1)
+}
+
+env$Plot <- paste0("CP_",env$Plot)
+
+if(file.exists("postfireweather.csv")) {
+pfweather <- read.csv(paste0(datwd,"postfireweather.csv"), stringsAsFactors = F, row.names = 1)
+} else {
+  pfweather <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "postfireweather", stringsAsFactors = F, row.names = 1)
+}
+  
+dat <- merge(env, pfweather)
+
+##Calculate species numbers for each survey for different partitions
+#All species
+dat$SR66 <- rowSums(veg66p) # rowSums of p/a matrix
+dat$SR96 <- rowSums(veg96p) # rowSums of p/a matrix
+dat$SR10 <- rowSums(veg10p) # rowSums of p/a matrix
+#Resprouters
+dat$SR66r <- as.vector((trt$resprout_postfire[which(trt$species%in%colnames(veg66p))]%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$SR96r <- as.vector((trt$resprout_postfire[which(trt$species%in%colnames(veg96p))]%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$SR10r <- as.vector((trt$resprout_postfire[which(trt$species%in%colnames(veg10p))]%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+#Seeders
+dat$SR66s <- as.vector((as.numeric(!trt$resprout_postfire[which(trt$species%in%colnames(veg66p))])%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$SR96s <- as.vector((as.numeric(!trt$resprout_postfire[which(trt$species%in%colnames(veg96p))])%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$SR10s <- as.vector((as.numeric(!trt$resprout_postfire[which(trt$species%in%colnames(veg10p))])%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+#Growth forms by year
+dat$lshrub66 <- as.vector((trt$low_shrub[which(trt$species%in%colnames(veg66p))]%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$tshrub66 <- as.vector((trt$tall_shrub[which(trt$species%in%colnames(veg66p))]%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$gram66 <- as.vector((trt$graminoid[which(trt$species%in%colnames(veg66p))]%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$herb66 <- as.vector((trt$herb[which(trt$species%in%colnames(veg66p))]%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$geo66 <- as.vector((trt$geophyte[which(trt$species%in%colnames(veg66p))]%*%t(veg66p[,which(colnames(veg66p)%in%trt$species)])))
+dat$lshrub96 <- as.vector((trt$low_shrub[which(trt$species%in%colnames(veg96p))]%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$tshrub96 <- as.vector((trt$tall_shrub[which(trt$species%in%colnames(veg96p))]%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$gram96 <- as.vector((trt$graminoid[which(trt$species%in%colnames(veg96p))]%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$herb96 <- as.vector((trt$herb[which(trt$species%in%colnames(veg96p))]%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$geo96 <- as.vector((trt$geophyte[which(trt$species%in%colnames(veg96p))]%*%t(veg96p[,which(colnames(veg96p)%in%trt$species)])))
+dat$lshrub10 <- as.vector((trt$low_shrub[which(trt$species%in%colnames(veg10p))]%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+dat$tshrub10 <- as.vector((trt$tall_shrub[which(trt$species%in%colnames(veg10p))]%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+dat$gram10 <- as.vector((trt$graminoid[which(trt$species%in%colnames(veg10p))]%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+dat$herb10 <- as.vector((trt$herb[which(trt$species%in%colnames(veg10p))]%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+dat$geo10 <- as.vector((trt$geophyte[which(trt$species%in%colnames(veg10p))]%*%t(veg10p[,which(colnames(veg10p)%in%trt$species)])))
+
+#Calculate change in species numbers
+dat$dSR66_96 <- dat$SR96-dat$SR66
+dat$dSR66_10 <- dat$SR10-dat$SR66
+dat$dSR66_96r <- dat$SR96r-dat$SR66r
+dat$dSR66_10r <- dat$SR10r-dat$SR66r
+dat$dSR66_96s <- dat$SR96s-dat$SR66s
+dat$dSR66_10s <- dat$SR10s-dat$SR66s
+dat$lshrub66_10 <- dat$lshrub10 - dat$lshrub66
+dat$tshrub66_10 <- dat$tshrub10 - dat$tshrub66
+dat$gram66_10 <- dat$gram10 - dat$gram66
+dat$herb66_10 <- dat$herb10 - dat$herb66
+dat$geo66_10 <- dat$geo10 - dat$geo66
+dat$lshrub66_96 <- dat$lshrub96 - dat$lshrub66
+dat$tshrub66_96 <- dat$tshrub96 - dat$tshrub66
+dat$gram66_96 <- dat$gram96 - dat$gram66
+dat$herb66_96 <- dat$herb96 - dat$herb66
+dat$geo66_96 <- dat$geo96 - dat$geo66
+
+#Calculate species turnover matrices between plots in space for each survey (Sorenson's dissimilarity)
+b66 <- beta.pair(veg66p, index.family="sorensen")
+b96 <- beta.pair(veg96p, index.family="sorensen")
+b10 <- beta.pair(veg10p, index.family="sorensen")
+
+#Which species were unique?
+unique_nms <- list()
+unique_nms[[1]] <- colnames(veg66)[-which(colnames(veg66)%in%c(colnames(veg96), colnames(veg10)))]
+unique_nms[[2]] <- colnames(veg96)[-which(colnames(veg96)%in%c(colnames(veg66), colnames(veg10)))]
+unique_nms[[3]] <- colnames(veg10)[-which(colnames(veg10)%in%c(colnames(veg66), colnames(veg96)))]
+names(unique_nms) <- c("1966", "1996", "2010")
+
+#Calculate change in veg age
+dat$dAge66_96 <- dat$Age1996 - dat$Age1966
+dat$dAge66_10 <- dat$Age2010 - dat$Age1966
+
+#Standardize change in age
+dat$dAge66_10_std <- (dat$dAge66_10 - mean(dat$dAge66_10, na.rm=T))/sd(dat$dAge66_10, na.rm=T) 
+dat$dAge66_96_std <- (dat$dAge66_96 - mean(dat$dAge66_96, na.rm=T))/sd(dat$dAge66_96, na.rm=T) 
+
+#Add change in serotinous tall shrubs
+tss66 <- as.numeric(rowSums(veg66p[, which(colnames(veg66p)%in%c("Leucadendron laureolum", "Leucadendron coniferum", "Leucadendron xanthoconus", "Protea lepidocarpodendron"))])>0)
+tss96 <- as.numeric(rowSums(veg96p[, which(colnames(veg96p)%in%c("Leucadendron laureolum", "Leucadendron coniferum", "Leucadendron xanthoconus", "Protea lepidocarpodendron"))])>0)
+tss10 <- as.numeric(rowSums(veg10p[, which(colnames(veg10p)%in%c("Leucadendron laureolum", "Leucadendron coniferum", "Leucadendron xanthoconus", "Protea lepidocarpodendron"))])>0)
+
+dat$tss66_96 <- as.factor(tss96 - tss66)
+dat$tss66_10 <- as.factor(tss10 - tss66)
+
+#Fix factors etc
+dat$firecount66_10 <- as.factor(dat$firecount66_10)
+dat$firecount66_96 <- as.factor(dat$firecount66_96)
+dat$Moisture <- as.factor(dat$Moisture)
+dat$Aliens_max <- as.factor(dat$Aliens_max)
+dat <- droplevels(dat)
+
+
+```
+
+<br>
+
+# 1. Data Description
+<br>
+
+Instructions for interpreting column names:
+
+"**SR**" = species count
+
+The prefix "**d**" = "delta" (i.e. change), and there is usually a suffix indicating years compared, e.g. dSR66_10 is the change in species numbers between 1966 and 2010
+
+The suffix "**r**" indicates "resprouter" while the suffix "**s**" indicates "seeder", so SR66s is the seeder species numbers in 1966
+
+"**lshrub**", "**tshrub**", "**gram**", "**herb**", "**geo**" represent the different growth forms (see paper)
+
+"**Age**" is the age of the plot in a particular year (e.g. "Age66") or change in age between years (e.g. dAge66_10), while "**dAge66_96_std**" and "**dAge66_10_std**" are standardized for use in the models
+
+"**cdd**" is a factor for the maximum count of consecutive dry days experienced in the first year after a fire between 1966 and 2010 ("**cdd66_96**" is the same but for the period 1966 to 1996) binned into 0-49 days or 50-200 days (see paper)
+
+"**chd**" is a factor for the maximum count of consecutive hot and dry days experienced in the first year after a fire between 1966 and 2010 ("**chd66_96**" is the same but for the period 1966 to 1996) binned into 0-5 days or 6-9 days (see paper)
+
+"**Aliens**" is the maximum density of woody alien shrubs previously recorded in the plot binned into the classes 0, 1-49, 50-199,  >200 (see paper)
+
+<br>
+
+### A quick look at the data
+
+<br>
+
+```{r, echo=F}
+#lapply(dat, summary)
+head(dat)
+```
+
+<br>
+
+### The total number of species and per survey and their growth form composition
+
+<br>
+
+```{r, echo=F}
+
+nmsl <- c(length(unique(c(colnames(veg66p), colnames(veg96p), colnames(veg10p)))), length(colnames(veg66p)), length(colnames(veg96p)), length(colnames(veg10p)))
+names(nmsl) <- c("Total", "1966", "1996", "2010")
+nmsl
+
+gfs <- rbind(colSums(trt[, 4:8]),
+             colSums(trt[which(trt$species%in%colnames(veg66)), 4:8]),
+             colSums(trt[which(trt$species%in%colnames(veg96)), 4:8]),
+             colSums(trt[which(trt$species%in%colnames(veg10)), 4:8]))
+rownames(gfs) <- c("Total", "1966", "1996", "2010")
+
+gfs
+
+```
+
+<br>
+
+### Spatial turnover between plots within each survey as measured using Sorenson's dissimilarity
+
+<br>
+
+```{r, echo=F}
+#lapply(dat, summary)
+turnover <- rbind(summary(b66[[3]]), summary(b96[[3]]), summary(b10[[3]]))
+rownames(turnover) <- c("1966", "1996", "2010")
+turnover
+```
+
+<br>
+
+### The number and names of the unique species per survey.
+
+<br>
+
+```{r, echo=F}
+
+lapply(unique_nms, length)
+unique_nms
+
+```
+
+<br>
+  
+# 2. Testing for change in species number within sites between surveys (Table 1 in the manuscript)
+  
+<br>
+
+Here we explore the effects of vegetation age and survey year on species counts within plots for all species, then seeders, resprouters and each of the growth forms separately (see Table 1 of the paper). Analyses are done with MCMCglmm. Age and year are fixed effects while plot is a random effect, creating a repeated measures design.
+
+<br>
+
+```{r, echo=FALSE}
+
+# Make long table for analysis
+
+ldat <- data.frame(SR=c(dat$SR66,dat$SR96,dat$SR10), SRs=c(dat$SR66s,dat$SR96s,dat$SR10s), SRr=c(dat$SR66r,dat$SR96r,dat$SR10r), TS=c(dat$tshrub66,dat$tshrub96,dat$tshrub10), LS=c(dat$lshrub66,dat$lshrub96,dat$lshrub10), GD=c(dat$gram66,dat$gram96,dat$gram10), HB=c(dat$herb66,dat$herb96,dat$herb10), GE=c(dat$geo66,dat$geo96,dat$geo10), Year=c(rep("1966",nrow(dat)),rep("1996",nrow(dat)),rep("2010",nrow(dat))), Plot=rep(dat$Plot,3), Age=c(dat$Age1966,dat$Age1996,dat$Age2010), Moisture=rep(dat$Moisture,3))
+
+# Model SR with MCMCglmm
+prior=list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+
+SRmod=MCMCglmm(SR ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+SRrmod=MCMCglmm(SRr ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+SRsmod=MCMCglmm(SRs ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+TSmod=MCMCglmm(TS ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+LSmod=MCMCglmm(LS ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+HBmod=MCMCglmm(HB ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+GDmod=MCMCglmm(GD ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+GEmod=MCMCglmm(GE ~ Age + Year, random=~Plot, data=ldat, prior=prior, verbose=FALSE, pr=TRUE, nitt=20000, family ="poisson")
+
+
+###Summarize results for all plots into a table
+res <- as.data.frame(rbind(
+  t(summary(SRmod)$solutions[,c(1,5)]),
+  t(summary(SRrmod)$solutions[,c(1,5)]),
+  t(summary(SRsmod)$solutions[,c(1,5)]),
+  t(summary(TSmod)$solutions[,c(1,5)]),
+  t(summary(LSmod)$solutions[,c(1,5)]),
+  t(summary(HBmod)$solutions[,c(1,5)]),
+  t(summary(GDmod)$solutions[,c(1,5)]),
+  t(summary(GEmod)$solutions[,c(1,5)])
+))
+
+res$Statistic <- rownames(res)
+rownames(res) <- NULL
+res$Set <- c("All species", "", "Resprouters", "", "Seeders", "", "Tall shrubs", "", "Low shrubs", "", "Herbs", "", "Graminoids", "", "Geophytes", "")
+res <- res[,c("Set", "Statistic", "(Intercept)", "Age", "Year1996", "Year2010")]
+colnames(res) <- c("Set", "Statistic", "Intercept", "Age", "1996", "2010")
+
+#Make latex table output
+respm <- res[which(res$Statistic == "post.mean"),]
+resmc <- res[which(res$Statistic == "pMCMC"),]
+respm[,3:6] <- round(respm[,3:6],3)
+
+hmm <- cbind(unlist(respm[,3:6]),
+as.character(cut(as.numeric(unlist(resmc[,3:6])), breaks = c(0, 0.005, 0.01, 0.05, 0.1, 1), labels = c(" ***", " **", " *", " .", " \textsuperscript{NS}"))))
+
+respm[,3:6] <- matrix(apply(hmm, MARGIN = 1, FUN = "paste0", collapse = ""), nrow(respm), 4)
+rownames(respm) <- respm$Set
+respm <- respm[,-which(colnames(respm) %in% c("Set", "Statistic"))]
+
+xres <- xtable(respm, label="tab:timeall", caption = "Results of generalized linear mixed effects models exploring change in numbers of species within plots between surveys while accounting for differences in vegetation age.", align = rep("l", ncol(respm)+1))
+
+#print(xres, file = "timeall.tex")
+
+#Make output for Rmd pdf
+
+res[,3:6] <- round(res[,3:6],3)
+
+for (i in seq(2,nrow(res),2)) {
+  
+res[i, 3:6] <- cut(as.numeric(unlist(res[i,3:6])), breaks = c(0, 0.005, 0.01, 0.05, 0.1, 1), labels = c(" ***", " **", " *", " .", "NS"))
+#  res[i, which(res[i,3:6] > 0.1) + 2] <- "NS"
+#  res[i, which(res[i,3:6] < 0.1 & res[i,3:6] > 0.05) + 2] <- "."
+#  res[i, which(res[i,3:6] < 0.05 & res[i,3:6] > 0.01) + 2] <- "*"
+#  res[i, which(res[i,3:6] < 0.01 & res[i,3:6] > 0.005) + 2] <- "**"
+#  res[i, which(res[i,3:6] < 0.005) + 2] <- "***"
+}
+
+kable(res, format="latex")
+
+```
+
+<br>
+
+Note that results may differ slightly from the published tables and figures due to the MCMC sampling process!
+
+<br>
+  
+# 3. Testing for differences in the drivers of change in species number within sites between surveys across plots (Figure 2 in the manuscript)
+  
+<br>
+Here we perform the analysis of drivers of change in species numbers through time as described in the paper. The output is presented as boxplots on their side indicating the posterior mean, 95% HPD interval (box) and maximum and minimum values. pMCMC <0.1, <0.05, <0.005, <0.001 are indicated by ``.``, ``*``, ``**``, ``***``. Each individual model's results are printed below.
+
+<br>
+
+```{r, echo=FALSE, fig.width=14, fig.height=4}
+#Run standard models
+SRmod_Full <- MCMCglmm(dSR66_10 ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+rSRmod_Full <- MCMCglmm(dSR66_10r ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+sSRmod_Full <- MCMCglmm(dSR66_10s ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+
+TSmod1 <- MCMCglmm(tshrub66_10 ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000)
+LSmod1 <- MCMCglmm(lshrub66_10 ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000)
+GRmod1 <- MCMCglmm(gram66_10 ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000)
+HBmod1 <- MCMCglmm(herb66_10 ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000)
+GEmod1 <- MCMCglmm(geo66_10 ~ dAge66_10_std + chd66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+
+###Summarize model results and set up for plotting
+pMCMC <- lapply(list(SRmod_Full,rSRmod_Full,sSRmod_Full,TSmod1,LSmod1,GRmod1,HBmod1,GEmod1), summary)
+pMCMC <- lapply(pMCMC, function(x) {data.frame(Names = rownames(x$solutions), pMCMC = x$solutions[,5])})
+pMCMC <- do.call("rbind", pMCMC)
+pMCMC$Model <-  factor(rep(c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"), each = 6), levels = c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"))
+
+mods <- list(as.data.frame(SRmod_Full$Sol), as.data.frame(rSRmod_Full$Sol), as.data.frame(sSRmod_Full$Sol), as.data.frame(TSmod1$Sol), as.data.frame(LSmod1$Sol), as.data.frame(GRmod1$Sol), as.data.frame(HBmod1$Sol), as.data.frame(GEmod1$Sol))
+
+modsum <- function(x) {data.frame(Min = sapply(x, min), Lower = sapply(x, quantile, 0.025), L90 = sapply(x, quantile, 0.05), Posterior_Mean = colMeans(x), U90 = sapply(x, quantile, 0.95), Upper = sapply(x, quantile, 0.975), Max = sapply(x, max), Names = colnames(x))}
+
+modsum <- lapply(mods, modsum)
+modsum <- do.call("rbind", modsum)
+
+modsum$Model <- factor(rep(c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"), each = 6), levels = c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"))
+
+cleannames <- data.frame(Names = colnames(mods[[1]]), fignames = c("Intercept", "Change in age", "CHD (>5)", "Alien (1-49)", "Alien (50-199)", "Alien (200+)"))
+
+modsum <- merge(modsum, pMCMC)
+modsum <- merge(modsum, cleannames)
+
+modsum$fignames <- factor(modsum$fignames, levels = c("Intercept", "Change in age", "CHD (>5)", "Alien (1-49)", "Alien (50-199)", "Alien (200+)"))
+
+
+modsum$Sign <- ""
+modsum$Sign[which(modsum$pMCMC < 0.1)] <- "."
+modsum$Sign[which(modsum$pMCMC < 0.05)] <- "*"
+modsum$Sign[which(modsum$pMCMC < 0.01)] <- "**"
+modsum$Sign[which(modsum$pMCMC < 0.005)] <- "***"
+
+
+P <-  ggplot(modsum,aes(fignames, label = Sign)) +
+  geom_boxplot(aes(ymin=Min,lower=Lower,middle=Posterior_Mean,upper=Upper,ymax=Max,colour = Sign),stat="identity") + 
+  geom_hline(yintercept = 0,linetype=2) + coord_flip() +
+  theme_bw(base_size = 18) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), legend.position="none") +
+  labs(title = " ", x = " ", y = " ") +
+  facet_grid(. ~ Model, scales="free_x") + 
+  scale_colour_manual(values=c("black", "orange", "red", "red", "red")) + 
+  geom_text(aes(y = Upper + (Max - Upper)/1.15, vjust = -.12), na.rm = T, size = 5)
+
+P
+
+mods <- list(SRmod_Full,rSRmod_Full,sSRmod_Full,TSmod1,LSmod1,GRmod1,HBmod1,GEmod1)
+names(mods) <- c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes")
+print(lapply(mods, summary))
+
+#pdf(paste0(datwd,"Fig2_", Sys.Date(), ".pdf"), width=14, height=4)
+#P
+#dev.off()
+```
+
+<br>
+
+##And the period 1966 to 1996 (Fig. S1)
+
+<br>
+
+```{r, echo=FALSE, fig.width=14, fig.height=4}
+
+#Run standard models
+SRmod_Full <- MCMCglmm(dSR66_96 ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+rSRmod_Full <- MCMCglmm(dSR66_96r ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+sSRmod_Full <- MCMCglmm(dSR66_96s ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+
+TSmod1 <- MCMCglmm(tshrub66_96 ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+LSmod1 <- MCMCglmm(lshrub66_96 ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+GRmod1 <- MCMCglmm(gram66_96 ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+HBmod1 <- MCMCglmm(herb66_96 ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+GEmod1 <- MCMCglmm(geo66_96 ~ dAge66_96_std + chd66_96 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+      
+###Summarize model results and set up for plotting
+pMCMC <- lapply(list(SRmod_Full,rSRmod_Full,sSRmod_Full,TSmod1,LSmod1,GRmod1,HBmod1,GEmod1), summary)
+pMCMC <- lapply(pMCMC, function(x) {data.frame(Names = rownames(x$solutions), pMCMC = x$solutions[,5])})
+pMCMC <- do.call("rbind", pMCMC)
+pMCMC$Model <-  factor(rep(c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"), each = 6), levels = c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"))
+
+mods <- list(as.data.frame(SRmod_Full$Sol), as.data.frame(rSRmod_Full$Sol), as.data.frame(sSRmod_Full$Sol), as.data.frame(TSmod1$Sol), as.data.frame(LSmod1$Sol), as.data.frame(GRmod1$Sol), as.data.frame(HBmod1$Sol), as.data.frame(GEmod1$Sol))
+
+modsum <- function(x) {data.frame(Min = sapply(x, min), Lower = sapply(x, quantile, 0.025), L90 = sapply(x, quantile, 0.05), Posterior_Mean = colMeans(x), U90 = sapply(x, quantile, 0.95), Upper = sapply(x, quantile, 0.975), Max = sapply(x, max), Names = colnames(x))}
+
+modsum <- lapply(mods, modsum)
+modsum <- do.call("rbind", modsum)
+
+modsum$Model <- factor(rep(c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"), each = 6), levels = c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"))
+
+cleannames <- data.frame(Names = colnames(mods[[1]]), fignames = c("Intercept", "Change in age", "CHD (>5)", "Alien (1-49)", "Alien (50-199)", "Alien (200+)"))
+
+modsum <- merge(modsum, pMCMC)
+modsum <- merge(modsum, cleannames)
+
+modsum$fignames <- factor(modsum$fignames, levels = c("Intercept", "Change in age", "CHD (>5)", "Alien (1-49)", "Alien (50-199)", "Alien (200+)"))
+
+
+modsum$Sign <- ""
+modsum$Sign[which(modsum$pMCMC < 0.1)] <- "."
+modsum$Sign[which(modsum$pMCMC < 0.05)] <- "*"
+modsum$Sign[which(modsum$pMCMC < 0.01)] <- "**"
+modsum$Sign[which(modsum$pMCMC < 0.005)] <- "***"
+
+
+PI <-  ggplot(modsum,aes(fignames, label = Sign)) +
+  geom_boxplot(aes(ymin=Min,lower=Lower,middle=Posterior_Mean,upper=Upper,ymax=Max,colour = Sign),stat="identity") + 
+  geom_hline(yintercept = 0,linetype=2) + coord_flip() +
+  theme_bw(base_size = 18) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), legend.position="none") +
+  labs(title = " ", x = " ", y = " ") +
+  facet_grid(. ~ Model, scales="free_x") + 
+  scale_colour_manual(values=c("black", "orange", "red", "red", "red")) + 
+  geom_text(aes(y = Upper + (Max - Upper)/1.15, vjust = -.12), na.rm = T, size = 5)
+
+PI
+
+mods <- list(SRmod_Full,rSRmod_Full,sSRmod_Full,TSmod1,LSmod1,GRmod1,HBmod1,GEmod1)
+names(mods) <- c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes")
+print(lapply(mods, summary))
+
+#pdf(paste0(datwd,"Fig. S1_", Sys.Date(), ".pdf"), width=14, height=4)
+#PI
+#dev.off()
+```
+
+<br>
+
+#4. Include testing the impact of changes in the presence of serotinous tall shrubs
+
+Cowling and Gxaba (1990) found evidence that serotinous overstorey shrub species in our study area are highly variable in distribution and density between fire events and that their density alters understorey community structure and diversity. We tested for this by rerunning our models exploring the drivers of change in species numbers, including the change in presence/absence of serotinous overstorey shrub species as a co-variate.
+
+Cowling RM, Gxaba T (1990) Effects of a fynbos overstorey shrub on understorey community structure: implications for the maintenance of community-wide species richness. South African Journal of Ecology 1: 1–7.
+
+<br>
+
+```{r, echo=FALSE, fig.width=14, fig.height=4}
+#Run standard models
+SRmod_Full <- MCMCglmm(dSR66_10 ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+rSRmod_Full=MCMCglmm(dSR66_10r ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+sSRmod_Full=MCMCglmm(dSR66_10s ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+
+TSmod1=MCMCglmm(tshrub66_10 ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+LSmod1=MCMCglmm(lshrub66_10 ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+GRmod1=MCMCglmm(gram66_10 ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+HBmod1=MCMCglmm(herb66_10 ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+GEmod1=MCMCglmm(geo66_10 ~ dAge66_10_std + chd66_10 + tss66_10 + Aliens_max, data=dat, verbose=FALSE, pr=TRUE, nitt=53000) 
+
+
+###Summarize model results and set up for plotting
+pMCMC <- lapply(list(SRmod_Full,rSRmod_Full,sSRmod_Full,TSmod1,LSmod1,GRmod1,HBmod1,GEmod1), summary)
+pMCMC <- lapply(pMCMC, function(x) {data.frame(Names = rownames(x$solutions), pMCMC = x$solutions[,5])})
+pMCMC <- do.call("rbind", pMCMC)
+pMCMC$Model <-  factor(rep(c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"), each = 8), levels = c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"))
+
+mods <- list(as.data.frame(SRmod_Full$Sol), as.data.frame(rSRmod_Full$Sol), as.data.frame(sSRmod_Full$Sol), as.data.frame(TSmod1$Sol), as.data.frame(LSmod1$Sol), as.data.frame(GRmod1$Sol), as.data.frame(HBmod1$Sol), as.data.frame(GEmod1$Sol))
+
+modsum <- function(x) {data.frame(Min = sapply(x, min), Lower = sapply(x, quantile, 0.025), L90 = sapply(x, quantile, 0.05), Posterior_Mean = colMeans(x), U90 = sapply(x, quantile, 0.95), Upper = sapply(x, quantile, 0.975), Max = sapply(x, max), Names = colnames(x))}
+
+modsum <- lapply(mods, modsum)
+modsum <- do.call("rbind", modsum)
+
+modsum$Model <- factor(rep(c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"), each = 8), levels = c("All Species", "Resprouters", "Seeders", "Tall shrubs", "Low shrubs", "Graminoids", "Herbs", "Geophytes"))
+
+cleannames <- data.frame(Names = colnames(mods[[1]]), fignames = c("Intercept", "Change in age", "CHD (>5)", "TSS (no change)", "TSS (colonize)", "Alien (1-49)", "Alien (50-199)", "Alien (200+)"))
+
+modsum <- merge(modsum, pMCMC)
+modsum <- merge(modsum, cleannames)
+
+modsum$fignames <- factor(modsum$fignames, levels = c("Intercept", "Change in age", "CHD (>5)", "TSS (no change)", "TSS (colonize)", "Alien (1-49)", "Alien (50-199)", "Alien (200+)"))
+
+
+modsum$Sign <- ""
+modsum$Sign[which(modsum$pMCMC < 0.1)] <- "."
+modsum$Sign[which(modsum$pMCMC < 0.05)] <- "*"
+modsum$Sign[which(modsum$pMCMC < 0.01)] <- "**"
+modsum$Sign[which(modsum$pMCMC < 0.005)] <- "***"
+
+
+PT <-  ggplot(modsum,aes(fignames, label = Sign)) +
+  geom_boxplot(aes(ymin=Min,lower=Lower,middle=Posterior_Mean,upper=Upper,ymax=Max,colour = Sign),stat="identity") + 
+  geom_hline(yintercept = 0,linetype=2) + coord_flip() +
+  theme_bw(base_size = 18) +
+  theme(axis.text.x = element_text(size=12), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), legend.position="none") +
+  labs(title = " ", x = " ", y = " ") +
+  facet_grid(. ~ Model, scales="free_x") + 
+  scale_colour_manual(values=c("black", "orange", "red", "red", "red")) + 
+  geom_text(aes(y = Upper + (Max - Upper)/1.15, vjust = -.12), na.rm = T, size = 5)
+
+PT
+
+#pdf(paste0(datwd,"Fig. S2_", Sys.Date(), ".pdf"), width=14, height=4)
+#PT
+#dev.off()
+
+```
+
+<br>
+
+The results show that the additional co-variate affects only response variables with which it is auto-correlated (i.e. positive effects on the diversity of tall shrubs, seeder species and the sum of all species), and a weak positive effect on low shrubs. No groups were negatively affected by the colonization of plots by serotinous tall shrubs. Serotinous tall shrubs showed no change across most plots (`r summary(dat$tss66_10)[2]`) through time, while they were lost from `r summary(dat$tss66_10)[1]` plots and gained in `r summary(dat$tss66_10)[3]`.
+
+<br>
+

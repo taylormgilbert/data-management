@@ -1,0 +1,208 @@
+---
+title: "Weather Data Analysis"
+author: "Jasper Slingsby"
+date: "9 March 2017"
+output: pdf_document
+---
+
+<br>
+
+## Trends in mean monthly maximum temperature anomalies:
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+###Set Working directory
+datwd <- ""
+
+###Get libraries
+library(ggplot2)
+library(dplyr)
+library(climdex.pcic)
+library(MCMCglmm)
+library(gdata)
+
+###Get weather data
+if(file.exists("weather.csv")) {
+ddat <- read.csv(paste0(datwd,"weather.csv"), stringsAsFactors = F)
+} else {
+ddat <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "weather", stringsAsFactors = F)
+}
+           
+ddat$Date <- as.Date(ddat$Date, "%d/%m/%Y")
+
+###Function to summarise data and plot
+anomalyplot <- function(p, q, tit, yl) # p is a dataframe with columns "Year", "Month" and other variables, q is the variable of interest for this plot, tit is the title, and y is the y-axis label
+{
+###Summarise data for plotting 
+x <- tbl_df(na.omit(p))
+y <- summarise(group_by(x, Year, Month), MMT=mean(q)) # monthly means by year
+x <- summarise(group_by(x, Month), MMMT=mean(q)) # monthly means across all years
+y <- merge(y, x)
+
+y$Positive <- y$MMT - y$MMMT # calculate anomalies
+y$Positive[which(y$Positive<0)] <- 0
+y$Negative <- y$MMT - y$MMMT
+y$Negative[which(y$Negative>0)] <- 0
+
+###Plot
+g <- ggplot(y, aes(x = Year))
+g <- g + geom_ribbon(aes(ymin = 0, ymax = Positive, fill="Positive")) + geom_ribbon(aes(ymin = Negative, ymax = 0 ,fill="Negative"))
+g <- g + scale_fill_manual(name="",values=c("#4393C3","#D6604D"))
+g <- g + facet_grid(.~Month)
+g + ggtitle(tit) + coord_flip() + ylab(yl)
+}
+
+anomalyplot(p=ddat[,c("Year","Month","Temp")], q=alist(Temp)[[1]], tit="Mean monthly Max Temp Anomaly (1961-2010)", yl="Degrees Celcius")
+
+```
+
+<br>
+
+Pretty clear increases in positive anomalies.
+
+<br>
+
+\pagebreak
+
+<br>
+
+## Trends in cumulative monthly rainfall anomalies:
+
+<br>
+
+```{r, echo=FALSE}
+
+###Summarise data for plotting 
+x <- tbl_df(na.omit(ddat))
+y <- summarise(group_by(x, Year, Month), MMP=sum(Rain))
+x <- summarise(group_by(y, Month), MMMP=mean(MMP))
+y <- merge(y, x)
+
+y$Positive <- y$MMP - y$MMMP
+y$Positive[which(y$Positive<0)] <- 0
+y$Negative <- y$MMP - y$MMMP
+y$Negative[which(y$Negative>0)] <- 0
+
+###Plot
+g <- ggplot(y, aes(x = Year))
+g <- g + geom_ribbon(aes(ymin = 0, ymax = Positive, fill="Positive")) + geom_ribbon(aes(ymin = Negative, ymax = 0 ,fill="Negative"))
+g <- g + scale_fill_manual(name="",values=c("#D6604D", "#4393C3"))
+g <- g + facet_grid(.~Month)
+g + ggtitle("Cumulative Monthly Rainfall Anomaly (1961-2010)")+coord_flip()+ylab("Rainfall (mm)")
+
+```
+
+<br>
+
+Not much trend. There's bigger variance in April to September because this spans the wet season.
+
+<br>
+
+\pagebreak
+
+<br>
+
+##Analysis of maximum count of consecutive hot and dry days (1963-2009)
+
+<br>
+
+Let's look at the plot of consecutive hot and dry days and then model them as a function of year with MCMCglmm (default priors and normal errors).
+
+```{r, echo=FALSE}
+
+###Trim to April 1963 onwards
+ddat <- ddat[ddat$Date>as.Date("1963-3-31"),]
+
+###Set Dry vs Wet season
+ddat$Season <- NA
+ddat$Season[which(months(ddat$Date)%in%c("October","November","December","January","February","March"))] <- "Dry"
+ddat$Season[which(months(ddat$Date)%in%c("April","May","June","July","August","September"))] <- "Wet"
+
+###Set summer years" (i.e. the summer Oct 1963 to March 1964 is the summer of 1963...)
+ddat$DryYear <- NA
+ddat$DryYear[1] <- ddat$Year[1]
+for (i in 2:nrow(ddat)){
+  if(ddat$Season[i]=="Dry" & ddat$Season[i-1]=="Wet")
+   ddat$DryYear[i] <- ddat$DryYear[i-1]+1
+  else
+    ddat$DryYear[i] <- ddat$DryYear[i-1] 
+}
+
+ddat$SeasonYear <- paste0(ddat$Season, ddat$DryYear, sep="")
+
+###Days with Temperature > 21 and no rain.
+ddat$xE <- (ddat$Temp > 21)*(ddat$Rain < 1)
+
+###Consectutive days with Temperature > 21 and no rain
+CHDseason <- spell.length.max(ddat$xE, as.factor(ddat$SeasonYear), 0, ">", spells.can.span.years=FALSE)
+  
+#CHDspan <- spell.length.max(ddat$xE, as.factor(ddat$Year), 0, ">", spells.can.span.years=TRUE)
+
+###Consecutuve dry days
+cdd <- spell.length.max(ddat$Rain, as.factor(ddat$SeasonYear), 1, "<", spells.can.span.years=FALSE)
+
+###Bind with years
+climstress <- data.frame(Consecutive_Hot_and_Dry_Days = CHDseason[1:46], Consecutive_Dry_Days = cdd[1:46], Year = as.integer(1963:2008))
+
+###Plot
+g <- ggplot(data=climstress, na.rm=T, aes(x=Year, y=Consecutive_Hot_and_Dry_Days)) + 
+  geom_point() + 
+  geom_smooth(alpha=.2, size=1, method="lm") + 
+  ylab("Maximum consecutive \n hot and dry days") +
+  #theme_bw() +
+  #theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  xlim(1962, 2011)
+
+g
+
+#ggsave(paste0(datwd,"Consecutive_Hot_and_Dry_Days", Sys.Date(), ".pdf"), width=11.4, height=6, units = "cm", dpi=600, plot=g)
+
+summary(MCMCglmm(Consecutive_Hot_and_Dry_Days ~ Year, data=climstress, verbose = F))
+```
+
+<br>
+
+Lastly, hidden code calculates the most extreme post fire weather (CDD and CHD) experienced in the first year after fire and outputs this as *postfireweather.csv*. This can be altered to change thresholds etc for downstream analyses if desired.
+
+<br>
+
+```{r, echo = F}
+
+###Code to calculate when our sites burnt relative to extreme summer weather events
+
+# if(file.exists("fires.csv")) {
+# burns <- read.csv(paste0(datwd,"fires.csv"), row.names=1)
+# } else {
+# burns <- read.xls(paste0(datwd,"Dataset S1.xlsx"), sheet = "fires", row.names=1)
+# }
+# 
+# climstress$SeasonYear <- rownames(climstress)
+# 
+# # Extract for each inter-survey period across full period (1966-2010)
+# x <- merge(burns, climstress, by = "SeasonYear")
+# y <- aggregate(x[,5:6], by=list(x$plot), FUN="max")
+# colnames(y)[1] <- "Plot"
+# 
+# # Extract for each inter-survey period across first period (1966 - 1996)
+# x66_96 <- x[-which(x$year>1995),] 
+# y66_96 <- aggregate(x66_96[,5:6], by=list(x66_96$plot), FUN="max")
+# colnames(y66_96) <- paste0(colnames(y66_96), "_66_96")
+# colnames(y66_96)[1] <- "Plot"
+# 
+# # Bin into classes
+# postfireweather <- merge(y66_96, y)
+# 
+# postfireweather$cdd66_96 <- cut(y66_96$Consecutive_Dry_Days_66_96, breaks=c(0,40,100)) #c(0,50,200)
+# postfireweather$chd66_96 <- cut(y66_96$Consecutive_Hot_and_Dry_Days_66_96, breaks=c(0,5,11)) #c(0,5,9)
+# 
+# postfireweather$cdd66_10 <- cut(y$Consecutive_Dry_Days, breaks=c(0,40,100))
+# postfireweather$chd66_10 <- cut(y$Consecutive_Hot_and_Dry_Days, breaks=c(0,5,11))
+# 
+# write.csv(postfireweather, paste0(datwd,"postfireweather.csv"))
+
+```
+
+<br>
+
+
