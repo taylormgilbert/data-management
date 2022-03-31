@@ -1,5 +1,8 @@
-book_filename: "bookdown-demo"
+book_filename: "data-management"
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: ""
 delete_merged_file: true
+output_dir: "docs"
+view: https://github.com/jslingsby/data-management/blob/master/%s
+edit: https://github.com/jslingsby/data-management/edit/master/%s
