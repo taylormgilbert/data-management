@@ -31,7 +31,7 @@ The rest of this section provides a demonstration of some of the functionality o
 
 This tutorial relies on data provided as supplementary material for the paper Slingsby et al. 2017. Intensifying postfire weather and biological invasion drive species loss in a Mediterranean-type biodiversity hotspot. _Proceedings of the National Academy of Sciences_. http://dx.doi.org/10.1073/pnas.1619014114. 
 
-The data can be downloaded as one ~13MB MicroSoft Excel (.xlsx) file [here](https://www.pnas.org/highwire/filestream/29863/field_highwire_adjunct_files/0/pnas.1619014114.sd01.xlsx). We're also going to use the same dataset, but as a set of comma separated value (.csv) text files, that you can download and unzip from [here](https://figshare.com/articles/dataset/Slingsby_TaylorPlots/4737358).
+The data can be downloaded and unzipped from [here](https://figshare.com/articles/dataset/Slingsby_TaylorPlots/4737358).
 
 
 <br>
@@ -40,12 +40,162 @@ The data can be downloaded as one ~13MB MicroSoft Excel (.xlsx) file [here](http
 
 R has a number of different packages to read in data, and there's even a few that work with different tabular data types just within the _tidyverse_. These include:
 
-* [_readr_]() for text files
-* [_readxl_]() for Microsoft Excel files (.xls or .xlsx)
-* [_googlesheets4_]() for reading data directly from a Google Sheet
+* [_readr_](https://readr.tidyverse.org/) for text files
+* [_readxl_](https://readxl.tidyverse.org/) for Microsoft Excel files (.xls or .xlsx)
+* [_googlesheets4_](https://googlesheets4.tidyverse.org/) for reading data directly from a Google Sheet
 
-There's [others too](https://www.tidyverse.org/packages/#import) that can scrape data from web pages, interact with web APIs or directly with local or online databases.
+There's [others too](https://www.tidyverse.org/packages/#import) that can scrape data from web pages, interact with web APIs, or query local or online databases.
 
-Fortunately, within the _tidyverse_ similar syntax can be used across most packages. Check out the [cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf). Let's start with _readr_:
+Fortunately, within the _tidyverse_, similar syntax can be used across most data import packages. Check out the [cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf). 
+
+Let's start with _readr_. First, we may want to know what files are in our data folder, which we can do with the base function `list.files()`. 
+
+> **NOTE:** you need to replace the working directory folder path with wherever you put the data on your computer.
+
+```{r}
+# get list of files in the folder (change to your own)
+list.files("data/Slingsby_TaylorPlots")
+```
+
+So we have:
+
+* a bunch of RMarkdown files (.Rmd) that perform the analyses used in the paper. The .Rmd files output the .pdf documents of the same name. We can ignore all of these.
+* a bunch of text files in comma separated value format (.csv). These are essentially spreadsheets, where the columns are denoted by commas.
+* one MicroSoft Excel (.xlsx) file.
+
+Let's read in a .csv file
+
+```{r}
+# get 1966 vegetation data
+veg66 <- read_csv("data/Slingsby_TaylorPlots/veg1966.csv")
+
+# print the first few lines (note this is a tibble)
+veg66
+```
+
+You'll note `<chr>` and `<dbl>` in the output. These indicate that the data types (or classes) for those columns are "character" and "double" respectively...
+
+## A quick aside on data types
+
+* R's basic data types are character, integer, numeric (or double, they are synonymous), complex, and logical.
+  - `integer` is for whole numbers (i.e. no decimals)
+  - `numeric` or `double` (double precision floating point numbers) are _real numbers_ - i.e. they include decimal places. 
+    - For reasons I won't explain, storing data as real numbers takes up far more memory than integers. Obviously, lots of numbers we work with are real numbers, so we need to be able to work with them. Interestingly, large data storage and transmission projects (e.g. satellite remote sensing) often do tricks like multiply values by some constant so that all data stored are integers. You need to correct by the constant during your analysis to get values in the actual unit of measurement.
+  - `logical` is the outcome of a conditional statement (i.e. values can only be `TRUE` or `FALSE`)
+  - `character` is for letters, words, sentences or mixed strings (i.e. letters and digits)
+  - `factor` is a set of levels (often treatments) that you'd use in an analysis. They are very useful, but they are also VERY likely to trip you up at some stage (I'll explain why in a minute)!!!
+    - factors are essentially numerical codings of character data in some order. Using mumerical coding is useful, because you can order your levels in an analysis - e.g. _Treatment A, Treatment B, Control,_ etc. They are also useful, because they can store data efficiently. For example, if your analysis has thousands of data points, it uses much less memory to recode the treatments above as _1, 2, 3,_ etc and just store one copy of the levels (what we call the labels in a factors).
+    - `logical` is actually just a special case of factor data where FALSE = 0 and TRUE = 1. That said, R treats logical in specific ways that can't be done with true factors and vice versa, so forget said that.
+
+<br>
+
+Here're some code examples to try to drive this home, using the built in vector `letters
+
+```{r}
+letters
+```
+
+You can check the class of data using the function `class()`
+
+```{r}
+class(letters)
+```
+
+And typically convert (or coerce) between classes using `as.` followed by the class you want, e.g.
+
+```{r}
+as.factor(letters)
+```
+
+Here it shows us that we have a factor with 26 values with 26 unique levels. You wouldn't really use a factor class if all values are unique though. Here's a better example.
+
+```{r}
+as.factor(rep(letters[1:3], 8))
+```
+
+And to prove that the factor represents the levels as a set of numbers:
+
+```{r}
+as.numeric(as.factor(rep(letters[1:3], 8)))
+```
+
+Note that this doesn't work if we try to coerce the the letters to numbers without making them a factor first:
+
+```{r}
+as.numeric(rep(letters[1:3], 8))
+```
+
+<br>
+
+**Here's how factors will catch you out, sooner or later...**
+
+As I said earlier, storing data as a factor can be less memory intensive. R takes advantage of this in that some functions (especially when reading in data) try to identify the most sensible data type and store it in R's memory as such. So for example, if all the valuesin a column of a table are whole numbers, R will read it in as class integer, which requires less memory than class numeric (or double). By the same token, if the column is text and some values are repeated, R will often make it class factor. 
+
+This is great, but it can catch you out as follows. If a column of numbers has any text in it, R will make the whole column class character. If many of the values are repeated, it may even make it class factor for efficiency. **_This happens a lot!_**, especially if someone makes an error and types in an O instead of a 0, or denotes missing data with a "." or anything else other than "NA".
+
+The problem is that even though R typically orders factors in alphabetical or numerical order, **it is possible to create a mismatch between the actual number and the order in the levels.**
+
+Here are some code examples. Firstly, where a number is treated as a character.
+
+```{r}
+hmm <- rep(c(4, "0", 2, 5, 3, 1), 3)
+
+hmm
+
+class(hmm)
+```
+
+In this case the vector is class character, but if we'd read it in from a file it would likely have been made a factor. Let's see what happens when we coerce it to factor:
+
+```{r}
+as.factor(hmm)
+```
+
+Seems ok?
+
+What if we try to coerce that factor to a number?
+
+```{r}
+as.numeric(as.factor(hmm))
+```
+
+Ouch! While the level labels start at 0, the numeric representation of the levels start at 1, so coercing them to numbers creates a mismatch...
+
+**If you need to fix this, you should always coerce to character first.**
+
+```{r}
+as.numeric(as.character(as.factor(hmm)))
+```
+
+What about if we insert a character instead of a number, like "O" instead of "0"
+
+```{r}
+hmm2 <- rep(c(4, "O", 2, 5, 3, 1), 3)
+
+hmm2
+
+class(hmm2)
+
+as.factor(hmm2)
+```
+
+Interesting, the "O" is not the 6th level, not the first... What if we coerce to numeric?
+
+```{r}
+as.numeric(as.factor(hmm2))
+```
+
+Oops!!! Converting all your zeroes to sixes is really going to mess with your results!!!
+
+And if we try our `as.character` fix?
+
+```{r}
+as.numeric(as.character(as.factor(hmm2)))
+```
+
+R doesn't know what to do with the Os, so it makes them NA and gives you a warning. Watch out for this, because ignoring the warning and leaving out zero values could seriously bias your results!
 
 
+## A quick aside on data structures
+
+* R's basic data structures include the vector, list, matrix, data frame, and factors

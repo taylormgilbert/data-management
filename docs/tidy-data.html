@@ -24,7 +24,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2022-03-31" />
+<meta name="date" content="2022-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -202,6 +202,8 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-and-data-wrangling"><i class="fa fa-check"></i><b>6.2</b> Tidy data and data wrangling</a></li>
 <li class="chapter" data-level="6.3" data-path="tidy-data.html"><a href="tidy-data.html#the-dataset"><i class="fa fa-check"></i><b>6.3</b> The dataset</a></li>
 <li class="chapter" data-level="6.4" data-path="tidy-data.html"><a href="tidy-data.html#reading-data"><i class="fa fa-check"></i><b>6.4</b> Reading data</a></li>
+<li class="chapter" data-level="6.5" data-path="tidy-data.html"><a href="tidy-data.html#a-quick-aside-on-data-types"><i class="fa fa-check"></i><b>6.5</b> A quick aside on data types</a></li>
+<li class="chapter" data-level="6.6" data-path="tidy-data.html"><a href="tidy-data.html#a-quick-aside-on-data-structures"><i class="fa fa-check"></i><b>6.6</b> A quick aside on data structures</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="7" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>7</b> Applications</a>
@@ -254,19 +256,181 @@ div.csl-indent {
 <div id="the-dataset" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> The dataset</h2>
 <p>This tutorial relies on data provided as supplementary material for the paper Slingsby et al. 2017. Intensifying postfire weather and biological invasion drive species loss in a Mediterranean-type biodiversity hotspot. <em>Proceedings of the National Academy of Sciences</em>. <a href="http://dx.doi.org/10.1073/pnas.1619014114" class="uri">http://dx.doi.org/10.1073/pnas.1619014114</a>.</p>
-<p>The data can be downloaded as one ~13MB MicroSoft Excel (.xlsx) file <a href="https://www.pnas.org/highwire/filestream/29863/field_highwire_adjunct_files/0/pnas.1619014114.sd01.xlsx">here</a>. We’re also going to use the same dataset, but as a set of comma separated value (.csv) text files, that you can download and unzip from <a href="https://figshare.com/articles/dataset/Slingsby_TaylorPlots/4737358">here</a>.</p>
+<p>The data can be downloaded and unzipped from <a href="https://figshare.com/articles/dataset/Slingsby_TaylorPlots/4737358">here</a>.</p>
 <p><br></p>
 </div>
 <div id="reading-data" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Reading data</h2>
 <p>R has a number of different packages to read in data, and there’s even a few that work with different tabular data types just within the <em>tidyverse</em>. These include:</p>
 <ul>
-<li><a href=""><em>readr</em></a> for text files</li>
-<li><a href=""><em>readxl</em></a> for Microsoft Excel files (.xls or .xlsx)</li>
-<li><a href=""><em>googlesheets4</em></a> for reading data directly from a Google Sheet</li>
+<li><a href="https://readr.tidyverse.org/"><em>readr</em></a> for text files</li>
+<li><a href="https://readxl.tidyverse.org/"><em>readxl</em></a> for Microsoft Excel files (.xls or .xlsx)</li>
+<li><a href="https://googlesheets4.tidyverse.org/"><em>googlesheets4</em></a> for reading data directly from a Google Sheet</li>
 </ul>
-<p>There’s <a href="https://www.tidyverse.org/packages/#import">others too</a> that can scrape data from web pages, interact with web APIs or directly with local or online databases.</p>
-<p>Fortunately, within the <em>tidyverse</em> similar syntax can be used across most packages. Check out the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf">cheat sheet</a>. Let’s start with <em>readr</em>:</p>
+<p>There’s <a href="https://www.tidyverse.org/packages/#import">others too</a> that can scrape data from web pages, interact with web APIs, or query local or online databases.</p>
+<p>Fortunately, within the <em>tidyverse</em>, similar syntax can be used across most data import packages. Check out the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf">cheat sheet</a>.</p>
+<p>Let’s start with <em>readr</em>. First, we may want to know what files are in our data folder, which we can do with the base function <code>list.files()</code>.</p>
+<blockquote>
+<p><strong>NOTE:</strong> you need to replace the working directory folder path with wherever you put the data on your computer.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="tidy-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of files in the folder (change to your own)</span></span>
+<span id="cb3-2"><a href="tidy-data.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;data/Slingsby_TaylorPlots&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;Dataset S1.xlsx&quot;                                
+##  [2] &quot;Dataset S2_Weather_Data_Analysis.Rmd&quot;           
+##  [3] &quot;Dataset S3_Vegetation_Analysis.Rmd&quot;             
+##  [4] &quot;Dataset S4_Community_Climate_Shift_Analysis.Rmd&quot;
+##  [5] &quot;Dataset_S2_Weather_Data_Analysis.pdf&quot;           
+##  [6] &quot;Dataset_S3_Vegetation_Analysis.pdf&quot;             
+##  [7] &quot;Dataset_S4_Community_Climate_Shift_Analysis.pdf&quot;
+##  [8] &quot;Dataset_S5_RMarkdown_Output.pdf&quot;                
+##  [9] &quot;enviroment.csv&quot;                                 
+## [10] &quot;excluded_spp.csv&quot;                               
+## [11] &quot;fires.csv&quot;                                      
+## [12] &quot;postfireweather.csv&quot;                            
+## [13] &quot;README.md&quot;                                      
+## [14] &quot;speciesclimatedata.csv&quot;                         
+## [15] &quot;traits.csv&quot;                                     
+## [16] &quot;veg1966.csv&quot;                                    
+## [17] &quot;veg1996.csv&quot;                                    
+## [18] &quot;veg2010.csv&quot;                                    
+## [19] &quot;weather.csv&quot;</code></pre>
+<p>So we have:</p>
+<ul>
+<li>a bunch of RMarkdown files (.Rmd) that perform the analyses used in the paper. The .Rmd files output the .pdf documents of the same name. We can ignore all of these.</li>
+<li>a bunch of text files in comma separated value format (.csv). These are essentially spreadsheets, where the columns are denoted by commas.</li>
+<li>one MicroSoft Excel (.xlsx) file.</li>
+</ul>
+<p>Let’s read in a .csv file</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="tidy-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get 1966 vegetation data</span></span>
+<span id="cb5-2"><a href="tidy-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>veg66 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/Slingsby_TaylorPlots/veg1966.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## New names:
+## * `` -&gt; ...1</code></pre>
+<pre><code>## Rows: 81 Columns: 428
+## ── Column specification ──────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (1): ...1
+## dbl (427): Adenandra uniflora, Adenandra villosa, Adenocline pauciflor...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="tidy-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the first few lines (note this is a tibble)</span></span>
+<span id="cb8-2"><a href="tidy-data.html#cb8-2" aria-hidden="true" tabindex="-1"></a>veg66</span></code></pre></div>
+<pre><code>## # A tibble: 81 × 428
+##    ...1   `Adenandra uniflora` `Adenandra villosa` `Adenocline pauciflora`
+##    &lt;chr&gt;                 &lt;dbl&gt;               &lt;dbl&gt;                   &lt;dbl&gt;
+##  1 CP_1                      0                   7                       0
+##  2 CP_10                     0                   0                       0
+##  3 CP_100                    0                   7                       0
+##  4 CP_12                     0                   0                       0
+##  5 CP_13                     0                   0                       0
+##  6 CP_14                     0                   0                       0
+##  7 CP_15                     0                   7                       0
+##  8 CP_16                     0                   0                       0
+##  9 CP_17                     0                   0                       0
+## 10 CP_18                     0                   0                       0
+## # … with 71 more rows, and 424 more variables:
+## #   `Agathosma ciliaris` &lt;dbl&gt;, `Agathosma hookeri` &lt;dbl&gt;,
+## #   `Agathosma imbricata` &lt;dbl&gt;, `Agathosma lanceolata` &lt;dbl&gt;,
+## #   `Agathosma serpyllacea` &lt;dbl&gt;, `Aizoon paniculatum` &lt;dbl&gt;,
+## #   `Amphithalea ericifolia` &lt;dbl&gt;, `Anaxeton laeve` &lt;dbl&gt;,
+## #   `Anemone knowltonia` &lt;dbl&gt;, `Anthochortus laxiflorus` &lt;dbl&gt;,
+## #   `Anthospermum aethiopicum` &lt;dbl&gt;, `Anthospermum bergianum` &lt;dbl&gt;, …</code></pre>
+<p>You’ll note <code>&lt;chr&gt;</code> and <code>&lt;dbl&gt;</code> in the output. These indicate that the data types (or classes) for those columns are “character” and “double” respectively…</p>
+</div>
+<div id="a-quick-aside-on-data-types" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> A quick aside on data types</h2>
+<ul>
+<li>R’s basic data types are character, integer, numeric (or double, they are synonymous), complex, and logical.
+<ul>
+<li><code>integer</code> is for whole numbers (i.e. no decimals)</li>
+<li><code>numeric</code> or <code>double</code> (double precision floating point numbers) are <em>real numbers</em> - i.e. they include decimal places.
+<ul>
+<li>For reasons I won’t explain, storing data as real numbers takes up far more memory than integers. Obviously, lots of numbers we work with are real numbers, so we need to be able to work with them. Interestingly, large data storage and transmission projects (e.g. satellite remote sensing) often do tricks like multiply values by some constant so that all data stored are integers. You need to correct by the constant during your analysis to get values in the actual unit of measurement.</li>
+</ul></li>
+<li><code>logical</code> is the outcome of a conditional statement (i.e. values can only be <code>TRUE</code> or <code>FALSE</code>)</li>
+<li><code>character</code> is for letters, words, sentences or mixed strings (i.e. letters and digits)</li>
+<li><code>factor</code> is a set of levels (often treatments) that you’d use in an analysis. They are very useful, but they are also VERY likely to trip you up at some stage (I’ll explain why in a minute)!!!
+<ul>
+<li>factors are essentially numerical codings of character data in some order. Using mumerical coding is useful, because you can order your levels in an analysis - e.g. <em>Treatment A, Treatment B, Control,</em> etc. They are also useful, because they can store data efficiently. For example, if your analysis has thousands of data points, it uses much less memory to recode the treatments above as <em>1, 2, 3,</em> etc and just store one copy of the levels (what we call the labels in a factors).</li>
+<li><code>logical</code> is actually just a special case of factor data where FALSE = 0 and TRUE = 1. That said, R treats logical in specific ways that can’t be done with true factors and vice versa, so forget said that.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br></p>
+<p>Here’re some code examples to try to drive this home, using the built in vector `letters</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tidy-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a>letters</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
+## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<p>You can check the class of data using the function <code>class()</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tidy-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letters)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>And typically convert (or coerce) between classes using <code>as.</code> followed by the class you want, e.g.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="tidy-data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(letters)</span></code></pre></div>
+<pre><code>##  [1] a b c d e f g h i j k l m n o p q r s t u v w x y z
+## Levels: a b c d e f g h i j k l m n o p q r s t u v w x y z</code></pre>
+<p>Here it shows us that we have a factor with 26 values with 26 unique levels. You wouldn’t really use a factor class if all values are unique though. Here’s a better example.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="tidy-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>))</span></code></pre></div>
+<pre><code>##  [1] a b c a b c a b c a b c a b c a b c a b c a b c
+## Levels: a b c</code></pre>
+<p>And to prove that the factor represents the levels as a set of numbers:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="tidy-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>)))</span></code></pre></div>
+<pre><code>##  [1] 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3</code></pre>
+<p>Note that this doesn’t work if we try to coerce the the letters to numbers without making them a factor first:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tidy-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>))</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+## [24] NA</code></pre>
+<p><br></p>
+<p><strong>Here’s how factors will catch you out, sooner or later…</strong></p>
+<p>As I said earlier, storing data as a factor can be less memory intensive. R takes advantage of this in that some functions (especially when reading in data) try to identify the most sensible data type and store it in R’s memory as such. So for example, if all the valuesin a column of a table are whole numbers, R will read it in as class integer, which requires less memory than class numeric (or double). By the same token, if the column is text and some values are repeated, R will often make it class factor.</p>
+<p>This is great, but it can catch you out as follows. If a column of numbers has any text in it, R will make the whole column class character. If many of the values are repeated, it may even make it class factor for efficiency. <strong><em>This happens a lot!</em></strong>, especially if someone makes an error and types in an O instead of a 0, or denotes missing data with a “.” or anything else other than “NA.”</p>
+<p>The problem is that even though R typically orders factors in alphabetical or numerical order, <strong>it is possible to create a mismatch between the actual number and the order in the levels.</strong></p>
+<p>Here are some code examples. Firstly, where a number is treated as a character.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="tidy-data.html#cb23-1" aria-hidden="true" tabindex="-1"></a>hmm <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="st">&quot;0&quot;</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dv">3</span>)</span>
+<span id="cb23-2"><a href="tidy-data.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="tidy-data.html#cb23-3" aria-hidden="true" tabindex="-1"></a>hmm</span></code></pre></div>
+<pre><code>##  [1] &quot;4&quot; &quot;0&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;0&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;0&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot;
+## [18] &quot;1&quot;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="tidy-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hmm)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>In this case the vector is class character, but if we’d read it in from a file it would likely have been made a factor. Let’s see what happens when we coerce it to factor:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tidy-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(hmm)</span></code></pre></div>
+<pre><code>##  [1] 4 0 2 5 3 1 4 0 2 5 3 1 4 0 2 5 3 1
+## Levels: 0 1 2 3 4 5</code></pre>
+<p>Seems ok?</p>
+<p>What if we try to coerce that factor to a number?</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tidy-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(hmm))</span></code></pre></div>
+<pre><code>##  [1] 5 1 3 6 4 2 5 1 3 6 4 2 5 1 3 6 4 2</code></pre>
+<p>Ouch! While the level labels start at 0, the numeric representation of the levels start at 1, so coercing them to numbers creates a mismatch…</p>
+<p><strong>If you need to fix this, you should always coerce to character first.</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tidy-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">as.factor</span>(hmm)))</span></code></pre></div>
+<pre><code>##  [1] 4 0 2 5 3 1 4 0 2 5 3 1 4 0 2 5 3 1</code></pre>
+<p>What about if we insert a character instead of a number, like “O” instead of “0”</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="tidy-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a>hmm2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="st">&quot;O&quot;</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dv">3</span>)</span>
+<span id="cb33-2"><a href="tidy-data.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="tidy-data.html#cb33-3" aria-hidden="true" tabindex="-1"></a>hmm2</span></code></pre></div>
+<pre><code>##  [1] &quot;4&quot; &quot;O&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;O&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;O&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot;
+## [18] &quot;1&quot;</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tidy-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hmm2)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tidy-data.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(hmm2)</span></code></pre></div>
+<pre><code>##  [1] 4 O 2 5 3 1 4 O 2 5 3 1 4 O 2 5 3 1
+## Levels: 1 2 3 4 5 O</code></pre>
+<p>Interesting, the “O” is not the 6th level, not the first… What if we coerce to numeric?</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tidy-data.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(hmm2))</span></code></pre></div>
+<pre><code>##  [1] 4 6 2 5 3 1 4 6 2 5 3 1 4 6 2 5 3 1</code></pre>
+<p>Oops!!! Converting all your zeroes to sixes is really going to mess with your results!!!</p>
+<p>And if we try our <code>as.character</code> fix?</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="tidy-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">as.factor</span>(hmm2)))</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>##  [1]  4 NA  2  5  3  1  4 NA  2  5  3  1  4 NA  2  5  3  1</code></pre>
+<p>R doesn’t know what to do with the Os, so it makes them NA and gives you a warning. Watch out for this, because ignoring the warning and leaving out zero values could seriously bias your results!</p>
+</div>
+<div id="a-quick-aside-on-data-structures" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> A quick aside on data structures</h2>
+<ul>
+<li>R’s basic data structures include the vector, list, matrix, data frame, and factors</li>
+</ul>
 
 </div>
 </div>
@@ -336,20 +500,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

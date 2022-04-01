@@ -49,3 +49,6 @@ reading-data
 applications
 example-one
 example-two
+a-quick-aside-on-data-types-and-structures
+a-quick-aside-on-data-types
+a-quick-aside-on-data-structures
