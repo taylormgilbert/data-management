@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Data Management | A Minimal Introduction to Data Management</title>
+  <title>3 Data Management | A Minimal Introduction to Data Management</title>
   <meta name="description" content="This is a minimal introduction to data management handling data in R compiled for the Biological Sciences BSc(Honours) class at the University of Cape Town." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Data Management | A Minimal Introduction to Data Management" />
+  <meta property="og:title" content="3 Data Management | A Minimal Introduction to Data Management" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Data Management | A Minimal Introduction to Data Management" />
+  <meta name="twitter:title" content="3 Data Management | A Minimal Introduction to Data Management" />
   
   <meta name="twitter:description" content="This is a minimal introduction to data management handling data in R compiled for the Biological Sciences BSc(Honours) class at the University of Cape Town." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2022-04-01" />
+<meta name="date" content="2022-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,52 +163,51 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.1</b> General</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#lecturesdiscussionstutorials"><i class="fa fa-check"></i><b>1.2</b> Lectures/Discussions/Tutorials</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#deliverables"><i class="fa fa-check"></i><b>1.3</b> Deliverables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#deliverables-due-thursday-the-14th-april"><i class="fa fa-check"></i><b>1.3</b> Deliverables (Due Thursday the 14th April)</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#software-installation-and-setup"><i class="fa fa-check"></i><b>1.4</b> Software installation and setup</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
-<li class="chapter" data-level="4" data-path="reproducibility.html"><a href="reproducibility.html"><i class="fa fa-check"></i><b>4</b> Reproducible research</a>
+<li class="chapter" data-level="2" data-path="reproducibility.html"><a href="reproducibility.html"><i class="fa fa-check"></i><b>2</b> Reproducible research</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="reproducibility.html"><a href="reproducibility.html#the-reproducibility-crisis"><i class="fa fa-check"></i><b>4.1</b> The Reproducibility Crisis</a></li>
-<li class="chapter" data-level="4.2" data-path="reproducibility.html"><a href="reproducibility.html#replication-and-the-reproducibility-spectrum"><i class="fa fa-check"></i><b>4.2</b> Replication and the Reproducibility Spectrum</a></li>
-<li class="chapter" data-level="4.3" data-path="reproducibility.html"><a href="reproducibility.html#why-work-reproducibly"><i class="fa fa-check"></i><b>4.3</b> Why work reproducibly?</a></li>
-<li class="chapter" data-level="4.4" data-path="reproducibility.html"><a href="reproducibility.html#barriers-to-working-reproducibly"><i class="fa fa-check"></i><b>4.4</b> Barriers to working reproducibly</a></li>
-<li class="chapter" data-level="4.5" data-path="reproducibility.html"><a href="reproducibility.html#reproducible-scientific-workflows"><i class="fa fa-check"></i><b>4.5</b> Reproducible Scientific Workflows</a>
+<li class="chapter" data-level="2.1" data-path="reproducibility.html"><a href="reproducibility.html#the-reproducibility-crisis"><i class="fa fa-check"></i><b>2.1</b> The Reproducibility Crisis</a></li>
+<li class="chapter" data-level="2.2" data-path="reproducibility.html"><a href="reproducibility.html#replication-and-the-reproducibility-spectrum"><i class="fa fa-check"></i><b>2.2</b> Replication and the Reproducibility Spectrum</a></li>
+<li class="chapter" data-level="2.3" data-path="reproducibility.html"><a href="reproducibility.html#why-work-reproducibly"><i class="fa fa-check"></i><b>2.3</b> Why work reproducibly?</a></li>
+<li class="chapter" data-level="2.4" data-path="reproducibility.html"><a href="reproducibility.html#barriers-to-working-reproducibly"><i class="fa fa-check"></i><b>2.4</b> Barriers to working reproducibly</a></li>
+<li class="chapter" data-level="2.5" data-path="reproducibility.html"><a href="reproducibility.html#reproducible-scientific-workflows"><i class="fa fa-check"></i><b>2.5</b> Reproducible Scientific Workflows</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="reproducibility.html"><a href="reproducibility.html#file-and-folder-management"><i class="fa fa-check"></i><b>4.5.1</b> File and folder management</a></li>
-<li class="chapter" data-level="4.5.2" data-path="reproducibility.html"><a href="reproducibility.html#coding-and-code-management"><i class="fa fa-check"></i><b>4.5.2</b> Coding and code management</a></li>
-<li class="chapter" data-level="4.5.3" data-path="reproducibility.html"><a href="reproducibility.html#computing-environment-and-software"><i class="fa fa-check"></i><b>4.5.3</b> Computing environment and software</a></li>
-<li class="chapter" data-level="4.5.4" data-path="reproducibility.html"><a href="reproducibility.html#sharing-of-the-data-code-publication-etc"><i class="fa fa-check"></i><b>4.5.4</b> Sharing of the data, code, publication etc</a></li>
+<li class="chapter" data-level="2.5.1" data-path="reproducibility.html"><a href="reproducibility.html#file-and-folder-management"><i class="fa fa-check"></i><b>2.5.1</b> File and folder management</a></li>
+<li class="chapter" data-level="2.5.2" data-path="reproducibility.html"><a href="reproducibility.html#coding-and-code-management"><i class="fa fa-check"></i><b>2.5.2</b> Coding and code management</a></li>
+<li class="chapter" data-level="2.5.3" data-path="reproducibility.html"><a href="reproducibility.html#computing-environment-and-software"><i class="fa fa-check"></i><b>2.5.3</b> Computing environment and software</a></li>
+<li class="chapter" data-level="2.5.4" data-path="reproducibility.html"><a href="reproducibility.html#sharing-of-the-data-code-publication-etc"><i class="fa fa-check"></i><b>2.5.4</b> Sharing of the data, code, publication etc</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>5</b> Data Management</a>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data Management</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="data.html"><a href="data.html#why-do-you-need-to-manage-your-data"><i class="fa fa-check"></i><b>5.1</b> Why do you need to manage your data?</a></li>
-<li class="chapter" data-level="5.2" data-path="data.html"><a href="data.html#the-data-life-cycle"><i class="fa fa-check"></i><b>5.2</b> The Data Life Cycle</a>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#why-do-you-need-to-manage-your-data"><i class="fa fa-check"></i><b>3.1</b> Why do you need to manage your data?</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#the-data-life-cycle"><i class="fa fa-check"></i><b>3.2</b> The Data Life Cycle</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="data.html"><a href="data.html#plan"><i class="fa fa-check"></i><b>5.2.1</b> Plan</a></li>
-<li class="chapter" data-level="5.2.2" data-path="data.html"><a href="data.html#collect-and-assure"><i class="fa fa-check"></i><b>5.2.2</b> Collect and Assure</a></li>
-<li class="chapter" data-level="5.2.3" data-path="data.html"><a href="data.html#describe"><i class="fa fa-check"></i><b>5.2.3</b> Describe</a></li>
-<li class="chapter" data-level="5.2.4" data-path="data.html"><a href="data.html#preserve"><i class="fa fa-check"></i><b>5.2.4</b> Preserve</a></li>
-<li class="chapter" data-level="5.2.5" data-path="data.html"><a href="data.html#discover"><i class="fa fa-check"></i><b>5.2.5</b> Discover</a></li>
-<li class="chapter" data-level="5.2.6" data-path="data.html"><a href="data.html#integrate"><i class="fa fa-check"></i><b>5.2.6</b> Integrate</a></li>
-<li class="chapter" data-level="5.2.7" data-path="data.html"><a href="data.html#analyze"><i class="fa fa-check"></i><b>5.2.7</b> Analyze</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data.html"><a href="data.html#plan"><i class="fa fa-check"></i><b>3.2.1</b> Plan</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data.html"><a href="data.html#collect-and-assure"><i class="fa fa-check"></i><b>3.2.2</b> Collect and Assure</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#describe"><i class="fa fa-check"></i><b>3.2.3</b> Describe</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data.html"><a href="data.html#preserve"><i class="fa fa-check"></i><b>3.2.4</b> Preserve</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data.html"><a href="data.html#discover"><i class="fa fa-check"></i><b>3.2.5</b> Discover</a></li>
+<li class="chapter" data-level="3.2.6" data-path="data.html"><a href="data.html#integrate"><i class="fa fa-check"></i><b>3.2.6</b> Integrate</a></li>
+<li class="chapter" data-level="3.2.7" data-path="data.html"><a href="data.html#analyze"><i class="fa fa-check"></i><b>3.2.7</b> Analyze</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="data.html"><a href="data.html#data-and-decisions"><i class="fa fa-check"></i><b>5.3</b> Data and decisions</a></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#data-and-decisions"><i class="fa fa-check"></i><b>3.3</b> Data and decisions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>6</b> Tidy Data</a>
+<li class="chapter" data-level="4" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>4</b> Tidy Data</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="tidy-data.html"><a href="tidy-data.html#data-entry"><i class="fa fa-check"></i><b>6.1</b> Data entry</a></li>
-<li class="chapter" data-level="6.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-and-data-wrangling"><i class="fa fa-check"></i><b>6.2</b> Tidy data and data wrangling</a></li>
-<li class="chapter" data-level="6.3" data-path="tidy-data.html"><a href="tidy-data.html#the-dataset"><i class="fa fa-check"></i><b>6.3</b> The dataset</a></li>
-<li class="chapter" data-level="6.4" data-path="tidy-data.html"><a href="tidy-data.html#reading-data"><i class="fa fa-check"></i><b>6.4</b> Reading data</a></li>
+<li class="chapter" data-level="4.1" data-path="tidy-data.html"><a href="tidy-data.html#data-entry"><i class="fa fa-check"></i><b>4.1</b> Data entry</a></li>
+<li class="chapter" data-level="4.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-and-data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Tidy data and data wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="tidy-data.html"><a href="tidy-data.html#the-dataset"><i class="fa fa-check"></i><b>4.3</b> The dataset</a></li>
+<li class="chapter" data-level="4.4" data-path="tidy-data.html"><a href="tidy-data.html#reading-data"><i class="fa fa-check"></i><b>4.4</b> Reading data</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="tidy-data.html"><a href="tidy-data.html#microsoft-excel-files-with-readxl-start-with-googlesheets"><i class="fa fa-check"></i><b>4.4.1</b> Microsoft Excel files with <em>readxl</em> (start with Googlesheets?)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="tidy-data.html"><a href="tidy-data.html#a-quick-aside-on-data-types"><i class="fa fa-check"></i><b>4.5</b> A quick aside on data types</a></li>
+<li class="chapter" data-level="4.6" data-path="tidy-data.html"><a href="tidy-data.html#a-quick-aside-on-data-structures"><i class="fa fa-check"></i><b>4.6</b> A quick aside on data structures</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="7" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>7</b> Applications</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>7.1</b> Example one</a></li>
-<li class="chapter" data-level="7.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>7.2</b> Example two</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -229,23 +228,23 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Data Management</h1>
-<div id="why-do-you-need-to-manage-your-data" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Why do you need to manage your data?</h2>
+<div id="data" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Data Management</h1>
+<div id="why-do-you-need-to-manage-your-data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Why do you need to manage your data?</h2>
 <p>Data management is often the last thing on a scientists mind when doing a new study - “I have a cool idea, and I’m going to test it!” You don’t want to “waste” time planning how you’re going to manage your data and implementing that plan…</p>
 <p>Unfortunately, this never ends well and really is a realm where “haste makes waste.”</p>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:datadecay"></span>
 <img src="img/datadecaycurve.jpg" alt="The 'Data Decay Curve' [@Michener1997]" width="75%" />
 <p class="caption">
-Figure 5.1: The ‘Data Decay Curve’ <span class="citation">(<a href="#ref-Michener1997" role="doc-biblioref">Michener et al. 1997</a>)</span>
+Figure 3.1: The ‘Data Decay Curve’ <span class="citation">(<a href="#ref-Michener1997" role="doc-biblioref">Michener et al. 1997</a>)</span>
 </p>
 </div>
 <p><br></p>
 <p>Here are a bunch of reasons you really want to focus on doing good data management:</p>
 <ul>
-<li><p><strong>Bad data management leads to data loss</strong>… (Figure <a href="data.html#fig:datadecay">5.1</a>)</p></li>
+<li><p><strong>Bad data management leads to data loss</strong>… (Figure <a href="data.html#fig:datadecay">3.1</a>)</p></li>
 <li><p><strong>Your future self will hate you if you lose it before you’re finished with it!!!</strong> This is less likely in the world of Dropbox, Google Drive, iCloud etc, but I know people who had to repeat their PhD’s because they lost their data because it was on a laptop that crashed or was stolen… Also, <strong><em>beware cloud storage!!!</em></strong> It’s very easy for you or a collaborator to delete/overwrite/lose access to items, e.g. </p>
 <ul>
 <li>if someone leaves the project and deletes the folder on their Dropbox without “leaving” it first</li>
@@ -272,12 +271,12 @@ Figure 5.1: The ‘Data Decay Curve’ <span class="citation">(<a href="#ref-Mic
 <p>To avoid data (and relationship) decay, and to reap the benefits of good data management, it is important to consider the full <em>Data Life Cycle</em>.</p>
 <p><br></p>
 </div>
-<div id="the-data-life-cycle" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> The Data Life Cycle</h2>
+<div id="the-data-life-cycle" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> The Data Life Cycle</h2>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:datalifecycle"></span>
 <img src="data-management_files/figure-html/datalifecycle-1.png" alt="The Data Life Cycle, adapted from https://www.dataone.org/" width="110%" />
 <p class="caption">
-Figure 5.2: The Data Life Cycle, adapted from <a href="https://www.dataone.org/" class="uri">https://www.dataone.org/</a>
+Figure 3.2: The Data Life Cycle, adapted from <a href="https://www.dataone.org/" class="uri">https://www.dataone.org/</a>
 </p>
 </div>
 <p><br></p>
@@ -288,8 +287,8 @@ Figure 5.2: The Data Life Cycle, adapted from <a href="https://www.dataone.org/"
 <li>If you’re collecting new data you would do steps 1 to 5 and possibly skip 6 and 7, although in my experience few studies do not reuse existing data (e.g. weather or various GIS data to put your new samples into context).</li>
 </ul>
 <p><br></p>
-<div id="plan" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Plan</h3>
+<div id="plan" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Plan</h3>
 <p>Good data management begins with planning. In this step you essentially <strong>outline the plan for every step of the cycle in as much detail as possible</strong>. Usually this is done by constructing a document or <strong>Data Management Plan (DMP)</strong>.</p>
 <p>While developing DMPs can seem tedious, they are essential for the reasons I gave above, and because <strong>most funders and universities now require them</strong>.</p>
 <p>Fortunately, there are a number of <strong>online data management planning tools</strong> that make it easy by providing templates and prompts to ensure that you cover all the bases, like the Digital Curation Centre’s <a href="https://dmponline.dcc.ac.uk/">DMPOnline</a> and <a href="https://dmp.lib.uct.ac.za/">UCT’s DMP Tool</a>.</p>
@@ -297,7 +296,7 @@ Figure 5.2: The Data Life Cycle, adapted from <a href="https://www.dataone.org/"
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:uctdmp"></span>
 <img src="img/UCTDMP.png" alt="Screenshot of [UCT's Data Management Planning Tool's Data Management Checklist.](http://www.digitalservices.lib.uct.ac.za/dls/systems/uct-dmp)" width="90%" />
 <p class="caption">
-Figure 5.3: Screenshot of <a href="http://www.digitalservices.lib.uct.ac.za/dls/systems/uct-dmp">UCT’s Data Management Planning Tool’s Data Management Checklist.</a>
+Figure 3.3: Screenshot of <a href="http://www.digitalservices.lib.uct.ac.za/dls/systems/uct-dmp">UCT’s Data Management Planning Tool’s Data Management Checklist.</a>
 </p>
 </div>
 <p><br></p>
@@ -305,13 +304,13 @@ Figure 5.3: Screenshot of <a href="http://www.digitalservices.lib.uct.ac.za/dls/
 <p>I typically develop one overarching DMP for an umbrella project (e.g. a particular grant), but then add specifics for subprojects (e.g. separate student projects etc).</p>
 <p><br></p>
 </div>
-<div id="collect-and-assure" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Collect and Assure</h3>
+<div id="collect-and-assure" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Collect and Assure</h3>
 <p>There are many, many different kinds of data that can be collected in a vast number of ways!</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:datatypes"></span>
 <img src="img/datatypes.png" alt="[Springer Nature Infographic](https://doi.org/10.6084/m9.figshare.5883193.v1) illustrating the vast range of research data types." width="90%" />
 <p class="caption">
-Figure 5.4: <a href="https://doi.org/10.6084/m9.figshare.5883193.v1">Springer Nature Infographic</a> illustrating the vast range of research data types.
+Figure 3.4: <a href="https://doi.org/10.6084/m9.figshare.5883193.v1">Springer Nature Infographic</a> illustrating the vast range of research data types.
 </p>
 </div>
 <p><br></p>
@@ -327,7 +326,7 @@ Figure 5.4: <a href="https://doi.org/10.6084/m9.figshare.5883193.v1">Springer Na
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:appsheet"></span>
 <img src="img/veldwatch.png" alt="An example data collection app I built in [AppSheet](https://www.appsheet.com) that allows you to log GPS coordinates, take photos, record various fields, etc." width="90%" />
 <p class="caption">
-Figure 5.5: An example data collection app I built in <a href="https://www.appsheet.com">AppSheet</a> that allows you to log GPS coordinates, take photos, record various fields, etc.
+Figure 3.5: An example data collection app I built in <a href="https://www.appsheet.com">AppSheet</a> that allows you to log GPS coordinates, take photos, record various fields, etc.
 </p>
 </div>
 <p><br></p>
@@ -335,15 +334,15 @@ Figure 5.5: An example data collection app I built in <a href="https://www.appsh
 <p>Last, but not least. We haven’t discussed different data formats etc, but if you are working with tabular data (i.e. spreadsheets, tables) I strongly recommend you read this short paper on <strong><a href="http://dx.doi.org/10.18637/jss.v059.i10">how to keep your data Tidy</a></strong> <span class="citation">(<a href="#ref-Wickham2014" role="doc-biblioref">Wickham 2014</a>)</span>. Following these principles will make life much easier for you once you get to the analysis step…</p>
 <p><br></p>
 </div>
-<div id="describe" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Describe</h3>
+<div id="describe" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Describe</h3>
 <p>There are few things worse than having a spreadsheet of what you think is the data you need, but you don’t know what the column names mean, how variables were measured, what units they’re reported in, etc… - <em>Especially when you were the one who collected and captured the data!!!</em></p>
 <p>This descriptive data about the data is called <strong><em>metadata</em></strong> and is essential for making the data reusable, but is also useful for many other purposes like making the data findable (e.g. using keyword searches). In fact, metadata makes up the majority of what are called the <a href="https://www.go-fair.org/fair-principles/"><strong>FAIR data principles</strong></a> <span class="citation">(<a href="#ref-Wilkinson2016" role="doc-biblioref">Wilkinson et al. 2016</a>)</span>, which largely focus on this and the next few steps of the Data Life Cycle. I’m not going to dwell on them other than to say that they are a key component of making your work reproducible, and that like reproducibility, practicing FAIR data principles is a spectrum.</p>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fairdata"></span>
 <img src="img/fairdata.jpg" alt="The FAIR data principles [ErrantScience.com](https://errantscience.com/)." width="75%" />
 <p class="caption">
-Figure 5.6: The FAIR data principles <a href="https://errantscience.com/">ErrantScience.com</a>.
+Figure 3.6: The FAIR data principles <a href="https://errantscience.com/">ErrantScience.com</a>.
 </p>
 </div>
 <p><br></p>
@@ -387,7 +386,7 @@ Figure 5.6: The FAIR data principles <a href="https://errantscience.com/">Errant
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:datastandards"></span>
 <img src="img/standards.png" alt="How standards proliferate... from [xkcd.com/927](https://xkcd.com/927), used under a [CC-BY-NC 2.5 license](https://creativecommons.org/licenses/by-nc/2.5/)." width="75%" />
 <p class="caption">
-Figure 5.7: How standards proliferate… from <a href="https://xkcd.com/927">xkcd.com/927</a>, used under a <a href="https://creativecommons.org/licenses/by-nc/2.5/">CC-BY-NC 2.5 license</a>.
+Figure 3.7: How standards proliferate… from <a href="https://xkcd.com/927">xkcd.com/927</a>, used under a <a href="https://creativecommons.org/licenses/by-nc/2.5/">CC-BY-NC 2.5 license</a>.
 </p>
 </div>
 <p><br></p>
@@ -398,13 +397,13 @@ Figure 5.7: How standards proliferate… from <a href="https://xkcd.com/927">xkc
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:stacspec"></span>
 <img src="img/stacspec.png" alt="An example of a geospatial metadata standard. SpatioTemporal Asset Catalogs [(STAC; stacspec.org)](https://stacspec.org/) aims to provide a common specification to enable online search and discovery of geospatial assets in just about any format." width="100%" />
 <p class="caption">
-Figure 5.8: An example of a geospatial metadata standard. SpatioTemporal Asset Catalogs <a href="https://stacspec.org/">(STAC; stacspec.org)</a> aims to provide a common specification to enable online search and discovery of geospatial assets in just about any format.
+Figure 3.8: An example of a geospatial metadata standard. SpatioTemporal Asset Catalogs <a href="https://stacspec.org/">(STAC; stacspec.org)</a> aims to provide a common specification to enable online search and discovery of geospatial assets in just about any format.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="preserve" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> Preserve</h3>
+<div id="preserve" class="section level3" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Preserve</h3>
 <p>There are two major components to preserving your data:</p>
 <ol style="list-style-type: decimal">
 <li><strong><em>Back your data up now!!! (and repeat regularly)</em></strong></li>
@@ -442,10 +441,10 @@ Figure 5.8: An example of a geospatial metadata standard. SpatioTemporal Asset C
 <p>I haven’t discussed <strong>physical samples</strong> at all. These are obviously a huge (if not bigger) challenge too, although there are some obvious homes for common biological data, like herbaria for plant collections and museums for animal specimens.</p>
 <p><br></p>
 </div>
-<div id="discover" class="section level3" number="5.2.5">
-<h3><span class="header-section-number">5.2.5</span> Discover</h3>
+<div id="discover" class="section level3" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Discover</h3>
 <p>This is perhaps the main point of the Data Life Cycle and FAIR data principles - to make data findable so that it can be reused.</p>
-<p>The biggest challenge to discovering data is that <strong>so many datasets are not online</strong> and are in the “filing cabinet in a bath in the basement under a leaking pipe” as in Figure <a href="data.html#fig:fairdata">5.6</a>. If you <strong><em>preserve and publish</em></strong> them in an online data repository, this overcomes the biggest hurdle.</p>
+<p>The biggest challenge to discovering data is that <strong>so many datasets are not online</strong> and are in the “filing cabinet in a bath in the basement under a leaking pipe” as in Figure <a href="data.html#fig:fairdata">3.6</a>. If you <strong><em>preserve and publish</em></strong> them in an online data repository, this overcomes the biggest hurdle.</p>
 <p>The next biggest challenge is <strong>that there is so much online that finding what you need can be quite challenging</strong> (like looking for a needle in a haystack…). This is where choosing the right portal can be important. It is also what metadata standards are aimed at - allowing interoperable searches for specific data types across multiple repositories.</p>
 <p>A final consideration is whether you have <strong>permission to use the data</strong>. You can often find out about the existence of a dataset, either online or in a paper, but the data aren’t made freely available. This is where <strong>licensing</strong> comes into play. Most data repositories require you to publish the data under a license. There are many options depending on the kind of data and what restrictions you want to put on its use. I’m not going to go into the gory details, but <a href="https://creativecommons.org/licenses/">Creative Commons</a> have created an extensible system of generic licenses that are easy to interpret and cover most situations. I say <em>extensible</em> because the licenses are made up of a string of components that can be layered over each other. For example:</p>
 <ul>
@@ -463,8 +462,8 @@ Figure 5.8: An example of a geospatial metadata standard. SpatioTemporal Asset C
 </blockquote>
 <p><br></p>
 </div>
-<div id="integrate" class="section level3" number="5.2.6">
-<h3><span class="header-section-number">5.2.6</span> Integrate</h3>
+<div id="integrate" class="section level3" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Integrate</h3>
 <p>There are a few different components to data integration in this context:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Linking different kinds of data</strong>, usually through spatial and or temporal information</li>
@@ -484,18 +483,18 @@ Figure 5.8: An example of a geospatial metadata standard. SpatioTemporal Asset C
 <li><strong>Curating your data</strong> such that they can easily be integrated with other, similar datasets for larger analyses or meta-analyses</li>
 </ol>
 <ul>
-<li>this is largely a metadata game, but also one of data formats etc. Many fields promote the use of common data standards with rules on measurement specifications, file formats, common data and metadata fields, controlled vocabularies etc that allow easy integration, searching and manipulation (see section <a href="data.html#describe">5.2.3</a> for more details). This is what a lot of the discipline-specific online databases attempt to achieve.</li>
+<li>this is largely a metadata game, but also one of data formats etc. Many fields promote the use of common data standards with rules on measurement specifications, file formats, common data and metadata fields, controlled vocabularies etc that allow easy integration, searching and manipulation (see section <a href="data.html#describe">3.2.3</a> for more details). This is what a lot of the discipline-specific online databases attempt to achieve.</li>
 </ul>
 <p><br></p>
 </div>
-<div id="analyze" class="section level3" number="5.2.7">
-<h3><span class="header-section-number">5.2.7</span> Analyze</h3>
-<p>“The fun bit,” but again, there are many things to bear in mind and keep track of so that your analysis is repeatable. This is largely covered by the sections on <em>Coding and code management</em> and <em>Computing environment and software</em> in Chapter <a href="reproducibility.html#reproducibility">4</a></p>
+<div id="analyze" class="section level3" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> Analyze</h3>
+<p>“The fun bit,” but again, there are many things to bear in mind and keep track of so that your analysis is repeatable. This is largely covered by the sections on <em>Coding and code management</em> and <em>Computing environment and software</em> in Chapter <a href="reproducibility.html#reproducibility">2</a></p>
 <p><br></p>
 </div>
 </div>
-<div id="data-and-decisions" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Data and decisions</h2>
+<div id="data-and-decisions" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Data and decisions</h2>
 <p>This is not part of <em>The Data Life Cycle</em> per se, but it’s worth remembering that there are some other aspects of data, while still important if the goal is purely academic, that are make-or-break when the goal is informing decisions, e.g. (mostly paraphrased from <span class="citation"><a href="#ref-Dietze2018" role="doc-biblioref">Dietze et al.</a> (<a href="#ref-Dietze2018" role="doc-biblioref">2018</a>)</span>):</p>
 <ol style="list-style-type: decimal">
 <li><strong>Latency</strong> - the time between data collection and it’s availability for modelling. Depending on the model’s need for the latest data, if the latency is too long then it can preclude the ability to make useful forecasts (e.g. it’s very difficult to make useful weekly forecasts if you only get new data once a year…).</li>

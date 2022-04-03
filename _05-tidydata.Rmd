@@ -8,7 +8,9 @@ This section is a demonstration of some of the _Tidyverse_ tools for wrangling a
 
 Before we start, I should highlight that one very good way of reducing errors in data entry and improving quality assurance and quality control (QA/QC) is to make use of various forms of **data validation** like **drop down lists** and **conditional formatting**. These can be used to limit data types (i.e. avoids you entering text into a numeric column or vice versa), or limiting the range of values entered (e.g. 0 to 100 for percentages), or just highlighting values that are possible, but rare, and should be double-checked, like 100m tall trees. Unit errors are incredibly common in ecological data entry, especially for things like plant height where you may be measuring 20cm tall grasses and 20m tall trees!!! Drop down lists really come into their own when you're working with lots of different Latin species names etc. Typos, spelling errors and synonyms can take weeks of work to fix! Restricting the names to a drop-down list from a known published taxonomic resource really makes a huge difference! 
 
-[Here's an example](https://docs.google.com/spreadsheets/d/1LB_guWKrc-EAD8cwD3fdnYrZkoalTory4q24styxdGA/edit?usp=sharing) from a vegetation plot survey I ran. If you go to the `PlotTemplate` sheet, you'll see that the first two columns `Plot_Quadrat` and `AcceptedSpecies` are drop-down lists that reference the `SiteData` and `AcceptedSpecies` spreadsheets respectively. These prevent you from entering species data without having collected the site data first (it's easy to forget if you're doing lots of sites) and then limits the names you can use in turn.
+[Here's an example](https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing) from a vegetation survey practical I ran as part of the BIO3018F Ecology and Evolution 3rd-year field course. If you go to the `Sites` sheet, you'll see that the first two columns `Site` and `Point` are drop-down lists that reference the `RangeLimits` spreadsheet, to make entry easy and to prevent spelling mistakes etc. You'll also notice that the different columns have specified ranges, and that a number outside the range is entered (e.g. anything >100 for `PercentBareSoil`) then the cell is highlighted with a warning. You can see the data validation rules by selecting a cell in the column of interest and clicking `Data > Data validation`
+
+It's often easy to forget to collect some measurements etc when in the field, like site-level information. Sometimes what I do to prevent this is set up the next data entry sheet (trait data in this case), to require that you fill in the site name from a drop-down list that is populated in the site data sheet. This limits the names you can use to only those that have site data, and serves as a reminder should you have forgotten. Check out the `SitePoint` column in the `Traits` sheet.
 
 I'm not going to go into how to do data validation in spreadsheets, but here are links for:
 
@@ -16,6 +18,8 @@ I'm not going to go into how to do data validation in spreadsheets, but here are
 * [Google Sheets](https://cloud.google.com/blog/products/g-suite/pro-tip-how-create-dropdown-list-google-sheets-and-pointers-conditional-formatting)
 
 I'm sure there are plenty of other online resources too.
+
+**One thing I really like** about Google Sheets is that you can set your sheet to work in "offline mode" on your phone or tablet, which allows you to do data entry directly into the sheet in the field, which then syncs to your Google Drive when you go back online (I'd imagine you can do the same with MS Excel and One Drive, but I've never tried it). This really saves time (and errors) on entering written field data sheets into a spreadsheet later, and allows you to take advantage of the data validation rules in the field, which are harder to set up with pen or pencil... The only issue is that if you make a typo etc that isn't caught by the data validation you're likely to be stuck with it...
 
 <br>
 
@@ -29,10 +33,7 @@ The rest of this section provides a demonstration of some of the functionality o
 
 ## The dataset
 
-This tutorial relies on data provided as supplementary material for the paper Slingsby et al. 2017. Intensifying postfire weather and biological invasion drive species loss in a Mediterranean-type biodiversity hotspot. _Proceedings of the National Academy of Sciences_. http://dx.doi.org/10.1073/pnas.1619014114. 
-
-The data can be downloaded and unzipped from [here](https://figshare.com/articles/dataset/Slingsby_TaylorPlots/4737358).
-
+This tutorial relies on the BIO3018F prac data mentioned previously (see link above). **Add more details?**
 
 <br>
 
@@ -48,29 +49,37 @@ There's [others too](https://www.tidyverse.org/packages/#import) that can scrape
 
 Fortunately, within the _tidyverse_, similar syntax can be used across most data import packages. Check out the [cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf). 
 
-Let's start with _readr_. First, we may want to know what files are in our data folder, which we can do with the base function `list.files()`. 
+### Microsoft Excel files with _readxl_ (start with Googlesheets?)
 
-> **NOTE:** you need to replace the working directory folder path with wherever you put the data on your computer.
+First, we may want to know what files are in our data folder, which we can do with the base function `list.files()`. 
+
+> **NOTE:** you need to replace the working directory folder path ("data" here) with wherever you put the data on your computer.
 
 ```{r}
 # get list of files in the folder (change to your own)
-list.files("data/Slingsby_TaylorPlots")
+list.files("data")
 ```
 
 So we have:
 
 * a bunch of RMarkdown files (.Rmd) that perform the analyses used in the paper. The .Rmd files output the .pdf documents of the same name. We can ignore all of these.
 * a bunch of text files in comma separated value format (.csv). These are essentially spreadsheets, where the columns are denoted by commas.
-* one MicroSoft Excel (.xlsx) file.
+* one Microsoft Excel (.xlsx) file.
 
-Let's read in a .csv file
+Let's have a look at the .xlsx file
 
 ```{r}
-# get 1966 vegetation data
-veg66 <- read_csv("data/Slingsby_TaylorPlots/veg1966.csv")
+library(tidyverse)
+library(readxl) #while readxl is part of the tidyverse and installed when you install the tidyverse, it isn't a core package, so you have to call it separately
 
-# print the first few lines (note this is a tibble)
-veg66
+# See what sheets are in the Excel workbook
+excel_sheets("data/pracdatasheet.xlsx")
+
+# Read in data
+edat <- read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites")
+
+# Print a summary of the data (WARNING - doing this is usually a bad idea when not using tidyverse packages - it would usually show you all the data...)
+edat
 ```
 
 You'll note `<chr>` and `<dbl>` in the output. These indicate that the data types (or classes) for those columns are "character" and "double" respectively...
@@ -179,7 +188,7 @@ class(hmm2)
 as.factor(hmm2)
 ```
 
-Interesting, the "O" is not the 6th level, not the first... What if we coerce to numeric?
+Interesting, the "O" is now the 6th level, not the first... What if we coerce to numeric?
 
 ```{r}
 as.numeric(as.factor(hmm2))
@@ -194,6 +203,12 @@ as.numeric(as.character(as.factor(hmm2)))
 ```
 
 R doesn't know what to do with the Os, so it makes them NA and gives you a warning. Watch out for this, because ignoring the warning and leaving out zero values could seriously bias your results!
+
+
+```{r}
+f <- factor(c(3.4, 1.2, 5))
+as.numeric(f)
+```
 
 
 ## A quick aside on data structures

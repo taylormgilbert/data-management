@@ -91,7 +91,7 @@ knitr::include_graphics("img/miracle.jpg")
 
 ***In addition to basic scientific rigour, working reproducibly is hugely valuable, because:***
 
-(Adapted from "_Five selfish reasons to work reproducibly_" [@Markowetz2015])
+(Adapted from "_Five selfish reasons to work reproducibly_" [@Markowetz2015], with a few extras added)
 
 1. _**Its transparent and open, helping us avoid mistakes and/or track down errors in analyses**_
 - This is what highlighted the importance of working reproducibly for me. In 2017 I published the first evidence of observed climate change impacts on biodiversity in the Fynbos Biome [@Slingsby2017]. The analyses were quite complicated, and when working on the revisions I found an error in my R code. Fortunately, it didn't change the results qualitatively, but it made me realize how easy it is to make a mistake and potentially put the wrong message out there! This encouraged me to make all data and R code from the paper available, so that anyone is free to check my data and analyses and let me (and/or the world) know if they find any errors.
@@ -101,6 +101,7 @@ knitr::include_graphics("img/miracle.jpg")
 - Often issues picked at by reviewers are matters of clarity/confusion. Sharing your data and analyses allows them to see exactly what you did, not just what you said you did, allowing them to identify the problem and make constructive suggestions.
 - It's also handy to be able to respond to a reviewer's comment with something like:
   - _"That's a great suggestion, but not really in line with the objectives of the study. We have chosen not to include the suggested analysis, but do provide all data and code so that interested readers can explore this for themselves."_ (Feel free to copy and paste - [CCO 1.0](https://creativecommons.org/publicdomain/zero/1.0/))
+- It also helps you get assistance and feedback on your analyses (depending on your supervisor). I'm starting to enforce the use of reproducible research tools among my postgraduate students. Previously, when they needed help with R etc it would take me ages to work out what they were trying to do and to replicate the problem. Now it takes me seconds to just pull their git repository and rerun their code. When it comes to getting feedback and engagement from your supervisors, it helps to give a little too!
 4. _**It enables continuity of the research**_
 - When people leave a project (e.g. students/postdocs), or you forget what you did _X_ days/weeks/months/years ago, it can be a serious setback for a project and make it difficult for you or a new student to pick up where things left off. If the data and workflow are well curated and documented this problem is avoided. _Trust me, this is a very common problem!!!_ I have many papers that I (or my students) never published and may never go back to, because I know it'll take me a few days or weeks to understand the datasets and analyses again...
 - This is obviously incredibly important for long-term projects!
@@ -118,7 +119,8 @@ And some less selfish reasons (and relevant for ecoforecasting):
 8. _**It makes it easy to repeat the same analyses when new data are collected or added**_
   - This is key for iterative forecasting, but also useful if you want to apply the same method/model to a new data set (e.g. applying @Merow2014's analysis on all 26 Proteaceae studied by @Treurnicht2016).
 9. _**Most skills and software used in Reproducible Research are very useful beyond Reproducible Research alone!**_ 
-  - e.g. GitHub - in addition to versioning code etc is great for code management, collaborative projects and can be used for all kinds of things like building websites (e.g. these course notes).
+  - e.g. Version control with GitHub or similar - in addition to versioning code etc is great for code management, collaborative projects and can be used for all kinds of things like building websites (e.g. these course notes).
+  - It also makes it much easier to start working with **Big Data**... The philosophy with Big Data has shifted from a paradigm of moving the data to the analysis (i.e. putting the data on your local computer and analyzing it there) to moving the analysis to the data (i.e. uploading your analysis code to a server or cloud machine that already has access to the data), largely because the data are too big to download or fit on your laptop. a code repository like GitHub and using containers (contained computing environments) like docker or singularity make this much easier.
 
 And one more selfish reason (but don't tell anyone I said this):
 
@@ -179,7 +181,7 @@ This entails a number of overlapping/intertwined components, namely:
 - Computing environment and software
 - Sharing of the data, metadata, code, publications and any other relevant materials
 
-For the rest of this section we'll work through these components and some of the tools that help you achieve this.
+For the rest of this section we'll work through these components and some of the tools that help you achieve this [there's a more thorough treatment of this by @Cooper2017]  [here](https://nhm.openrepository.com/handle/10141/622618).
 
 <br>
 

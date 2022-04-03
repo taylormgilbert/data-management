@@ -41,7 +41,63 @@ These will be held live in person in BIO LT1 from 10AM to 12PM from the 4th to t
 
 I’ll be adding to (and mostly teaching from) these online course notes as we go along.
 
-## Deliverables
+The schedule of lectures (and readings) is as follows:
 
+- Monday, 4th April - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
+- Tuesday, 5th April - Data Management [@Michener1997; @Michener2012]
+- Wednesday, 6th April - Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
+- Thursday, 7th April - Getting started with GitHub 
 
+Friday we head off on the field trip and do a field data collection exercise...
 
+## Deliverables (Due Thursday the 14th April)
+
+1. A draft Data Management Plan (DMP) for your Honours Project using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/).
+
+2. A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you'll develop based on Wednesday's tutorial), all in line with best practice as per the content of this module. 
+  - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
+  - Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (>5MB), then it's best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.
+
+## Software installation and setup
+
+For the data wrangling exercise and the second deliverable, we'll be using the [R](https://cran.r-project.org/) statistical programming language and the [Git](https://git-scm.com/) version control system. We'll also be using an [integrated development environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) for each: [RStudio](https://www.rstudio.com) and [GitHub](https://github.com/), respectively.
+
+> _**If you already have these installed and set up**_, please make sure you have the latest versions, and check that your installations are working! Please also make sure you have installed (and/or updated) the [_Tidyverse_](https://www.tidyverse.org/) set of R packages. It can be installed using the code `install.packages("tidyverse")` and updated using `update.packages("tidyverse")`.
+
+The installation and setup can be a bit long-winded, but once done you should be good to go until you change or reformat your computer. The steps below are my summary and (hopefully) more intuitive adaptation of the instructions provided for setting up [GitHub](https://docs.github.com/en/get-started/quickstart/set-up-git?email_source=welcome) and [version control with R](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN). If my steps don't work its probably best to read up there.
+
+<br>
+
+First we'll start with the necessary software. 
+
+1. Download and install the ***latest*** version of [R](https://cran.r-project.org/)
+2. Download and install the ***latest*** free version of [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/)
+3. Download and install the latest version of [Git](https://git-scm.com/) - **accept all the defaults**
+
+Then get started with GitHub:
+
+4. Create a [GitHub](https://github.com/) account
+5. Run through the [10 minute GitHub tutorial](https://guides.github.com/activities/hello-world/) that is offered when you activate your GitHub Account (It'll really help you get the idea behind what Git does!)
+
+Now you have RStudio, R and Git installed, and you have a working GitHub account that lets you do stuff online, but what remains is to get GitHub working locally and configuring RStudio to use GitHub.
+
+6. Install [GitHub CLI](https://github.com/cli/cli#installation) (Command Line Interface). For Windows you can download the installer [here](https://cli.github.com/)
+7. Open RStudio. 
+- Select the `Terminal` tab (top left, next to `Console`)
+- Enter `gh auth login`, then follow the prompts:
+  - Select `GitHub.com`
+  - When prompted for your preferred protocol for Git operations, select `HTTPS`
+  - When asked if you would like to authenticate to Git with your GitHub credentials, enter `Y`
+  - When asked how you would like to authenticate select `Login with web browser`
+  - Copy the 8-digit code and hit `Enter`
+  - Github.com will open in your internet browser - paste the code and hit enter
+  - If any of these steps don't work, just start again with `gh auth login` in Terminal
+8. In RStudio
+- Go to `Global Options` (from the `Tools` menu)
+- Click `Git/SVN`
+- Make sure `Enable version control interface for RStudio projects` is on
+- If necessary, enter the path for your Git or SVN executable where provided (this shouldn't be needed, but may)
+- Click `Apply`
+- Restart RStudio
+
+Lastly, you need to install the [_Tidyverse_](https://www.tidyverse.org/) set of R packages. This can be done using the code `install.packages("tidyverse")`.
