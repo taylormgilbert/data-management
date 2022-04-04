@@ -21,10 +21,9 @@ Here are a bunch of reasons you really want to focus on doing good data manageme
     - if someone leaves the project and deletes the folder on their Dropbox without "leaving" it first
     - if the "owner" of the Google Drive folder loses access to their Google account (***as will happen to your UCT Google Drive access as soon as you graduate!!!***)
     - through all manner of random "accidents"
-    
 - **Data has value beyond your current project**: 
   - to yourself for reuse in future projects, collaborations, etc (i.e. publications and citations), 
-  - for others for follow-up studies, or combining multiple datasets for meta-analyses or synthesis etc
+  - for others for follow-up studies, or combining multiple datasets for meta-analyses or synthesis
   - for science on general (especially long-term ecology in a time of global change)
   
 - We've covered this before, but **sharing your data is key for transparency and accountability**.

@@ -23,7 +23,50 @@ I'm sure there are plenty of other online resources too.
 
 <br>
 
+## Reproducibility - start as you mean to finish
+
+Now that you have your data, the temptation is to open an R script and get analyzing, or worse yet, open your raw data file in a spreadsheeting programme and crack out a few simple graphs... _**WAIT!!!**_
+
+A) Never do data analyses in your raw data files!!! These are your raw data, and they should stay that way. In fact, they should be set to be _read-only_ so that you can't edit them even if you wanted to. If you were to edit these files directly and make a mistake like say sort a column without sorting the rest of the table, that's it! Alles is kaput! You need your raw data files so that you have somewhere to look when you suspect you've done something bad to your data.
+
+B) Beyond data management, there's code management, and version control software like GitHub is your friend, providing a backup of all your scripts, versioning (i.e. a record of changes of your scripts that you can _revert_ should you need to - i.e. no more scripts named "analysis_final_final_FINAL.R") and is a great tool for collaboration and sharing. In fact, GitHub can manage much more than just code, and can host your manuscript, output figures and tables, and even small datasets. Let's start there.
+
+<br>
+
+### Creating a Git repository (or repo for short)
+
+1. Go to your online GitHub account (e.g. https://github.com/jslingsby)
+2. Click on the `+` in the top-right and select `New repository` 
+3. Give your repository a name and description
+4. Choose whether you want the repo to be public or private (e.g. if you're going to include sensitive data or otherwise don;t want the world to see what you're doing)
+5. I usually `Add a README` file, that allows you to write a description of the project, explain the contents of the repo, etc
+6. I also usually `Add .gitignore` and choose `R` from the templates. This is a file that allows you to list files and folders that you don't want GitHub to sync
+  - e.g. you may want to have a "bigdata" folder on your local machine with files too large to sync to GitHub (~>50MB), although check out [Git Large File Storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage), or an "output" folder with large figures etc that you can easily reproduce from the code
+7. Add a license if you want too
+8. Click `Create repository`
+
+<br>
+
+### Cloning your repo to your local machine
+
+1. Open RStudio on your laptop (you should already have RStudio and GitHub set up as per the instructions in section \@ref(setup))
+2. Copy the URL to the repo you just created(e.g. https://github.com/jslingsby/demo)
+3. In RStudio: 
+- in the top-right of the window you'll see `Project: (None)` - click on it and select `New Project` then `Version Control` then `Git`
+- In the `Repository URl:` box paste the URL to your repo
+- `Project directory name` should fill automatically
+- For `Create project as subdirectory of:` hit `Browse` and navigate through your file system to where you want to put your folder for storing your Git repositories. I recommend something like `~Documents/GIT` (If you've used Git before you may have set this already and can skip this step)
+- Click `Create Repository`
+
+You should now see the name of your project/repo in the top-right corner of RStudio where previously you saw `Project: (None)` and you're good to go.
+
+Now you need to set up a folder structure for code, output, data etc. Then you can open an R script, or better yet, an [RMarkdown document](https://rmarkdown.rstudio.com/lesson-1.html) that allows you to write text and embed code and images etc. 
+
+<br>
+
 ## Tidy data and data wrangling
+
+Now you're finally ready to start interrogating your data! But the raw data probably aren't in a particularly analysis-friendly format, so you need to start with some data tidying and wrangling. You could do this "manually" in a new, appropriately named, copy of your raw data spreadsheet, but then you may not be able to track the changes you've made and errors may creep in. Where possible, it's best to do this step with code. Most of my projects start with a "00_data_cleaning.R" script or similar to read the raw data and create an analysis-ready dataset. If this script takes a long time to run, I may output a new "clean data" file (or files) so that I don't need to rerun the script every time.
 
 As you know from the readings for the course, there are many reasons why you should keep your data in _tidy_ format [@Wickham2014]. Unfortunately, as my spreadsheet above demonstrates, it's not always convenient to enter your data in _tidy_ format, so you inevitably end out needing to do post-entry data formatting. A major problem here is that doing the reformatting manually creates opportunities for introducing errors. This is where it's a major advantage if you know how to _wrangle_ your data in a coding language like R or Python. This is not to say that coded data wrangling cannot introduce errors!!! You should always do sanity checks!!! But I'd suspect that most of the errors you can make with code will be very obvious, because the outcome is usually spectacularly different to the input.
 
@@ -33,7 +76,7 @@ The rest of this section provides a demonstration of some of the functionality o
 
 ## The dataset
 
-This tutorial relies on the BIO3018F prac data mentioned previously (see link above). **Add more details?**
+This tutorial relies on the BIO3018F prac data mentioned previously (see link above). See [here]( https://github.com/PlantEcologi/BIO3018F_2022/blob/main/PracMaster.pdf) if you'd like more details about the data and practical.
 
 <br>
 

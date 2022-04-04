@@ -45,8 +45,8 @@ The schedule of lectures (and readings) is as follows:
 
 - Monday, 4th April - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
 - Tuesday, 5th April - Data Management [@Michener1997; @Michener2012]
-- Wednesday, 6th April - Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
-- Thursday, 7th April - Getting started with GitHub 
+- Wednesday, 6th April - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
+- Thursday, 7th April - Tidy Data and Data Wrangling continued (your turn) 
 
 Friday we head off on the field trip and do a field data collection exercise...
 
@@ -58,7 +58,7 @@ Friday we head off on the field trip and do a field data collection exercise...
   - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
   - Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (>5MB), then it's best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.
 
-## Software installation and setup
+## Software installation and setup {#setup}
 
 For the data wrangling exercise and the second deliverable, we'll be using the [R](https://cran.r-project.org/) statistical programming language and the [Git](https://git-scm.com/) version control system. We'll also be using an [integrated development environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) for each: [RStudio](https://www.rstudio.com) and [GitHub](https://github.com/), respectively.
 
