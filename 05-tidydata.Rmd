@@ -1,0 +1,419 @@
+# Tidy Data
+
+This section is aimed at helping you develop a relatively simple reproducible workflow for your project (i.e. Deliverable 2 described in section \@ref(deliverables)) and provide a demonstration of some of the _Tidyverse_ tools for wrangling and tidying your data, but first you need to get your data into a digital format...
+
+<br>
+
+## Data entry
+
+> NOTE: This section may not be relevant to the module deliverable, because you should have an example dataset that's already in digital format, but it will be useful if/when you collect new data of your own.
+
+Before we start, I should highlight that one very good way of reducing errors in data entry and improving quality assurance and quality control (QA/QC) is to make use of various forms of **data validation** like **drop down lists** and **conditional formatting**. These can be used to limit data types (i.e. avoids you entering text into a numeric column or vice versa), or limiting the range of values entered (e.g. 0 to 100 for percentages), or just highlighting values that are possible, but rare, and should be double-checked, like 100m tall trees. Unit errors are incredibly common in ecological data entry, especially for things like plant height where you may be measuring 20cm tall grasses and 20m tall trees!!! Drop down lists really come into their own when you're working with lots of different Latin species names etc. Typos, spelling errors and synonyms can take weeks of work to fix! Restricting the names to a drop-down list from a known published taxonomic resource really makes a huge difference! 
+
+[Here's an example](https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing) from a vegetation survey practical I ran as part of the BIO3018F Ecology and Evolution 3rd-year field course. If you go to the `Sites` sheet, you'll see that the first two columns `Site` and `Point` are drop-down lists that reference the `RangeLimits` spreadsheet, to make entry easy and to prevent spelling mistakes etc. You'll also notice that the different columns have specified ranges, and that a number outside the range is entered (e.g. anything >100 for `PercentBareSoil`) then the cell is highlighted with a warning. You can see the data validation rules by selecting a cell in the column of interest and clicking `Data > Data validation`
+
+It's often easy to forget to collect some measurements etc when in the field, like site-level information. Sometimes what I do to prevent this is set up the next data entry sheet (trait data in this case), to require that you fill in the site name from a drop-down list that is populated in the site data sheet. This limits the names you can use to only those that have site data, and serves as a reminder should you have forgotten. Check out the `SitePoint` column in the `Traits` sheet.
+
+I'm not going to go into how to do data validation in spreadsheets, but here are links for:
+
+* [Microsoft Excel](https://support.microsoft.com/en-us/topic/fef13169-0a84-4b92-a5ab-d856b0d7c1f7#ID0EAABAAA=Data_validation&ID0EBBD=Data_validation)
+* [Google Sheets](https://cloud.google.com/blog/products/g-suite/pro-tip-how-create-dropdown-list-google-sheets-and-pointers-conditional-formatting)
+
+I'm sure there are plenty of other online resources too.
+
+**One thing I really like** about Google Sheets is that you can set your sheet to work in "offline mode" on your phone or tablet, which allows you to do data entry directly into the sheet in the field, which then syncs to your Google Drive when you go back online (I'd imagine you can do the same with MS Excel and One Drive, but I've never tried it). This really saves time (and errors) on entering written field data sheets into a spreadsheet later, and allows you to take advantage of the data validation rules in the field, which are harder to set up with pen or pencil... The only issue is that if you make a typo etc that isn't caught by the data validation you're likely to be stuck with it...
+
+<br>
+
+## Reproducibility - start as you mean to finish
+
+Now that you have your data, the temptation is to open an R script and get analyzing, or worse yet, open your raw data file in a spreadsheeting programme and crack out a few simple graphs... _**WAIT!!!**_
+
+A) Never do data analyses in your raw data files!!! These are your raw data, and they should stay that way. In fact, they should be set to be _read-only_ so that you can't edit them even if you wanted to. If you were to edit these files directly and make a mistake, like say sort a column without sorting the rest of the table, that's it! Alles is kaput! You need your raw data files so that you have somewhere to look when you suspect you've done something bad to your data.
+
+B) Beyond data management, there's code management, and version control software like [GitHub](https://github.com/) is your friend, providing a backup of all your scripts, versioning (i.e. a record of changes of your scripts that you can _revert_ should you need to - i.e. no more scripts named "analysis_final_final_FINAL.R") and is a great tool for collaboration and sharing. In fact, GitHub can manage much more than just code, and can host your manuscript, output figures and tables, and even small datasets. Here's a [quick start guide for GitHub](https://docs.github.com/en/get-started/quickstart/hello-world) that shows you the basic functionality in ~10 minutes. I highly recommend working through it before you move on to the next steps...
+
+C) The trick to reproducible research is to start as you mean to finish. By this I mean that it is much easier to produce a reproducible research workflow if you work reproducibly from the start, rather than retrofitting a bunch of data and code you've already analyzed. This also means that you can reap the benefits of reproducibility during your project, which includes things like easier finding and fixing of errors, easier collaboration, simple splitting of the workflow if you decide that the project could lead to multiple publications, etc.
+
+The next 2 sections are covered in the quick start guide you should have worked through, but I add a few specific comments, and are essentially what you need to do to get set up with a GitHub repo before you get coding.
+
+<br>
+
+### Creating a Git repository (or repo for short)
+
+1. Go to your online GitHub account (e.g. https://github.com/jslingsby)
+2. Click on the `+` in the top-right and select `New repository` 
+3. Give your repository a name and description
+4. Choose whether you want the repo to be public or private (e.g. if you're going to include sensitive data or otherwise don't want the world to see what you're doing)
+5. I usually `Add a README` file, that allows you to write a description of the project, explain the contents of the repo, etc
+6. I also usually `Add .gitignore` and choose `R` from the templates. This is a file that allows you to list files and folders that you don't want GitHub to sync
+  - e.g. you may want to have a "bigdata" folder on your local machine with files too large to sync to GitHub (~>50MB), although check out [Git Large File Storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage), or an "output" folder with large figures etc that you can easily reproduce from the code
+7. Add a license if you want too
+8. Click `Create repository`
+
+<br>
+
+### Cloning your repo to your local machine
+
+1. Open RStudio on your laptop (you should already have RStudio and GitHub set up as per the instructions in section \@ref(setup))
+2. Copy the URL to the repo you just created(e.g. https://github.com/jslingsby/demo)
+3. In RStudio: 
+- in the top-right of the window you'll see `Project: (None)` - click on it and select `New Project` then `Version Control` then `Git`
+- In the `Repository URl:` box paste the URL to your repo
+- `Project directory name` should fill automatically
+- For `Create project as subdirectory of:` hit `Browse` and navigate through your file system to where you want to put your folder for storing your Git repositories. I recommend something like `~Documents/GIT` (If you've used Git before you may have set this already and can skip this step)
+- Click `Create Repository`
+
+You should now see the name of your project/repo in the top-right corner of RStudio where previously you saw `Project: (None)` and you're good to go.
+
+Now you need to set up a folder structure for code, output, data etc. Then you can open an R script, or better yet, an [RMarkdown document](https://rmarkdown.rstudio.com/lesson-1.html) that allows you to write text and embed code and images etc. 
+
+<br>
+
+## Tidy data and data wrangling
+
+Now you're finally ready to start interrogating your data! But the raw data probably aren't in a particularly analysis-friendly format, so you need to start with some data tidying and wrangling. You could do this "manually" in a new, appropriately named, copy of your raw data spreadsheet, but then you may not be able to track the changes you've made and errors may creep in. Where possible, it's best to do this step with code. Most of my projects start with a "00_data_cleaning.R" script or similar to read the raw data and create an analysis-ready dataset. If this script takes a long time to run, I may output a new "clean data" file (or files) so that I don't need to rerun the script every time.
+
+As you know from the readings for the course, there are many reasons why you should keep your data in _tidy_ format [@Wickham2014]. Unfortunately, as my spreadsheet above demonstrates, it's not always convenient to enter your data in _tidy_ format, so you inevitably end out needing to do post-entry data formatting. A major problem here is that doing the reformatting manually creates opportunities for introducing errors. This is where it's a major advantage if you know how to _wrangle_ your data in a coding language like R or Python. This is not to say that coded data wrangling cannot introduce errors!!! You should always do sanity checks!!! But I'd suspect that most of the errors you can make with code will be very obvious, because the outcome is usually spectacularly different to the input.
+
+The rest of this chapter provides a demonstration of some of the functionality of the [_tidyverse_](https://www.tidyverse.org/) set of R packages, and some of the more common data wrangling errors made in R.
+
+<br>
+
+### The dataset
+
+This tutorial relies on the [BIO3018F prac data mentioned previously](https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing). See [here]( https://github.com/PlantEcologi/BIO3018F_2022/blob/main/PracMaster.pdf) if you'd like more details about the data and practical.
+
+<br>
+
+### The motivation... {#motivation}
+
+Here's a cool trick. Don't freak out that I haven't commented the code with explanations. We'll break this down in the following sections.
+
+```{r}
+library(tidyverse)
+library(readxl) 
+
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites") %>%
+  mutate(CanopyCover = 100 - 4.16*Densiometer) %>%
+  select(!c("SoilColour", "Densiometer")) %>%
+  pivot_longer(cols = c("PercentBareSoil", "SoilPH", "Dung", "CanopyCover"),
+               names_to = "variable", values_to = "value") %>%
+  ggplot() +
+    geom_boxplot(aes(y = value, x = Site)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    facet_wrap(vars(variable), scales = "free")
+```
+
+In just 9 lines of code (and it could be fewer if I was being less neat) I read in the raw data with `read_xlsx`, created a new column that's a transformation of an existing one with `mutate`, dropped unwanted variables with `select` (I didn't actually need to do this, I was just showing off...), reshaped the entire dataframe from wide format (not _tidy_) to long format (_tidy_) with `pivot_longer` and made a pretty boxplot (`ggplot` + `geom_boxplot`) with rotated x-axis text (`theme`) and separate facets for each environmental variable (`facet_wrap`).
+
+<br>
+
+You too can have these superhero powers!
+
+The rest of this chapter is focused on reading in data and various tricks to wrangle it into different formats, join separate tables, etc. Plotting you will have to learn yourself, but I may show a few simple examples.
+
+<br>
+
+## Reading in data
+
+R has a number of different packages to read in data, and there's even a few that work with different tabular data types just within the _tidyverse_. These include:
+
+* [_readr_](https://readr.tidyverse.org/) for text files with values separated with tab, comma, or some other delimiter (.txt, .csv, .tsv file extensions)
+* [_readxl_](https://readxl.tidyverse.org/) for Microsoft Excel files (.xls or .xlsx)
+* [_googlesheets4_](https://googlesheets4.tidyverse.org/) for reading data directly from a Google Sheet
+
+There's [others too](https://www.tidyverse.org/packages/#import) that can scrape data from web pages, interact with web APIs, or query local or online databases.
+
+Fortunately, within the _tidyverse_, similar syntax can be used across most data import packages. Check out the [cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf). 
+
+### Read Google Sheets with _googlesheets4_
+
+Since I gave you the link to a Google Sheet above, you should be able to read the data directly into R using that URL with the _googlesheets4_ package. Note that it may ask you to authenticate your Google account. You can do this with your personal or UCT account.
+
+```{r}
+# First let's call the libraries with the functions we want to use
+library(tidyverse)
+library(googlesheets4) # while googlesheets4 is part of the tidyverse, and installed when you install the tidyverse, it isn't a core package, so you have to call it separately
+
+# Now let's have a look at the names of the worksheets (tabs) within hte spreadsheet
+sheet_names("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing")
+
+# Let's read in the "Sites" sheet and call it "edat" for "environmental data"
+edat <- read_sheet("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing")
+
+# Print a summary of the data (WARNING - doing this is usually a bad idea when not using tidyverse packages - it would usually show you all the data... Tidyverse packages just show you a summary, which is nice...)
+edat
+```
+
+
+### Read Microsoft Excel files with _readxl_
+
+Reading data in directly from Google Sheets can be super handy, but it requires an internet connection, and can become quite slow if your dataset gets big. In that case, it's very easy to download Google Sheets as Microsoft Excel files and read them in using functions in the _readxl_ package.
+
+First, we may want to know what files are in our data folder, which we can do with the base R function `list.files()`. Note that this function can be very handy if you have lots of files to process, like photos, etc.
+
+> **NOTE:** you need to replace the working directory folder path ("data" here) with wherever you put the data on your computer.
+
+```{r}
+# get list of files in the folder (change to your own)
+list.files("data")
+```
+
+Let's have a look at the `pracdatasheet.xlsx` file
+
+```{r}
+library(tidyverse)
+library(readxl) #while readxl is part of the tidyverse and installed when you install the tidyverse, it isn't a core package, so you have to call it separately
+
+# See what sheets are in the Excel workbook
+excel_sheets("data/pracdatasheet.xlsx")
+
+# Read in data
+edat <- read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites")
+
+# Print a summary of the data (WARNING - doing this is usually a bad idea when not using tidyverse packages - it would usually show you all the data...)
+edat
+```
+
+A handy feature of `read_sheet` and `read_xlsx` is the `range =` option, which allows you to select only the regions of the worksheet you want using the usual syntax you'd use in Excel, e.g. `A1:Z100` would give you columns A to Z and rows 1 to 100.
+
+Here's an example skipping the first two columns:
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites", range = "C1:H25")
+```
+
+> NOTE: I'm just doing this for demonstration purposes. This particular dataset is already a rectangular table (or data frame), so it would be easiest to just read the whole thing in and subset the columns you want with `select()` and the rows with `filter()`, both from the `dplyr` package and a core part of `tidyverse` - demonstrated later.
+
+You can also be sneaky and read multiple separate chunks and then stitch them together, e.g.
+
+- Reading in different columns and binding them together:
+
+```{r}
+bind_cols(read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites", range = "A1:B25"),
+      read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites", range = "G1:H25"))
+```
+
+- Or by row:
+
+```{r}
+bind_rows(read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites", range = "C1:H15"),
+      read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites", range = "C16:H25"))
+```
+
+
+Note that the `skip =` and `nmax =` options are somewhat related and tell the function the number of rows to skip before reading anything and the maximum number of rows to read respectively.
+
+<br>
+
+### Reading text files with _readr_
+
+I'm not going to go through this package, but it's important to note that **both Microsoft Excel and Google Sheets are proprietary**. In other words these are not open formats and are not necessarily stable in the long term. **YOU SHOULD NOT STORE YOUR DATA IN THESE FORMATS**, and as such they should not be used if you want your workflow to be reproducible! The safest is to save each worksheet from the spreadsheet as separate comma or tab delimited text files, which you can read in with functions from _readr_ like `read_csv` or `read_delim`. Try `?readr` for details on the package and functions.
+
+<br>
+
+## A quick aside on data types
+
+You'll note `<chr>` and `<dbl>` in the output when we print a summary of the data. These indicate that the data types (or classes) for those columns are "character" and "double" respectively...
+
+* R's basic data types are character, integer, numeric (or double, they are synonymous), date and logical. There are a number of other special types, but this covers most of those you'll commonly deal with.
+  - `integer` is for whole numbers (i.e. no decimals)
+  - `numeric` or `double` (double precision floating point numbers) are _real numbers_ - i.e. they include decimal places. 
+    - For reasons I won't explain, storing data as real numbers takes up far more memory than integers. Obviously, lots of numbers we work with are real numbers, so we need to be able to work with them. Interestingly, large data storage and transmission projects (e.g. satellite remote sensing) often do tricks like multiply values by some constant so that all data stored are integers. You need to correct by the constant during your analysis to get values in the actual unit of measurement.
+  - `character` is for letters, words, sentences or mixed strings (i.e. letters and digits)
+  - `factor` is a set of levels (often treatments) that you'd use in an analysis. They are very useful, but they are also VERY likely to trip you up at some stage (I'll explain why in a minute)!!!
+    - factors are essentially numerical codings of character data in some order. Using mumerical coding is useful, because you can order your levels in an analysis - e.g. _Treatment A, Treatment B, Control,_ etc. They are also useful, because they can store data efficiently. For example, if your analysis has thousands of data points, it uses much less memory to recode the treatments above as _1, 2, 3,_ etc and just store one copy of the levels (what we call the labels in a factors).
+  - `logical` is the outcome of a conditional statement (i.e. values can only be `TRUE` or `FALSE`)
+    - it is actually just a special case of factor data where FALSE = 0 and TRUE = 1, so if you take the sum of a vector of `logical` values, it will give you a count of the number of `TRUE` cases. That said, R treats logical in specific ways that can't be done with true factors and vice versa, so forget I said that.
+  - `date` once again is a special case of a factor, but again, R treats dates in specific ways that it wouldn't treat a normal factor. Dates are thus stored as numbers, where each day has a unique value. For R, by default the numbering begins at the 1st January 1970 (the "origin"), which is coded as "0" - try run the code `as.numeric(as.Date("1970-01-01"))`, which coerced the date "1970-01-01" to a number. You can change the origin to whatever you prefer, and this can be very important, because different software use different origins...
+  
+<br>
+
+Here're some code examples to try to drive this home, using the built in vector `letters
+
+```{r}
+letters
+```
+
+You can check the class of data using the function `class()`
+
+```{r}
+class(letters)
+```
+
+And typically convert (or coerce) between classes using `as.` followed by the class you want, e.g.
+
+```{r}
+as.factor(letters)
+```
+
+Here it shows us that we have a factor with 26 values with 26 unique levels. You wouldn't really use a factor class if all values are unique though. Here's a better example.
+
+```{r}
+as.factor(rep(letters[1:3], 8))
+```
+
+And to prove that the factor represents the levels as a set of numbers:
+
+```{r}
+as.numeric(as.factor(rep(letters[1:3], 8)))
+```
+
+Note that this doesn't work if we try to coerce the the letters to numbers without making them a factor first:
+
+```{r}
+as.numeric(rep(letters[1:3], 8))
+```
+
+<br>
+
+**Here's how factors will catch you out, sooner or later...**
+
+As I said earlier, storing data as a factor can be less memory intensive. R takes advantage of this in that some functions (especially when reading in data) try to identify the most sensible data type and store it in R's memory as such. So for example, if all the valuesin a column of a table are whole numbers, R will read it in as class integer, which requires less memory than class numeric (or double). By the same token, if the column is text and some values are repeated, R will often make it class factor. 
+
+This is great, but it can catch you out as follows. If a column of numbers has any text in it, R will make the whole column class character. If many of the values are repeated, it may even make it class factor for efficiency. **_This happens a lot!_**, especially if someone makes an error and types in an O instead of a 0, or denotes missing data with a "." or anything else other than "NA".
+
+The problem is that even though R typically orders factors in alphabetical or numerical order, **it is possible to create a mismatch between the actual number and the order in the levels.**
+
+Here are some code examples. Firstly, where a number is treated as a character.
+
+```{r}
+hmm <- rep(c(4, "0", 2, 5, 3, 1), 3)
+
+hmm
+
+class(hmm)
+```
+
+In this case the vector is class character, but if we'd read it in from a file it would likely have been made a factor. Let's see what happens when we coerce it to factor:
+
+```{r}
+as.factor(hmm)
+```
+
+Seems ok?
+
+What if we try to coerce that factor to a number?
+
+```{r}
+as.numeric(as.factor(hmm))
+```
+
+Ouch! While the level labels start at 0, the numeric representation of the levels start at 1, so coercing them to numbers creates a mismatch...
+
+**If you need to fix this, you should always coerce to character first.**
+
+```{r}
+as.numeric(as.character(as.factor(hmm)))
+```
+
+What about if we insert a character instead of a number, like "O" instead of "0"
+
+```{r}
+hmm2 <- rep(c(4, "O", 2, 5, 3, 1), 3)
+
+hmm2
+
+class(hmm2)
+
+as.factor(hmm2)
+```
+
+Interesting, the "O" is now the 6th level, not the first... What if we coerce to numeric?
+
+```{r}
+as.numeric(as.factor(hmm2))
+```
+
+Oops!!! Converting all your zeroes to sixes is really going to mess with your results!!!
+
+And if we try our `as.character` fix?
+
+```{r}
+as.numeric(as.character(as.factor(hmm2)))
+```
+
+R doesn't know what to do with the Os, so it makes them NA and gives you a warning. Watch out for this, because ignoring the warning and leaving out zero values could seriously bias your results!
+
+## Learning to speak _Tidyverse_
+
+The *tidyverse* packages contain a series of functions that can be thought of as *verbs*, providing the *grammar* for you develop code statements. 
+
+For example, some of the main functions in `library(dplyr)` are:
+
+- `arrange()` - Arrange rows by the values of column
+- `select()` - Select a subset of columns using their names and types
+- `filter()` - Subset rows using column values
+- `slice()` - Subset rows using their positions
+- `mutate()` - Create, modify, and delete columns
+- `group_by()` - Group by one or more variables
+- `summarise()` - Summarise each group to fewer rows
+
+(Pro tip: Do yourself a favour and spend some time reading about these functions!)
+
+Binding the *verbs* together into code "sentences" like the example I gave in section \@ref(motivation) is made possible by the pipe `%>%` operator, which essentially allows you to pass the output of one function (or verb) to the next without making a new object in memory each time. 
+
+i.e. without `%>%` the code in section \@ref(motivation) would have required me to save 4 intermediate objects into R's memory as I went. This is clunky, and wastes RAM (computer memory space), often slowing the script down.
+
+<br>
+
+**Here are some example "sentences" using some of the `dplyr` "verbs":**
+
+_"Take the environmental data, group it by the Site labels and calculate the means for a specific set of variables for each group."_
+
+```{r}
+edat %>% 
+  group_by(Site) %>%
+  summarize(BareSoil = mean(PercentBareSoil), 
+            `Soil pH` = mean(SoilPH), 
+            Dung = mean(Dung))
+```
+
+> Note how you can create variables with new names when you `summarise`, and that you don't have to apply the same summary function to each (`mean` in this case, but you can use `median`, `sd`, etc). Also notice how enclosing names in "`" allows you to have spaces or special characters in the variable name.
+
+<br>
+
+_"Take the environmental data, filter it for only the renosterveld site, and select a specific set of variables."_
+
+```{r}
+edat %>% 
+  filter(Site == "renosterveld") %>%
+  select(Point, PercentBareSoil, SoilPH, Dung)
+```
+
+_"Take the environmental data, filter it for only the renosterveld site, select a specific set of variables, and add a new column that expresses the frequency of dung observed as a proportion of the percentage bare soil exposed."_
+
+```{r}
+edat %>% 
+  filter(Site == "renosterveld") %>%
+  select(Point, PercentBareSoil, SoilPH, Dung) %>%
+  mutate(DungPerSoil = Dung/PercentBareSoil)
+```
+
+_"Take the environmental data, select a specific set of variables, add a new column that expresses the frequency of dung observed as a proportion of the percentage bare soil exposed, and arrange the samples in descending order of the new variable."_
+
+```{r}
+edat %>% 
+  select(SitePoint, PercentBareSoil, SoilPH, Dung) %>%
+  mutate(DungPerSoil = Dung/PercentBareSoil) %>%
+  arrange(desc(DungPerSoil))
+```
+
+I think you get the picture...
+
+<br>
+
+## Getting things _Tidy_
+
+pivot_longer/pivot_wider
+
+separate/extract unite
+
+complete
+
+join
+
+plot
+
+

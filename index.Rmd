@@ -50,7 +50,7 @@ The schedule of lectures (and readings) is as follows:
 
 Friday we head off on the field trip and do a field data collection exercise...
 
-## Deliverables (Due Thursday the 14th April)
+## Deliverables (Due Thursday the 14th April) {#deliverables}
 
 1. A draft Data Management Plan (DMP) for your Honours Project using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/).
 
