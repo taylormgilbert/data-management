@@ -53,3 +53,8 @@ reading-text-files-with-readr
 a-quick-aside-on-data-types
 learning-to-speak-tidyverse
 getting-things-tidy
+pivot_longer
+pivot_wider
+unite-and-separate
+getting-out-of-the-tidyverse
+joining-dataframes

@@ -151,7 +151,7 @@ Let's read in the "Sites" sheet and call it `edat` for "environmental data", and
 > WARNING - running the name of a data object in R is usually a bad idea. It typically then shows you every value in the dataset, which can be hundreds of thousands of values! Tidyverse packages just show you a summary and the first few rows of data, which is nice...
 
 ```{r}
-edat <- read_sheet("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing") # read in data
+edat <- read_sheet("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing", sheet = "Sites") # read in data
 
 edat # print a summary of the data
 ```
@@ -416,7 +416,7 @@ I think you get the picture...
 
 ## Getting things _Tidy_
 
-Ok, most of what I've shown you is about reading in data and hen manipulating it once you have it read in. While this is handy, there are a few more functions you'll need to help get your data _Tidy_.
+Ok, most of what I've shown you is about reading in data and then manipulating it once you have it read in. While this is handy, there are a few more functions you'll need to help get your data _Tidy_.
 
 Specifically, _Tidy_ data is where:
 
@@ -428,10 +428,15 @@ Specifically, _Tidy_ data is where:
 There are many ways to violate this, but some of the most common are:
 
 - When your data are in "wide" format
-- When you have multiple values in a single column (or cell)
+- When you have data in your column names (often associated with wide format)
+- When you have multiple variables in a single column (or cell)
 - When you have gaps in your data
 
-Perhaps the most useful function here is `pivot_longer` from the `tidyr` package.
+<br>
+
+### `pivot_longer`
+
+Perhaps the most useful function here is `pivot_longer` from the `tidyr` package, which allows you to **convert wide format data to long format**.
 
 Here's our raw data:
 ```{r}
@@ -446,18 +451,142 @@ read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites") %>%
                names_to = "variable", values_to = "value") 
 ```
 
-Note that I had to leave out the variable `SoilColour`, because it was a different data type `<chr>` as opposed to `<dbl>`. If you don't convert one of the columns to long format, then it just gets repeated.
+> Note 1: I had to leave out the variable `SoilColour`, because it was a different data type - `<chr>` as opposed to `<dbl>`. I could only combine them into the same column if I convered them all to a common data type, which would have to be `character` in this case, and would not be very useful...
 
-You can reverse `pivot_longer` with `pivot_wider`...
+> Note 2: The columns that you don't select with the `cols = ` argument just get repeated throughout the data, so be careful when analyzing them because there will be duplicates...
 
-So how else are tehse data failing at being _Tidy_?
+<br>
 
-separate/extract unite
+### `pivot_wider`
 
-complete
+You can also **convert long format data to wide format** when needed using `pivot_wider`. You may need to do this when working with biological community data, because most analysis software and R functions prefer "community data matrices" with species as columns and sites as rows. This violates _Tidy_ data, because you have data in your column names (i.e. species names).
 
-join
+I'll demonstrate this using the `Species` worksheet from our dataset.
 
-plot
+First, let's look at the raw data:
 
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Species")
+```
+
+A bit messy, but in this case it is presence-only data and all we want are "Site", "Point" and "WorkingName", so if we just select those we'll be close to having our long format data, like so:
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Species") %>% 
+  select(Site, Point, WorkingName)
+```
+
+And we can make it wider like so:
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Species") %>% 
+  select(Site, Point, WorkingName) %>%
+  mutate(Presence = 1) %>% # adds a column called "Presence" filled with "1"
+  pivot_wider(names_from = WorkingName, values_from = Presence, values_fill = 0)
+```
+
+> Note the use of `mutate` to add a column of ones. You could also use `add_column`.
+
+> WARNING! Note that if you have multiple identical rows in your data then `pivot_wider` won't work without a little extra info. In this case, the data are presence only, so there should be no duplicates, but if it were catch data for example, you could have duplicates, because you may have the same species caught multiple times at one site. In this case you either need to `group_by` site and species and use `summarize` to take the `sum` before you `pivot_wider`, or you can add a function like `sum` to `pivot_wider` using the `values_fn =` argument. See `?pivot_wider` for details.
+
+<br>
+
+Ok, looks good, but one thing we're missing here is that our sites are currently identified by the combination of both the `Site` and `Point` columns, whereas community data matrices usually need to have a single unique name for each site. Fortunately, there are _tidyverse_ functions for dealing with this.
+
+<br>
+
+### `unite` and `separate`
+
+Here I use `unite` to combine the `Site` and `Point` columns into a new column called `SitePoint`. I've also changed the `select` line to only keep our new column, so that we output a community data matrix.
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Species") %>% 
+  unite("SitePoint", Site:Point, sep = "_") %>%
+  select(SitePoint, WorkingName) %>%
+  mutate(Presence = 1) %>% # adds a column called "Presence" filled with "1"
+  pivot_wider(names_from = WorkingName, values_from = Presence, values_fill = 0)
+```
+
+You can also split values using `separate`. For example, you may want to split the Latin names into genus and species.
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Species") %>% 
+  separate(WorkingName, c("Gen", "Sp")) %>%
+  select(Gen, Sp)
+```
+
+Note the warnings, because some plants were identified to genus only, or had makeshift names with more than 2 words like "Little yellow daisy".
+
+<br>
+
+## Getting out of the _tidyverse_
+
+> Pro Tip...
+
+Before I move on, there are times when you may need to get your data out of the _tidyverse_ formats. Specifically, many R packages that analyze biological community data (e.g. `library(vegan)`) require community data matrices with column and row names. For some reason that I have yet to understand, the _tidyverse_ tabular data class (`tibble`) doesn't believe in row names, so to use your community data matrix with `vegan` etc, you have to break free of the _tidyverse_, which can be surprisingly difficult, but here's how.
+
+```{r}
+# First rerun our tidyverse code to get as close to a community data matrix as possible
+comm <- read_xlsx("data/pracdatasheet.xlsx", sheet = "Species") %>% 
+  unite("SitePoint", Site:Point, sep = "_") %>%
+  select(SitePoint, WorkingName) %>%
+  mutate(Presence = 1) %>% # adds a column called "Presence" filled with "1"
+  pivot_wider(names_from = WorkingName, values_from = Presence, values_fill = 0)
+
+# Then some Untidyverse code to
+comm <- as.data.frame(unclass(comm)) # get out of the tibble format
+rownames(comm) <- comm[,1] # add the first column "SitePoint" as rownames
+comm <- comm[,-1] # remove the first column (i.e. "SitePoint")
+
+comm[1:5, 1:3] # view the first 5 rows and 3 columns
+```
+
+For more on analyzing community data, check out [this tutorial](https://fynbos.saeon.ac.za/docs/learningr/r-intro-2-biodiversity/#summarizing-community-data).
+
+<br>
+
+## Joining dataframes
+
+Often it's easiest to work with multiple different data tables, like the `Species` and `Site` worksheets we've been playing with, but there are times that you'd like to compare a variable from one with a variable from another, and to do this you need to `join` them.
+
+For example, let's compare the count of species for each site with some of the environmental variables.
+
+First, we calculate the number of species recorded in each site and save it as an object `sr`.
+
+```{r}
+sr <- read_xlsx("data/pracdatasheet.xlsx", sheet = "Species") %>% 
+  unite("SitePoint", Site:Point, sep = "_") %>%
+  select(SitePoint, WorkingName) %>% 
+  group_by(SitePoint) %>%
+  summarize(`Species Number` = n())
+
+sr
+```
+
+Now let's read in our site data, selet the columns we want and join `sr` to it using `left_join`.
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites") %>%
+  select(SitePoint, PercentBareSoil, SoilPH) %>%
+  left_join(sr, by = "SitePoint")
+```
+
+Hey presto!
+
+But what was it we wanted to compare? Well why not be unscientific and just plot everything against everything else using a function from another library called `GGally`.
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites") %>%
+  select(SitePoint, PercentBareSoil, SoilPH) %>%
+  left_join(sr, by = "SitePoint") %>%
+  GGally::ggpairs(columns = 2:ncol(.))
+```
+
+A weak correlation between soil pH and % bare soil, and a near-significant (0.05 < p < 0.1) correlation between soil pH and species number.
+
+> Note that if you only plan to use functions from a library a few times in your script it can be more efficient to call the function from the library once off using the syntax library::function (e.g. `GGally::ggpairs`) than to attach the whole library (i.e. calling `library(GGally)`) asit saves RAM.
+
+<br>
+
+That's it! Go forth and conquer!
 
