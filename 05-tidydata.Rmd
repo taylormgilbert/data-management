@@ -1,6 +1,10 @@
 # Tidy Data
 
-This section is aimed at helping you develop a relatively simple reproducible workflow for your project (i.e. Deliverable 2 described in section \@ref(deliverables)) and provide a demonstration of some of the _Tidyverse_ tools for wrangling and tidying your data, but first you need to get your data into a digital format...
+This section is aimed at helping you develop a relatively simple reproducible workflow for your project (i.e. Deliverable 2 described in section \@ref(deliverables)$^*$) and providing a demonstration of some of the _Tidyverse_ tools for wrangling and tidying your data.
+
+$^*$But note that the content of the previous 2 sections are important for the deliverable too.
+
+But first you need to get your data into a digital format...
 
 <br>
 
@@ -138,12 +142,18 @@ library(googlesheets4) # while googlesheets4 is part of the tidyverse, and insta
 
 # Now let's have a look at the names of the worksheets (tabs) within hte spreadsheet
 sheet_names("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing")
+```
 
-# Let's read in the "Sites" sheet and call it "edat" for "environmental data"
-edat <- read_sheet("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing")
+Sometimes it shows lots of garble about the online authentication, but finally it shows us that there are three worksheets in the spreadsheet.
 
-# Print a summary of the data (WARNING - doing this is usually a bad idea when not using tidyverse packages - it would usually show you all the data... Tidyverse packages just show you a summary, which is nice...)
-edat
+Let's read in the "Sites" sheet and call it `edat` for "environmental data", and then print a summary.
+
+> WARNING - running the name of a data object in R is usually a bad idea. It typically then shows you every value in the dataset, which can be hundreds of thousands of values! Tidyverse packages just show you a summary and the first few rows of data, which is nice...
+
+```{r}
+edat <- read_sheet("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing") # read in data
+
+edat # print a summary of the data
 ```
 
 
@@ -172,11 +182,11 @@ excel_sheets("data/pracdatasheet.xlsx")
 # Read in data
 edat <- read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites")
 
-# Print a summary of the data (WARNING - doing this is usually a bad idea when not using tidyverse packages - it would usually show you all the data...)
+# Print a summary 
 edat
 ```
 
-A handy feature of `read_sheet` and `read_xlsx` is the `range =` option, which allows you to select only the regions of the worksheet you want using the usual syntax you'd use in Excel, e.g. `A1:Z100` would give you columns A to Z and rows 1 to 100.
+A handy feature of `read_sheet` and `read_xlsx` is the `range =` option, which allows you to **select only the regions of the worksheet you want** using the usual syntax you'd use in Excel, e.g. `A1:Z100` would give you columns A to Z and rows 1 to 100.
 
 Here's an example skipping the first two columns:
 
@@ -406,7 +416,41 @@ I think you get the picture...
 
 ## Getting things _Tidy_
 
-pivot_longer/pivot_wider
+Ok, most of what I've shown you is about reading in data and hen manipulating it once you have it read in. While this is handy, there are a few more functions you'll need to help get your data _Tidy_.
+
+Specifically, _Tidy_ data is where:
+
+- Every column is variable.
+- Every row is an observation.
+- Every cell is a single value.
+
+
+There are many ways to violate this, but some of the most common are:
+
+- When your data are in "wide" format
+- When you have multiple values in a single column (or cell)
+- When you have gaps in your data
+
+Perhaps the most useful function here is `pivot_longer` from the `tidyr` package.
+
+Here's our raw data:
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites")
+```
+
+Here's our data in "long" format:
+
+```{r}
+read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites") %>%
+  pivot_longer(cols = c("PercentBareSoil", "SoilPH", "Dung", "Densiometer"),
+               names_to = "variable", values_to = "value") 
+```
+
+Note that I had to leave out the variable `SoilColour`, because it was a different data type `<chr>` as opposed to `<dbl>`. If you don't convert one of the columns to long format, then it just gets repeated.
+
+You can reverse `pivot_longer` with `pivot_wider`...
+
+So how else are tehse data failing at being _Tidy_?
 
 separate/extract unite
 

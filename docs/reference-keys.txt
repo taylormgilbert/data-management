@@ -45,14 +45,11 @@ creating-a-git-repository-or-repo-for-short
 cloning-your-repo-to-your-local-machine
 tidy-data-and-data-wrangling
 the-dataset
-the-motivation
+motivation
 reading-in-data
 read-google-sheets-with-googlesheets4
 read-microsoft-excel-files-with-readxl
-a-quick-aside-on-data-types
-a-quick-aside-on-data-structures
 reading-text-files-with-readr
+a-quick-aside-on-data-types
 learning-to-speak-tidyverse
-motivation
-section
 getting-things-tidy
