@@ -70,7 +70,17 @@ The next 2 sections are covered in the quick start guide you should have worked 
 
 You should now see the name of your project/repo in the top-right corner of RStudio where previously you saw `Project: (None)` and you're good to go.
 
-Now you need to set up a folder structure for code, output, data etc. Then you can open an R script, or better yet, an [RMarkdown document](https://rmarkdown.rstudio.com/lesson-1.html) that allows you to write text and embed code and images etc. 
+Now that you're working on your local machine you need to set up a folder structure for code, output, data etc (using RStudio or your file explorer). Then you can open an R script, or better yet, an [RMarkdown document](https://rmarkdown.rstudio.com/lesson-1.html) that allows you to write text and embed code and images etc. 
+
+<br>
+
+### Keeping your online Git repository in sync
+
+Once you've added some content to your project (the local version of the Git repository), you want to sync it back to the online repository...
+
+1. From the "Git" tab (top-right window in RStudio), click the check boxes next to the files and folders you've created. This is equivalent to _git add_ if you were doing this command line in bash or terminal.
+2. Click `Commit`, enter a log message (notes to yourself or collaborators about what you're adding), and click `Commit` again. This is equivalent to _git commit_ in command line.
+3. Now you're going to "push" the changes to the online repository, but first, it's always good practice to "pull" any changes from the repository to your local machine first. You do this, because if it was a collaborative project, others may have made changes since you last "pulled". You may also have made changes to the repo directly in the website... To "pull" changes into RStudio, click the green down arrow (next to "Commit"). If it says "Already up-to-date" you can then "push" your changes up to Github by clicking on the green up arrow. This is equivalent to _git push_.
 
 <br>
 
