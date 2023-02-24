@@ -33,11 +33,11 @@ I'm sure there are plenty of other online resources too.
 
 Now that you have your data, the temptation is to open an R script and get analyzing, or worse yet, open your raw data file in a spreadsheeting programme and crack out a few simple graphs... _**WAIT!!!**_
 
-A) Never do data analyses in your raw data files!!! These are your raw data, and they should stay that way. In fact, they should be set to be _read-only_ so that you can't edit them even if you wanted to. If you were to edit these files directly and make a mistake, like say sort a column without sorting the rest of the table, that's it! Alles is kaput! You need your raw data files so that you have somewhere to look when you suspect you've done something bad to your data.
+A) **Never do data analyses in your raw data files!!!** These are your raw data, and they should stay that way. In fact, they should be set to be _read-only_ so that you can't edit them even if you wanted to. If you were to edit these files directly and make a mistake, like say sort a column without sorting the rest of the table, that's it! Alles is kaput! You need your raw data files so that you have somewhere to look when you suspect you've done something bad to your data.
 
-B) Beyond data management, there's code management, and version control software like [GitHub](https://github.com/) is your friend, providing a backup of all your scripts, versioning (i.e. a record of changes of your scripts that you can _revert_ should you need to - i.e. no more scripts named "analysis_final_final_FINAL.R") and is a great tool for collaboration and sharing. In fact, GitHub can manage much more than just code, and can host your manuscript, output figures and tables, and even small datasets. Here's a [quick start guide for GitHub](https://docs.github.com/en/get-started/quickstart/hello-world) that shows you the basic functionality in ~10 minutes. I highly recommend working through it before you move on to the next steps...
+B) **Beyond data management, there's code management**, and version control software like [GitHub](https://github.com/) is your friend, providing a backup of all your scripts, versioning (i.e. a record of changes of your scripts that you can _revert_ should you need to - i.e. no more scripts named "analysis_final_final_FINAL.R") and is a great tool for collaboration and sharing. In fact, GitHub can manage much more than just code, and can host your manuscript, output figures and tables, and even small datasets. Here's a [quick start guide for GitHub](https://docs.github.com/en/get-started/quickstart/hello-world) that shows you the basic functionality in ~10 minutes. I highly recommend working through it before you move on to the next steps...
 
-C) The trick to reproducible research is to start as you mean to finish. By this I mean that it is much easier to produce a reproducible research workflow if you work reproducibly from the start, rather than retrofitting a bunch of data and code you've already analyzed. This also means that you can reap the benefits of reproducibility during your project, which includes things like easier finding and fixing of errors, easier collaboration, simple splitting of the workflow if you decide that the project could lead to multiple publications, etc.
+C) **The trick to reproducible research is to start as you mean to finish.** By this I mean that it is much easier to produce a reproducible research workflow if you work reproducibly from the start, rather than retrofitting a bunch of data and code you've already analyzed. This also means that you can reap the benefits of reproducibility during your project, which includes things like easier finding and fixing of errors, easier collaboration, simple splitting of the workflow if you decide that the project could lead to multiple publications, etc.
 
 The next 2 sections are covered in the quick start guide you should have worked through, but I add a few specific comments, and are essentially what you need to do to get set up with a GitHub repo before you get coding.
 
@@ -96,7 +96,7 @@ The rest of this chapter provides a demonstration of some of the functionality o
 
 ### The dataset
 
-This tutorial relies on the [BIO3018F prac data mentioned previously](https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing). See [here]( https://github.com/PlantEcologi/BIO3018F_2022/blob/main/PracMaster.pdf) if you'd like more details about the data and practical.
+This tutorial relies on the [BIO3018F prac data mentioned previously](https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing). See [here](https://plantecolo.gy/teaching/bio3018f/) if you'd like more details about the data and practical.
 
 <br>
 
@@ -594,7 +594,7 @@ read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites") %>%
 
 A weak correlation between soil pH and % bare soil, and a near-significant (0.05 < p < 0.1) correlation between soil pH and species number.
 
-> Note that if you only plan to use functions from a library a few times in your script it can be more efficient to call the function from the library once off using the syntax library::function (e.g. `GGally::ggpairs`) than to attach the whole library (i.e. calling `library(GGally)`) asit saves RAM.
+> Note that if you only plan to use functions from a library a few times in your script it can be more efficient to call the function from the library once off using the syntax library::function (e.g. `GGally::ggpairs`) than to attach the whole library (i.e. calling `library(GGally)`) as it saves RAM.
 
 <br>
 

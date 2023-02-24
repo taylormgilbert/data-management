@@ -43,14 +43,14 @@ I’ll be adding to (and mostly teaching from) these online course notes as we g
 
 The schedule of lectures (and readings) is as follows:
 
-- Monday, 4th April - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
-- Tuesday, 5th April - Data Management [@Michener1997; @Michener2012]
-- Wednesday, 6th April - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
-- Thursday, 7th April - Tidy Data and Data Wrangling continued (your turn) 
+- Monday, 27th Feb - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
+- Tuesday, 28th Feb - Data Management [@Michener2012]
+- Wednesday, 29th Feb - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
+- Thursday, 30th Feb - Tidy Data and Data Wrangling continued (your turn) 
 
-Friday we head off on the field trip and do a field data collection exercise...
+Friday we head off on the field trip...
 
-## Deliverables (Due Thursday the 14th April) {#deliverables}
+## Deliverables (Due Thursday the 2nd March) {#deliverables}
 
 1. A draft Data Management Plan (DMP) for your Honours Project using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/).
 

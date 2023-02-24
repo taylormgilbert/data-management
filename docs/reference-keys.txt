@@ -1,9 +1,9 @@
 fig:reprocrisis
 fig:peng
-fig:miracle
 fig:datapipeline
 fig:documentnaming
 fig:reproducibilitysteps
+fig:miracle
 fig:datadecay
 fig:datalifecycle
 fig:uctdmp
@@ -20,13 +20,13 @@ setup
 reproducibility
 the-reproducibility-crisis
 replication-and-the-reproducibility-spectrum
-why-work-reproducibly
-barriers-to-working-reproducibly
 reproducible-scientific-workflows
 file-and-folder-management
 coding-and-code-management
 computing-environment-and-software
 sharing-of-the-data-code-publication-etc
+why-work-reproducibly
+barriers-to-working-reproducibly
 data
 why-do-you-need-to-manage-your-data
 the-data-life-cycle
@@ -43,6 +43,7 @@ data-entry
 reproducibility---start-as-you-mean-to-finish
 creating-a-git-repository-or-repo-for-short
 cloning-your-repo-to-your-local-machine
+keeping-your-online-git-repository-in-sync
 tidy-data-and-data-wrangling
 the-dataset
 motivation
@@ -58,4 +59,3 @@ pivot_wider
 unite-and-separate
 getting-out-of-the-tidyverse
 joining-dataframes
-keeping-your-online-git-repository-in-sync
