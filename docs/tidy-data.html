@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2023-02-24" />
+<meta name="date" content="2023-02-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -341,19 +341,19 @@ div.csl-indent {
 <div id="motivation" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> The motivation…<a href="tidy-data.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here’s a cool trick. Don’t freak out that I haven’t commented the code with explanations. We’ll break this down in the following sections.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="tidy-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="tidy-data.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) </span>
-<span id="cb1-3"><a href="tidy-data.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="tidy-data.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="tidy-data.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CanopyCover =</span> <span class="dv">100</span> <span class="sc">-</span> <span class="fl">4.16</span><span class="sc">*</span>Densiometer) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a href="tidy-data.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(<span class="st">&quot;SoilColour&quot;</span>, <span class="st">&quot;Densiometer&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-7"><a href="tidy-data.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;PercentBareSoil&quot;</span>, <span class="st">&quot;SoilPH&quot;</span>, <span class="st">&quot;Dung&quot;</span>, <span class="st">&quot;CanopyCover&quot;</span>),</span>
-<span id="cb1-8"><a href="tidy-data.html#cb1-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-9"><a href="tidy-data.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb1-10"><a href="tidy-data.html#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> Site)) <span class="sc">+</span></span>
-<span id="cb1-11"><a href="tidy-data.html#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb1-12"><a href="tidy-data.html#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<p><img src="data-management_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="tidy-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="tidy-data.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) </span>
+<span id="cb3-3"><a href="tidy-data.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="tidy-data.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="tidy-data.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CanopyCover =</span> <span class="dv">100</span> <span class="sc">-</span> <span class="fl">4.16</span><span class="sc">*</span>Densiometer) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="tidy-data.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(<span class="st">&quot;SoilColour&quot;</span>, <span class="st">&quot;Densiometer&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="tidy-data.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;PercentBareSoil&quot;</span>, <span class="st">&quot;SoilPH&quot;</span>, <span class="st">&quot;Dung&quot;</span>, <span class="st">&quot;CanopyCover&quot;</span>),</span>
+<span id="cb3-8"><a href="tidy-data.html#cb3-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="tidy-data.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="tidy-data.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> Site)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="tidy-data.html#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="tidy-data.html#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="data-management_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>In just 9 lines of code (and it could be fewer if I was being less neat) I read in the raw data with <code>read_xlsx</code>, created a new column that’s a transformation of an existing one with <code>mutate</code>, dropped unwanted variables with <code>select</code> (I didn’t actually need to do this, I was just showing off…), reshaped the entire dataframe from wide format (not <em>tidy</em>) to long format (<em>tidy</em>) with <code>pivot_longer</code> and made a pretty boxplot (<code>ggplot</code> + <code>geom_boxplot</code>) with rotated x-axis text (<code>theme</code>) and separate facets for each environmental variable (<code>facet_wrap</code>).</p>
 <p><br></p>
 <p>You too can have these superhero powers!</p>
@@ -374,35 +374,35 @@ div.csl-indent {
 <div id="read-google-sheets-with-googlesheets4" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Read Google Sheets with <em>googlesheets4</em><a href="tidy-data.html#read-google-sheets-with-googlesheets4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since I gave you the link to a Google Sheet above, you should be able to read the data directly into R using that URL with the <em>googlesheets4</em> package. Note that it may ask you to authenticate your Google account. You can do this with your personal or UCT account.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="tidy-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First let&#39;s call the libraries with the functions we want to use</span></span>
-<span id="cb2-2"><a href="tidy-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-3"><a href="tidy-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4) <span class="co"># while googlesheets4 is part of the tidyverse, and installed when you install the tidyverse, it isn&#39;t a core package, so you have to call it separately</span></span>
-<span id="cb2-4"><a href="tidy-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="tidy-data.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s have a look at the names of the worksheets (tabs) within hte spreadsheet</span></span>
-<span id="cb2-6"><a href="tidy-data.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_names</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tidy-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First let&#39;s call the libraries with the functions we want to use</span></span>
+<span id="cb4-2"><a href="tidy-data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-3"><a href="tidy-data.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4) <span class="co"># while googlesheets4 is part of the tidyverse, and installed when you install the tidyverse, it isn&#39;t a core package, so you have to call it separately</span></span>
+<span id="cb4-4"><a href="tidy-data.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="tidy-data.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s have a look at the names of the worksheets (tabs) within hte spreadsheet</span></span>
+<span id="cb4-6"><a href="tidy-data.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_names</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Sites&quot;        &quot;Traits&quot;       &quot;Species&quot;      &quot;RangeLimits&quot;  &quot;RangeSpecies&quot;</code></pre>
 <p>Sometimes it shows lots of garble about the online authentication, but finally it shows us that there are three worksheets in the spreadsheet.</p>
 <p>Let’s read in the “Sites” sheet and call it <code>edat</code> for “environmental data”, and then print a summary.</p>
 <blockquote>
 <p>WARNING - running the name of a data object in R is usually a bad idea. It typically then shows you every value in the dataset, which can be hundreds of thousands of values! Tidyverse packages just show you a summary and the first few rows of data, which is nice…</p>
 </blockquote>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tidy-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a>edat <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="co"># read in data</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tidy-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a>edat <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="co"># read in data</span></span></code></pre></div>
 <pre><code>## ✔ Reading from &quot;pracdatasheet&quot;.</code></pre>
 <pre><code>## ✔ Range &#39;&#39;Sites&#39;&#39;.</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="tidy-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>edat <span class="co"># print a summary of the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tidy-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a>edat <span class="co"># print a summary of the data</span></span></code></pre></div>
 <pre><code>## # A tibble: 24 × 8
-##    Site         Point SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densiome…¹
-##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1 grass        SE    grass_SE                      0   4.6  7.5YR3/2       0         15
-##  2 renosterveld SE    renosterveld_SE               5   5.4  10YR3/2        3         14
-##  3 invasion     SE    invasion_SE                   0   3.79 10YR2/1        0          0
-##  4 sand         SE    sand_SE                      10   4.82 10YR6/4        0          5
-##  5 sandstone    SE    sandstone_SE                  5   4.91 10YR3/2        0          2
-##  6 limestone    SE    limestone_SE                  0   6.48 10YR2/1        0          9
-##  7 grass        NE    grass_NE                      0   5.13 10YR2/2        0         13
-##  8 renosterveld NE    renosterveld_NE              30   5.7  7.5YR4/3       2         20
-##  9 invasion     NE    invasion_NE                   5   3.7  10YR5/1        0          0
-## 10 sand         NE    sand_NE                       8   4.54 10YR4/3        0          4
+##    Site         Point SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densio…¹
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 grass        SE    grass_SE                      0   4.6  7.5YR3/2       0       15
+##  2 renosterveld SE    renosterveld_SE               5   5.4  10YR3/2        3       14
+##  3 invasion     SE    invasion_SE                   0   3.79 10YR2/1        0        0
+##  4 sand         SE    sand_SE                      10   4.82 10YR6/4        0        5
+##  5 sandstone    SE    sandstone_SE                  5   4.91 10YR3/2        0        2
+##  6 limestone    SE    limestone_SE                  0   6.48 10YR2/1        0        9
+##  7 grass        NE    grass_NE                      0   5.13 10YR2/2        0       13
+##  8 renosterveld NE    renosterveld_NE              30   5.7  7.5YR4/3       2       20
+##  9 invasion     NE    invasion_NE                   5   3.7  10YR5/1        0        0
+## 10 sand         NE    sand_NE                       8   4.54 10YR4/3        0        4
 ## # … with 14 more rows, and abbreviated variable name ¹​Densiometer</code></pre>
 </div>
 <div id="read-microsoft-excel-files-with-readxl" class="section level3 hasAnchor" number="4.4.2">
@@ -412,38 +412,38 @@ div.csl-indent {
 <blockquote>
 <p><strong>NOTE:</strong> you need to replace the working directory folder path (“data” here) with wherever you put the data on your computer.</p>
 </blockquote>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tidy-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of files in the folder (change to your own)</span></span>
-<span id="cb9-2"><a href="tidy-data.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;data&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tidy-data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of files in the folder (change to your own)</span></span>
+<span id="cb11-2"><a href="tidy-data.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;data&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;pracdatasheet.xlsx&quot;                   &quot;Reproducibility Survey Raw Data.xlsx&quot;</code></pre>
 <p>Let’s have a look at the <code>pracdatasheet.xlsx</code> file</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tidy-data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb11-2"><a href="tidy-data.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co">#while readxl is part of the tidyverse and installed when you install the tidyverse, it isn&#39;t a core package, so you have to call it separately</span></span>
-<span id="cb11-3"><a href="tidy-data.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="tidy-data.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See what sheets are in the Excel workbook</span></span>
-<span id="cb11-5"><a href="tidy-data.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Sites&quot;        &quot;Traits&quot;       &quot;Species&quot;      &quot;RangeLimits&quot;  &quot;RangeSpecies&quot;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="tidy-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
-<span id="cb13-2"><a href="tidy-data.html#cb13-2" aria-hidden="true" tabindex="-1"></a>edat <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>)</span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="tidy-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="tidy-data.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co">#while readxl is part of the tidyverse and installed when you install the tidyverse, it isn&#39;t a core package, so you have to call it separately</span></span>
 <span id="cb13-3"><a href="tidy-data.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="tidy-data.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary </span></span>
-<span id="cb13-5"><a href="tidy-data.html#cb13-5" aria-hidden="true" tabindex="-1"></a>edat</span></code></pre></div>
+<span id="cb13-4"><a href="tidy-data.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See what sheets are in the Excel workbook</span></span>
+<span id="cb13-5"><a href="tidy-data.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Sites&quot;        &quot;Traits&quot;       &quot;Species&quot;      &quot;RangeLimits&quot;  &quot;RangeSpecies&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tidy-data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb15-2"><a href="tidy-data.html#cb15-2" aria-hidden="true" tabindex="-1"></a>edat <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>)</span>
+<span id="cb15-3"><a href="tidy-data.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="tidy-data.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary </span></span>
+<span id="cb15-5"><a href="tidy-data.html#cb15-5" aria-hidden="true" tabindex="-1"></a>edat</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 8
-##    Site         Point SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densiome…¹
-##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1 grass        SE    grass_SE                      0   4.6  7.5YR3/2       0         15
-##  2 renosterveld SE    renosterveld_SE               5   5.4  10YR3/2        3         14
-##  3 invasion     SE    invasion_SE                   0   3.79 10YR2/1        0          0
-##  4 sand         SE    sand_SE                      10   4.82 10YR6/4        0          5
-##  5 sandstone    SE    sandstone_SE                  5   4.91 10YR3/2        0          2
-##  6 limestone    SE    limestone_SE                  0   6.48 10YR2/1        0          9
-##  7 grass        NE    grass_NE                      0   5.13 10YR2/2        0         13
-##  8 renosterveld NE    renosterveld_NE              30   5.7  7.5YR4/3       2         20
-##  9 invasion     NE    invasion_NE                   5   3.7  10YR5/1        0          0
-## 10 sand         NE    sand_NE                       8   4.54 10YR4/3        0          4
+##    Site         Point SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densio…¹
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 grass        SE    grass_SE                      0   4.6  7.5YR3/2       0       15
+##  2 renosterveld SE    renosterveld_SE               5   5.4  10YR3/2        3       14
+##  3 invasion     SE    invasion_SE                   0   3.79 10YR2/1        0        0
+##  4 sand         SE    sand_SE                      10   4.82 10YR6/4        0        5
+##  5 sandstone    SE    sandstone_SE                  5   4.91 10YR3/2        0        2
+##  6 limestone    SE    limestone_SE                  0   6.48 10YR2/1        0        9
+##  7 grass        NE    grass_NE                      0   5.13 10YR2/2        0       13
+##  8 renosterveld NE    renosterveld_NE              30   5.7  7.5YR4/3       2       20
+##  9 invasion     NE    invasion_NE                   5   3.7  10YR5/1        0        0
+## 10 sand         NE    sand_NE                       8   4.54 10YR4/3        0        4
 ## # … with 14 more rows, and abbreviated variable name ¹​Densiometer</code></pre>
 <p>A handy feature of <code>read_sheet</code> and <code>read_xlsx</code> is the <code>range =</code> option, which allows you to <strong>select only the regions of the worksheet you want</strong> using the usual syntax you’d use in Excel, e.g. <code>A1:Z100</code> would give you columns A to Z and rows 1 to 100.</p>
 <p>Here’s an example skipping the first two columns:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tidy-data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C1:H25&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tidy-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C1:H25&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 6
 ##    SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densiometer
 ##    &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
@@ -465,8 +465,8 @@ div.csl-indent {
 <ul>
 <li>Reading in different columns and binding them together:</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tidy-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(<span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;A1:B25&quot;</span>),</span>
-<span id="cb17-2"><a href="tidy-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;G1:H25&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="tidy-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(<span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;A1:B25&quot;</span>),</span>
+<span id="cb19-2"><a href="tidy-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;G1:H25&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 4
 ##    Site         Point  Dung Densiometer
 ##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;
@@ -484,21 +484,21 @@ div.csl-indent {
 <ul>
 <li>Or by row:</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="tidy-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C1:H15&quot;</span>),</span>
-<span id="cb19-2"><a href="tidy-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C16:H25&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tidy-data.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C1:H15&quot;</span>),</span>
+<span id="cb21-2"><a href="tidy-data.html#cb21-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C16:H25&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 23 × 12
-##    SitePoint    Perce…¹ SoilPH SoilC…²  Dung Densi…³ invas…⁴ `10.0` `3.93` 5Y2.5…⁵ `0.0`
-##    &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-##  1 grass_SE           0   4.6  7.5YR3…     0      15 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  2 renostervel…       5   5.4  10YR3/2     3      14 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  3 invasion_SE        0   3.79 10YR2/1     0       0 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  4 sand_SE           10   4.82 10YR6/4     0       5 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  5 sandstone_SE       5   4.91 10YR3/2     0       2 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  6 limestone_SE       0   6.48 10YR2/1     0       9 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  7 grass_NE           0   5.13 10YR2/2     0      13 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  8 renostervel…      30   5.7  7.5YR4…     2      20 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-##  9 invasion_NE        5   3.7  10YR5/1     0       0 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
-## 10 sand_NE            8   4.54 10YR4/3     0       4 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##    SitePoint  Perce…¹ SoilPH SoilC…²  Dung Densi…³ invas…⁴ `10.0` `3.93` 5Y2.5…⁵ `0.0`
+##    &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1 grass_SE         0   4.6  7.5YR3…     0      15 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  2 renosterv…       5   5.4  10YR3/2     3      14 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  3 invasion_…       0   3.79 10YR2/1     0       0 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  4 sand_SE         10   4.82 10YR6/4     0       5 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  5 sandstone…       5   4.91 10YR3/2     0       2 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  6 limestone…       0   6.48 10YR2/1     0       9 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  7 grass_NE         0   5.13 10YR2/2     0      13 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  8 renosterv…      30   5.7  7.5YR4…     2      20 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+##  9 invasion_…       5   3.7  10YR5/1     0       0 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
+## 10 sand_NE          8   4.54 10YR4/3     0       4 &lt;NA&gt;        NA     NA &lt;NA&gt;       NA
 ## # … with 13 more rows, 1 more variable: `3.0` &lt;dbl&gt;, and abbreviated variable names
 ## #   ¹​PercentBareSoil, ²​SoilColour, ³​Densiometer, ⁴​invasion_SW, ⁵​`5Y2.5/1`</code></pre>
 <p>Note that the <code>skip =</code> and <code>nmax =</code> options are somewhat related and tell the function the number of rows to skip before reading anything and the maximum number of rows to read respectively.</p>
@@ -535,25 +535,25 @@ div.csl-indent {
 </ul>
 <p><br></p>
 <p>Here’re some code examples to try to drive this home, using the built in vector `letters</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tidy-data.html#cb21-1" aria-hidden="true" tabindex="-1"></a>letters</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot;
-## [22] &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="tidy-data.html#cb23-1" aria-hidden="true" tabindex="-1"></a>letters</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot;
+## [21] &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
 <p>You can check the class of data using the function <code>class()</code></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="tidy-data.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letters)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="tidy-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(letters)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>And typically convert (or coerce) between classes using <code>as.</code> followed by the class you want, e.g.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="tidy-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(letters)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tidy-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(letters)</span></code></pre></div>
 <pre><code>##  [1] a b c d e f g h i j k l m n o p q r s t u v w x y z
 ## Levels: a b c d e f g h i j k l m n o p q r s t u v w x y z</code></pre>
 <p>Here it shows us that we have a factor with 26 values with 26 unique levels. You wouldn’t really use a factor class if all values are unique though. Here’s a better example.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tidy-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tidy-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>))</span></code></pre></div>
 <pre><code>##  [1] a b c a b c a b c a b c a b c a b c a b c a b c
 ## Levels: a b c</code></pre>
 <p>And to prove that the factor represents the levels as a set of numbers:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tidy-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tidy-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>)))</span></code></pre></div>
 <pre><code>##  [1] 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3</code></pre>
 <p>Note that this doesn’t work if we try to coerce the the letters to numbers without making them a factor first:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tidy-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="tidy-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">8</span>))</span></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
 <p><br></p>
@@ -562,40 +562,40 @@ div.csl-indent {
 <p>This is great, but it can catch you out as follows. If a column of numbers has any text in it, R will make the whole column class character. If many of the values are repeated, it may even make it class factor for efficiency. <strong><em>This happens a lot!</em></strong>, especially if someone makes an error and types in an O instead of a 0, or denotes missing data with a “.” or anything else other than “NA”.</p>
 <p>The problem is that even though R typically orders factors in alphabetical or numerical order, <strong>it is possible to create a mismatch between the actual number and the order in the levels.</strong></p>
 <p>Here are some code examples. Firstly, where a number is treated as a character.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="tidy-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a>hmm <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="st">&quot;0&quot;</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dv">3</span>)</span>
-<span id="cb34-2"><a href="tidy-data.html#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="tidy-data.html#cb34-3" aria-hidden="true" tabindex="-1"></a>hmm</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tidy-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a>hmm <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="st">&quot;0&quot;</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dv">3</span>)</span>
+<span id="cb36-2"><a href="tidy-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="tidy-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a>hmm</span></code></pre></div>
 <pre><code>##  [1] &quot;4&quot; &quot;0&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;0&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;0&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot;</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tidy-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hmm)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tidy-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hmm)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>In this case the vector is class character, but if we’d read it in from a file it would likely have been made a factor. Let’s see what happens when we coerce it to factor:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tidy-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(hmm)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tidy-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(hmm)</span></code></pre></div>
 <pre><code>##  [1] 4 0 2 5 3 1 4 0 2 5 3 1 4 0 2 5 3 1
 ## Levels: 0 1 2 3 4 5</code></pre>
 <p>Seems ok?</p>
 <p>What if we try to coerce that factor to a number?</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tidy-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(hmm))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tidy-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(hmm))</span></code></pre></div>
 <pre><code>##  [1] 5 1 3 6 4 2 5 1 3 6 4 2 5 1 3 6 4 2</code></pre>
 <p>Ouch! While the level labels start at 0, the numeric representation of the levels start at 1, so coercing them to numbers creates a mismatch…</p>
 <p><strong>If you need to fix this, you should always coerce to character first.</strong></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tidy-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">as.factor</span>(hmm)))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tidy-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">as.factor</span>(hmm)))</span></code></pre></div>
 <pre><code>##  [1] 4 0 2 5 3 1 4 0 2 5 3 1 4 0 2 5 3 1</code></pre>
 <p>What about if we insert a character instead of a number, like “O” instead of “0”</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tidy-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a>hmm2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="st">&quot;O&quot;</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dv">3</span>)</span>
-<span id="cb44-2"><a href="tidy-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="tidy-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a>hmm2</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidy-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>hmm2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="st">&quot;O&quot;</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dv">3</span>)</span>
+<span id="cb46-2"><a href="tidy-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="tidy-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a>hmm2</span></code></pre></div>
 <pre><code>##  [1] &quot;4&quot; &quot;O&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;O&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot; &quot;4&quot; &quot;O&quot; &quot;2&quot; &quot;5&quot; &quot;3&quot; &quot;1&quot;</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidy-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hmm2)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tidy-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hmm2)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tidy-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(hmm2)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidy-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(hmm2)</span></code></pre></div>
 <pre><code>##  [1] 4 O 2 5 3 1 4 O 2 5 3 1 4 O 2 5 3 1
 ## Levels: 1 2 3 4 5 O</code></pre>
 <p>Interesting, the “O” is now the 6th level, not the first… What if we coerce to numeric?</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidy-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(hmm2))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tidy-data.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(hmm2))</span></code></pre></div>
 <pre><code>##  [1] 4 6 2 5 3 1 4 6 2 5 3 1 4 6 2 5 3 1</code></pre>
 <p>Oops!!! Converting all your zeroes to sixes is really going to mess with your results!!!</p>
 <p>And if we try our <code>as.character</code> fix?</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tidy-data.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">as.factor</span>(hmm2)))</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tidy-data.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">as.factor</span>(hmm2)))</span></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>##  [1]  4 NA  2  5  3  1  4 NA  2  5  3  1  4 NA  2  5  3  1</code></pre>
 <p>R doesn’t know what to do with the Os, so it makes them NA and gives you a warning. Watch out for this, because ignoring the warning and leaving out zero values could seriously bias your results!</p>
@@ -619,11 +619,11 @@ div.csl-indent {
 <p><br></p>
 <p><strong>Here are some example “sentences” using some of the <code>dplyr</code> “verbs”:</strong></p>
 <p><em>“Take the environmental data, group it by the Site labels and calculate the means for a specific set of variables for each group.”</em></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="tidy-data.html#cb55-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
-<span id="cb55-2"><a href="tidy-data.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site) <span class="sc">%&gt;%</span></span>
-<span id="cb55-3"><a href="tidy-data.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">BareSoil =</span> <span class="fu">mean</span>(PercentBareSoil), </span>
-<span id="cb55-4"><a href="tidy-data.html#cb55-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Soil pH</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(SoilPH), </span>
-<span id="cb55-5"><a href="tidy-data.html#cb55-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Dung =</span> <span class="fu">mean</span>(Dung))</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="tidy-data.html#cb57-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="tidy-data.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site) <span class="sc">%&gt;%</span></span>
+<span id="cb57-3"><a href="tidy-data.html#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">BareSoil =</span> <span class="fu">mean</span>(PercentBareSoil), </span>
+<span id="cb57-4"><a href="tidy-data.html#cb57-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Soil pH</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(SoilPH), </span>
+<span id="cb57-5"><a href="tidy-data.html#cb57-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Dung =</span> <span class="fu">mean</span>(Dung))</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
 ##   Site         BareSoil `Soil pH`  Dung
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
@@ -638,9 +638,9 @@ div.csl-indent {
 </blockquote>
 <p><br></p>
 <p><em>“Take the environmental data, filter it for only the renosterveld site, and select a specific set of variables.”</em></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="tidy-data.html#cb57-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
-<span id="cb57-2"><a href="tidy-data.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Site <span class="sc">==</span> <span class="st">&quot;renosterveld&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb57-3"><a href="tidy-data.html#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Point, PercentBareSoil, SoilPH, Dung)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="tidy-data.html#cb59-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="tidy-data.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Site <span class="sc">==</span> <span class="st">&quot;renosterveld&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="tidy-data.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Point, PercentBareSoil, SoilPH, Dung)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 4
 ##   Point PercentBareSoil SoilPH  Dung
 ##   &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -649,10 +649,10 @@ div.csl-indent {
 ## 3 SW                 20   5.43     3
 ## 4 NW                 30   5.35     2</code></pre>
 <p><em>“Take the environmental data, filter it for only the renosterveld site, select a specific set of variables, and add a new column that expresses the frequency of dung observed as a proportion of the percentage bare soil exposed.”</em></p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="tidy-data.html#cb59-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
-<span id="cb59-2"><a href="tidy-data.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Site <span class="sc">==</span> <span class="st">&quot;renosterveld&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-3"><a href="tidy-data.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Point, PercentBareSoil, SoilPH, Dung) <span class="sc">%&gt;%</span></span>
-<span id="cb59-4"><a href="tidy-data.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DungPerSoil =</span> Dung<span class="sc">/</span>PercentBareSoil)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="tidy-data.html#cb61-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="tidy-data.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Site <span class="sc">==</span> <span class="st">&quot;renosterveld&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="tidy-data.html#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Point, PercentBareSoil, SoilPH, Dung) <span class="sc">%&gt;%</span></span>
+<span id="cb61-4"><a href="tidy-data.html#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DungPerSoil =</span> Dung<span class="sc">/</span>PercentBareSoil)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   Point PercentBareSoil SoilPH  Dung DungPerSoil
 ##   &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
@@ -661,10 +661,10 @@ div.csl-indent {
 ## 3 SW                 20   5.43     3      0.15  
 ## 4 NW                 30   5.35     2      0.0667</code></pre>
 <p><em>“Take the environmental data, select a specific set of variables, add a new column that expresses the frequency of dung observed as a proportion of the percentage bare soil exposed, and arrange the samples in descending order of the new variable.”</em></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="tidy-data.html#cb61-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
-<span id="cb61-2"><a href="tidy-data.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, PercentBareSoil, SoilPH, Dung) <span class="sc">%&gt;%</span></span>
-<span id="cb61-3"><a href="tidy-data.html#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DungPerSoil =</span> Dung<span class="sc">/</span>PercentBareSoil) <span class="sc">%&gt;%</span></span>
-<span id="cb61-4"><a href="tidy-data.html#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(DungPerSoil))</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="tidy-data.html#cb63-1" aria-hidden="true" tabindex="-1"></a>edat <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="tidy-data.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, PercentBareSoil, SoilPH, Dung) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="tidy-data.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DungPerSoil =</span> Dung<span class="sc">/</span>PercentBareSoil) <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="tidy-data.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(DungPerSoil))</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 5
 ##    SitePoint       PercentBareSoil SoilPH  Dung DungPerSoil
 ##    &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
@@ -703,25 +703,25 @@ div.csl-indent {
 <h3><span class="header-section-number">4.7.1</span> <code>pivot_longer</code><a href="tidy-data.html#pivot_longer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Perhaps the most useful function here is <code>pivot_longer</code> from the <code>tidyr</code> package, which allows you to <strong>convert wide format data to long format</strong>.</p>
 <p>Here’s our raw data:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="tidy-data.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="tidy-data.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 8
-##    Site         Point SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densiome…¹
-##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1 grass        SE    grass_SE                      0   4.6  7.5YR3/2       0         15
-##  2 renosterveld SE    renosterveld_SE               5   5.4  10YR3/2        3         14
-##  3 invasion     SE    invasion_SE                   0   3.79 10YR2/1        0          0
-##  4 sand         SE    sand_SE                      10   4.82 10YR6/4        0          5
-##  5 sandstone    SE    sandstone_SE                  5   4.91 10YR3/2        0          2
-##  6 limestone    SE    limestone_SE                  0   6.48 10YR2/1        0          9
-##  7 grass        NE    grass_NE                      0   5.13 10YR2/2        0         13
-##  8 renosterveld NE    renosterveld_NE              30   5.7  7.5YR4/3       2         20
-##  9 invasion     NE    invasion_NE                   5   3.7  10YR5/1        0          0
-## 10 sand         NE    sand_NE                       8   4.54 10YR4/3        0          4
+##    Site         Point SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densio…¹
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 grass        SE    grass_SE                      0   4.6  7.5YR3/2       0       15
+##  2 renosterveld SE    renosterveld_SE               5   5.4  10YR3/2        3       14
+##  3 invasion     SE    invasion_SE                   0   3.79 10YR2/1        0        0
+##  4 sand         SE    sand_SE                      10   4.82 10YR6/4        0        5
+##  5 sandstone    SE    sandstone_SE                  5   4.91 10YR3/2        0        2
+##  6 limestone    SE    limestone_SE                  0   6.48 10YR2/1        0        9
+##  7 grass        NE    grass_NE                      0   5.13 10YR2/2        0       13
+##  8 renosterveld NE    renosterveld_NE              30   5.7  7.5YR4/3       2       20
+##  9 invasion     NE    invasion_NE                   5   3.7  10YR5/1        0        0
+## 10 sand         NE    sand_NE                       8   4.54 10YR4/3        0        4
 ## # … with 14 more rows, and abbreviated variable name ¹​Densiometer</code></pre>
 <p>Here’s our data in “long” format:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="tidy-data.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb65-2"><a href="tidy-data.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;PercentBareSoil&quot;</span>, <span class="st">&quot;SoilPH&quot;</span>, <span class="st">&quot;Dung&quot;</span>, <span class="st">&quot;Densiometer&quot;</span>),</span>
-<span id="cb65-3"><a href="tidy-data.html#cb65-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="tidy-data.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="tidy-data.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;PercentBareSoil&quot;</span>, <span class="st">&quot;SoilPH&quot;</span>, <span class="st">&quot;Dung&quot;</span>, <span class="st">&quot;Densiometer&quot;</span>),</span>
+<span id="cb67-3"><a href="tidy-data.html#cb67-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) </span></code></pre></div>
 <pre><code>## # A tibble: 96 × 6
 ##    Site         Point SitePoint       SoilColour variable        value
 ##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
@@ -749,25 +749,25 @@ div.csl-indent {
 <p>You can also <strong>convert long format data to wide format</strong> when needed using <code>pivot_wider</code>. You may need to do this when working with biological community data, because most analysis software and R functions prefer “community data matrices” with species as columns and sites as rows. This violates <em>Tidy</em> data, because you have data in your column names (i.e. species names).</p>
 <p>I’ll demonstrate this using the <code>Species</code> worksheet from our dataset.</p>
 <p>First, let’s look at the raw data:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="tidy-data.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="tidy-data.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 419 × 12
-##    Site     Point Photo Family  Genus Species AddOn Field…¹ FullN…² Worki…³ Alien FullID
-##    &lt;chr&gt;    &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-##  1 invasion SE    NA    Aspara… Aspa… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    Aspara… Aspara…    NA     NA
-##  2 invasion SE    NA    Poaceae Cape… arundi… &lt;NA&gt;  &lt;NA&gt;    Capeoc… Capeoc…    NA     NA
-##  3 invasion SE    NA    Protea… Leuc… salign… &lt;NA&gt;  &lt;NA&gt;    Leucad… Leucad…    NA      1
-##  4 invasion SE    NA    Poaceae &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;  Small … &lt;NA&gt;    Small …    NA     NA
-##  5 invasion SE    NA    Ericac… Erica &lt;NA&gt;    smal… &lt;NA&gt;    Erica … Erica …    NA     NA
-##  6 invasion SE    NA    Rhamna… Phyl… ericoi… &lt;NA&gt;  &lt;NA&gt;    Phylic… Phylic…    NA      1
-##  7 invasion SE    NA    Fabace… Acac… saligna &lt;NA&gt;  &lt;NA&gt;    Acacia… Acacia…     1      1
-##  8 invasion SE    NA    Cypera… Scho… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    Schoen… Schoen…    NA     NA
-##  9 invasion SE    NA    Pinace… Pinus &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    Pinus   Pinus       1     NA
-## 10 invasion SE    NA    Fabace… Acac… pycnan… &lt;NA&gt;  &lt;NA&gt;    Acacia… Acacia…     1      1
+##    Site    Point Photo Family Genus Species AddOn Field…¹ FullN…² Worki…³ Alien FullID
+##    &lt;chr&gt;   &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1 invasi… SE    NA    Aspar… Aspa… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    Aspara… Aspara…    NA     NA
+##  2 invasi… SE    NA    Poace… Cape… arundi… &lt;NA&gt;  &lt;NA&gt;    Capeoc… Capeoc…    NA     NA
+##  3 invasi… SE    NA    Prote… Leuc… salign… &lt;NA&gt;  &lt;NA&gt;    Leucad… Leucad…    NA      1
+##  4 invasi… SE    NA    Poace… &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;  Small … &lt;NA&gt;    Small …    NA     NA
+##  5 invasi… SE    NA    Erica… Erica &lt;NA&gt;    smal… &lt;NA&gt;    Erica … Erica …    NA     NA
+##  6 invasi… SE    NA    Rhamn… Phyl… ericoi… &lt;NA&gt;  &lt;NA&gt;    Phylic… Phylic…    NA      1
+##  7 invasi… SE    NA    Fabac… Acac… saligna &lt;NA&gt;  &lt;NA&gt;    Acacia… Acacia…     1      1
+##  8 invasi… SE    NA    Cyper… Scho… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    Schoen… Schoen…    NA     NA
+##  9 invasi… SE    NA    Pinac… Pinus &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    Pinus   Pinus       1     NA
+## 10 invasi… SE    NA    Fabac… Acac… pycnan… &lt;NA&gt;  &lt;NA&gt;    Acacia… Acacia…     1      1
 ## # … with 409 more rows, and abbreviated variable names ¹​FieldName, ²​FullName,
 ## #   ³​WorkingName</code></pre>
 <p>A bit messy, but in this case it is presence-only data and all we want are “Site”, “Point” and “WorkingName”, so if we just select those we’ll be close to having our long format data, like so:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="tidy-data.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb69-2"><a href="tidy-data.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site, Point, WorkingName)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="tidy-data.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="tidy-data.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site, Point, WorkingName)</span></code></pre></div>
 <pre><code>## # A tibble: 419 × 3
 ##    Site     Point WorkingName           
 ##    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;                 
@@ -783,30 +783,30 @@ div.csl-indent {
 ## 10 invasion SE    Acacia pycnantha      
 ## # … with 409 more rows</code></pre>
 <p>And we can make it wider like so:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="tidy-data.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-2"><a href="tidy-data.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site, Point, WorkingName) <span class="sc">%&gt;%</span></span>
-<span id="cb71-3"><a href="tidy-data.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
-<span id="cb71-4"><a href="tidy-data.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="tidy-data.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="tidy-data.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site, Point, WorkingName) <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="tidy-data.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
+<span id="cb73-4"><a href="tidy-data.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 186
-##    Site      Point Aspar…¹ Capeo…² Leuca…³ Small…⁴ Erica…⁵ Phyli…⁶ Acaci…⁷ Schoe…⁸ Pinus
-##    &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-##  1 invasion  SE          1       1       1       1       1       1       1       1     1
-##  2 renoster… SW          0       0       1       0       0       0       0       0     0
-##  3 grass     NE          1       0       0       0       0       0       0       0     0
-##  4 grass     NW          0       0       0       0       0       0       0       0     0
-##  5 grass     SE          1       0       0       0       0       0       0       0     0
-##  6 grass     SW          1       0       0       0       0       0       0       0     0
-##  7 renoster… NE          0       0       0       0       0       0       0       0     0
-##  8 renoster… NW          0       0       0       0       0       0       0       0     0
-##  9 renoster… SE          0       0       0       0       0       0       0       0     0
-## 10 invasion  SW          0       1       0       0       0       0       1       1     1
+##    Site    Point Aspar…¹ Capeo…² Leuca…³ Small…⁴ Erica…⁵ Phyli…⁶ Acaci…⁷ Schoe…⁸ Pinus
+##    &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 invasi… SE          1       1       1       1       1       1       1       1     1
+##  2 renost… SW          0       0       1       0       0       0       0       0     0
+##  3 grass   NE          1       0       0       0       0       0       0       0     0
+##  4 grass   NW          0       0       0       0       0       0       0       0     0
+##  5 grass   SE          1       0       0       0       0       0       0       0     0
+##  6 grass   SW          1       0       0       0       0       0       0       0     0
+##  7 renost… NE          0       0       0       0       0       0       0       0     0
+##  8 renost… NW          0       0       0       0       0       0       0       0     0
+##  9 renost… SE          0       0       0       0       0       0       0       0     0
+## 10 invasi… SW          0       1       0       0       0       0       1       1     1
 ## # … with 14 more rows, 175 more variables: `Acacia pycnantha` &lt;dbl&gt;,
 ## #   `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;, `Restio tetragonus` &lt;dbl&gt;,
 ## #   `Helichrysum crispa` &lt;dbl&gt;, `Cynodon dactylon` &lt;dbl&gt;, `Briza major` &lt;dbl&gt;,
 ## #   Metalasia &lt;dbl&gt;, Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;,
 ## #   `Sporobolus africanus` &lt;dbl&gt;, Rhus &lt;dbl&gt;, Eragrostis &lt;dbl&gt;, Oedera &lt;dbl&gt;,
 ## #   `Ehrharta calycina` &lt;dbl&gt;, `Pennisetum clandestinum` &lt;dbl&gt;, Carex &lt;dbl&gt;,
-## #   `Aspalathus yellow furry` &lt;dbl&gt;, Lobelia &lt;dbl&gt;, `Osteospermum monilifera` &lt;dbl&gt;, …</code></pre>
+## #   `Aspalathus yellow furry` &lt;dbl&gt;, Lobelia &lt;dbl&gt;, …</code></pre>
 <blockquote>
 <p>Note the use of <code>mutate</code> to add a column of ones. You could also use <code>add_column</code>.</p>
 </blockquote>
@@ -820,39 +820,39 @@ div.csl-indent {
 <div id="unite-and-separate" class="section level3 hasAnchor" number="4.7.3">
 <h3><span class="header-section-number">4.7.3</span> <code>unite</code> and <code>separate</code><a href="tidy-data.html#unite-and-separate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here I use <code>unite</code> to combine the <code>Site</code> and <code>Point</code> columns into a new column called <code>SitePoint</code>. I’ve also changed the <code>select</code> line to only keep our new column, so that we output a community data matrix.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="tidy-data.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb73-2"><a href="tidy-data.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;SitePoint&quot;</span>, Site<span class="sc">:</span>Point, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb73-3"><a href="tidy-data.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, WorkingName) <span class="sc">%&gt;%</span></span>
-<span id="cb73-4"><a href="tidy-data.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
-<span id="cb73-5"><a href="tidy-data.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="tidy-data.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a href="tidy-data.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;SitePoint&quot;</span>, Site<span class="sc">:</span>Point, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="tidy-data.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, WorkingName) <span class="sc">%&gt;%</span></span>
+<span id="cb75-4"><a href="tidy-data.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
+<span id="cb75-5"><a href="tidy-data.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 185
-##    SiteP…¹ Aspar…² Capeo…³ Leuca…⁴ Small…⁵ Erica…⁶ Phyli…⁷ Acaci…⁸ Schoe…⁹ Pinus Acaci…˟
-##    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 invasi…       1       1       1       1       1       1       1       1     1       1
-##  2 renost…       0       0       1       0       0       0       0       0     0       0
-##  3 grass_…       1       0       0       0       0       0       0       0     0       0
-##  4 grass_…       0       0       0       0       0       0       0       0     0       0
-##  5 grass_…       1       0       0       0       0       0       0       0     0       0
-##  6 grass_…       1       0       0       0       0       0       0       0     0       0
-##  7 renost…       0       0       0       0       0       0       0       0     0       0
-##  8 renost…       0       0       0       0       0       0       0       0     0       0
-##  9 renost…       0       0       0       0       0       0       0       0     0       0
-## 10 invasi…       0       1       0       0       0       0       1       1     1       0
-## # … with 14 more rows, 174 more variables: `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;,
-## #   `Restio tetragonus` &lt;dbl&gt;, `Helichrysum crispa` &lt;dbl&gt;, `Cynodon dactylon` &lt;dbl&gt;,
-## #   `Briza major` &lt;dbl&gt;, Metalasia &lt;dbl&gt;, Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;,
+##    SitePoint     Aspar…¹ Capeo…² Leuca…³ Small…⁴ Erica…⁵ Phyli…⁶ Acaci…⁷ Schoe…⁸ Pinus
+##    &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 invasion_SE         1       1       1       1       1       1       1       1     1
+##  2 renosterveld…       0       0       1       0       0       0       0       0     0
+##  3 grass_NE            1       0       0       0       0       0       0       0     0
+##  4 grass_NW            0       0       0       0       0       0       0       0     0
+##  5 grass_SE            1       0       0       0       0       0       0       0     0
+##  6 grass_SW            1       0       0       0       0       0       0       0     0
+##  7 renosterveld…       0       0       0       0       0       0       0       0     0
+##  8 renosterveld…       0       0       0       0       0       0       0       0     0
+##  9 renosterveld…       0       0       0       0       0       0       0       0     0
+## 10 invasion_SW         0       1       0       0       0       0       1       1     1
+## # … with 14 more rows, 175 more variables: `Acacia pycnantha` &lt;dbl&gt;,
+## #   `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;, `Restio tetragonus` &lt;dbl&gt;,
+## #   `Helichrysum crispa` &lt;dbl&gt;, `Cynodon dactylon` &lt;dbl&gt;, `Briza major` &lt;dbl&gt;,
+## #   Metalasia &lt;dbl&gt;, Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;,
 ## #   `Sporobolus africanus` &lt;dbl&gt;, Rhus &lt;dbl&gt;, Eragrostis &lt;dbl&gt;, Oedera &lt;dbl&gt;,
 ## #   `Ehrharta calycina` &lt;dbl&gt;, `Pennisetum clandestinum` &lt;dbl&gt;, Carex &lt;dbl&gt;,
-## #   `Aspalathus yellow furry` &lt;dbl&gt;, Lobelia &lt;dbl&gt;, `Osteospermum monilifera` &lt;dbl&gt;,
-## #   Prismatocarpus &lt;dbl&gt;, `Seriphium plumosum` &lt;dbl&gt;, …</code></pre>
+## #   `Aspalathus yellow furry` &lt;dbl&gt;, Lobelia &lt;dbl&gt;, …</code></pre>
 <p>You can also split values using <code>separate</code>. For example, you may want to split the Latin names into genus and species.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="tidy-data.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb75-2"><a href="tidy-data.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(WorkingName, <span class="fu">c</span>(<span class="st">&quot;Gen&quot;</span>, <span class="st">&quot;Sp&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb75-3"><a href="tidy-data.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gen, Sp)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="tidy-data.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="tidy-data.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(WorkingName, <span class="fu">c</span>(<span class="st">&quot;Gen&quot;</span>, <span class="st">&quot;Sp&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb77-3"><a href="tidy-data.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gen, Sp)</span></code></pre></div>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 5 rows [5, 29, 145, 223,
 ## 401].</code></pre>
-<pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 58 rows [1, 8, 9, 12, 17, 18, 21,
-## 23, 24, 28, 30, 32, 34, 37, 38, 41, 45, 48, 49, 50, ...].</code></pre>
+<pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 58 rows [1, 8, 9, 12, 17, 18,
+## 21, 23, 24, 28, 30, 32, 34, 37, 38, 41, 45, 48, 49, 50, ...].</code></pre>
 <pre><code>## # A tibble: 419 × 2
 ##    Gen          Sp         
 ##    &lt;chr&gt;        &lt;chr&gt;      
@@ -877,19 +877,19 @@ div.csl-indent {
 <p>Pro Tip…</p>
 </blockquote>
 <p>Before I move on, there are times when you may need to get your data out of the <em>tidyverse</em> formats. Specifically, many R packages that analyze biological community data (e.g. <code>library(vegan)</code>) require community data matrices with column and row names. For some reason that I have yet to understand, the <em>tidyverse</em> tabular data class (<code>tibble</code>) doesn’t believe in row names, so to use your community data matrix with <code>vegan</code> etc, you have to break free of the <em>tidyverse</em>, which can be surprisingly difficult, but here’s how.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="tidy-data.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First rerun our tidyverse code to get as close to a community data matrix as possible</span></span>
-<span id="cb79-2"><a href="tidy-data.html#cb79-2" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb79-3"><a href="tidy-data.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;SitePoint&quot;</span>, Site<span class="sc">:</span>Point, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb79-4"><a href="tidy-data.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, WorkingName) <span class="sc">%&gt;%</span></span>
-<span id="cb79-5"><a href="tidy-data.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
-<span id="cb79-6"><a href="tidy-data.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
-<span id="cb79-7"><a href="tidy-data.html#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-8"><a href="tidy-data.html#cb79-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Then some Untidyverse code to</span></span>
-<span id="cb79-9"><a href="tidy-data.html#cb79-9" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">unclass</span>(comm)) <span class="co"># get out of the tibble format</span></span>
-<span id="cb79-10"><a href="tidy-data.html#cb79-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(comm) <span class="ot">&lt;-</span> comm[,<span class="dv">1</span>] <span class="co"># add the first column &quot;SitePoint&quot; as rownames</span></span>
-<span id="cb79-11"><a href="tidy-data.html#cb79-11" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> comm[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># remove the first column (i.e. &quot;SitePoint&quot;)</span></span>
-<span id="cb79-12"><a href="tidy-data.html#cb79-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-13"><a href="tidy-data.html#cb79-13" aria-hidden="true" tabindex="-1"></a>comm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># view the first 5 rows and 3 columns</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="tidy-data.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First rerun our tidyverse code to get as close to a community data matrix as possible</span></span>
+<span id="cb81-2"><a href="tidy-data.html#cb81-2" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href="tidy-data.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;SitePoint&quot;</span>, Site<span class="sc">:</span>Point, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb81-4"><a href="tidy-data.html#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, WorkingName) <span class="sc">%&gt;%</span></span>
+<span id="cb81-5"><a href="tidy-data.html#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
+<span id="cb81-6"><a href="tidy-data.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb81-7"><a href="tidy-data.html#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-8"><a href="tidy-data.html#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Then some Untidyverse code to</span></span>
+<span id="cb81-9"><a href="tidy-data.html#cb81-9" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">unclass</span>(comm)) <span class="co"># get out of the tibble format</span></span>
+<span id="cb81-10"><a href="tidy-data.html#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(comm) <span class="ot">&lt;-</span> comm[,<span class="dv">1</span>] <span class="co"># add the first column &quot;SitePoint&quot; as rownames</span></span>
+<span id="cb81-11"><a href="tidy-data.html#cb81-11" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> comm[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># remove the first column (i.e. &quot;SitePoint&quot;)</span></span>
+<span id="cb81-12"><a href="tidy-data.html#cb81-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-13"><a href="tidy-data.html#cb81-13" aria-hidden="true" tabindex="-1"></a>comm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># view the first 5 rows and 3 columns</span></span></code></pre></div>
 <pre><code>##                 Asparagus Capeochloa.arundinacea Leucadendron.salignum
 ## invasion_SE             1                      1                     1
 ## renosterveld_SW         0                      0                     1
@@ -904,13 +904,13 @@ div.csl-indent {
 <p>Often it’s easiest to work with multiple different data tables, like the <code>Species</code> and <code>Site</code> worksheets we’ve been playing with, but there are times that you’d like to compare a variable from one with a variable from another, and to do this you need to <code>join</code> them.</p>
 <p>For example, let’s compare the count of species for each site with some of the environmental variables.</p>
 <p>First, we calculate the number of species recorded in each site and save it as an object <code>sr</code>.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="tidy-data.html#cb81-1" aria-hidden="true" tabindex="-1"></a>sr <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-2"><a href="tidy-data.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;SitePoint&quot;</span>, Site<span class="sc">:</span>Point, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb81-3"><a href="tidy-data.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, WorkingName) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-4"><a href="tidy-data.html#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SitePoint) <span class="sc">%&gt;%</span></span>
-<span id="cb81-5"><a href="tidy-data.html#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Species Number</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>())</span>
-<span id="cb81-6"><a href="tidy-data.html#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-7"><a href="tidy-data.html#cb81-7" aria-hidden="true" tabindex="-1"></a>sr</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="tidy-data.html#cb83-1" aria-hidden="true" tabindex="-1"></a>sr <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb83-2"><a href="tidy-data.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;SitePoint&quot;</span>, Site<span class="sc">:</span>Point, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb83-3"><a href="tidy-data.html#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, WorkingName) <span class="sc">%&gt;%</span> </span>
+<span id="cb83-4"><a href="tidy-data.html#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SitePoint) <span class="sc">%&gt;%</span></span>
+<span id="cb83-5"><a href="tidy-data.html#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Species Number</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>())</span>
+<span id="cb83-6"><a href="tidy-data.html#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="tidy-data.html#cb83-7" aria-hidden="true" tabindex="-1"></a>sr</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 2
 ##    SitePoint    `Species Number`
 ##    &lt;chr&gt;                   &lt;int&gt;
@@ -926,9 +926,9 @@ div.csl-indent {
 ## 10 limestone_NW               23
 ## # … with 14 more rows</code></pre>
 <p>Now let’s read in our site data, selet the columns we want and join <code>sr</code> to it using <code>left_join</code>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="tidy-data.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb83-2"><a href="tidy-data.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, PercentBareSoil, SoilPH) <span class="sc">%&gt;%</span></span>
-<span id="cb83-3"><a href="tidy-data.html#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sr, <span class="at">by =</span> <span class="st">&quot;SitePoint&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="tidy-data.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="tidy-data.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, PercentBareSoil, SoilPH) <span class="sc">%&gt;%</span></span>
+<span id="cb85-3"><a href="tidy-data.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sr, <span class="at">by =</span> <span class="st">&quot;SitePoint&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 4
 ##    SitePoint       PercentBareSoil SoilPH `Species Number`
 ##    &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt;            &lt;int&gt;
@@ -945,11 +945,11 @@ div.csl-indent {
 ## # … with 14 more rows</code></pre>
 <p>Hey presto!</p>
 <p>But what was it we wanted to compare? Well why not be unscientific and just plot everything against everything else using a function from another library called <code>GGally</code>.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="tidy-data.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="tidy-data.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, PercentBareSoil, SoilPH) <span class="sc">%&gt;%</span></span>
-<span id="cb85-3"><a href="tidy-data.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sr, <span class="at">by =</span> <span class="st">&quot;SitePoint&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb85-4"><a href="tidy-data.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggpairs</span>(<span class="at">columns =</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(.))</span></code></pre></div>
-<p><img src="data-management_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="tidy-data.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="tidy-data.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SitePoint, PercentBareSoil, SoilPH) <span class="sc">%&gt;%</span></span>
+<span id="cb87-3"><a href="tidy-data.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sr, <span class="at">by =</span> <span class="st">&quot;SitePoint&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb87-4"><a href="tidy-data.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggpairs</span>(<span class="at">columns =</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(.))</span></code></pre></div>
+<p><img src="data-management_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>A weak correlation between soil pH and % bare soil, and a near-significant (0.05 &lt; p &lt; 0.1) correlation between soil pH and species number.</p>
 <blockquote>
 <p>Note that if you only plan to use functions from a library a few times in your script it can be more efficient to call the function from the library once off using the syntax library::function (e.g. <code>GGally::ggpairs</code>) than to attach the whole library (i.e. calling <code>library(GGally)</code>) as it saves RAM.</p>

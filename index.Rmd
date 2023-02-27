@@ -52,7 +52,7 @@ Friday we head off on the field trip...
 
 ## Deliverables (Due Thursday the 2nd March) {#deliverables}
 
-1. A draft Data Management Plan (DMP) for your Honours Project using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/).
+1. A draft Data Management Plan (DMP) for your Honours Project using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "University of Cape Town (UCT) - Full DMP" template.
 
 2. A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you'll develop based on Wednesday's tutorial), all in line with best practice as per the content of this module. 
   - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
