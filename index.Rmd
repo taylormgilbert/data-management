@@ -102,4 +102,6 @@ Now you have RStudio, R and Git installed, and you have a working GitHub account
 - Click `Apply`
 - Restart RStudio
 
+**If that hasn't worked**, have a look at the installation section of [Happy Git with R](https://happygitwithr.com/) to troubleshoot...
+
 Lastly, you need to install the [_Tidyverse_](https://www.tidyverse.org/) set of R packages. This can be done using the code `install.packages("tidyverse")`.
