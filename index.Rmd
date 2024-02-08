@@ -51,7 +51,7 @@ The schedule of lectures (and readings) is as follows:
 - Thursday, 15th Feb - Tidy Data and Data Wrangling continued (your turn) 
 - Friday, 16th Feb - We can discuss if you need me available to help. Possibly online.
 
-## Deliverables (Due Thursday the 9th March) {#deliverables}
+## Deliverables (Due Thursday the 22nd February) {#deliverables}
 
 1. A draft Data Management Plan (DMP) for your Honours Project (or mock project) using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "University of Cape Town (UCT) - Full DMP" template.
 
@@ -59,7 +59,7 @@ The schedule of lectures (and readings) is as follows:
   - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
   - Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (>5MB), then it's best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.
 
-## Software installation and setup {#setup}
+## Software installation and setup (Due Monday 12th Feb) {#setup}
 
 For the data wrangling exercise and the second deliverable, we'll be using the [R](https://cran.r-project.org/) statistical programming language and the [Git](https://git-scm.com/) version control system. We'll also be using an [integrated development environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) for each: [RStudio](https://www.rstudio.com) and [GitHub](https://github.com/), respectively.
 
@@ -75,7 +75,7 @@ First we'll start with the necessary software.
 2. Download and install the ***latest*** free version of [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/)
 3. Download and install the latest version of [Git](https://git-scm.com/) - **accept all the defaults**
 
-Then get started with GitHub:
+Then get started with GitHub (**If any of this does't worked**, have a look at the installation section of [Happy Git with R](https://happygitwithr.com/) to troubleshoot...):
 
 4. Create a [GitHub](https://github.com/) account
 5. Run through the [10 minute GitHub tutorial](https://guides.github.com/activities/hello-world/) that is offered when you activate your GitHub Account (It'll really help you get the idea behind what Git does!)
@@ -100,7 +100,5 @@ Now you have RStudio, R and Git installed, and you have a working GitHub account
 - If necessary, enter the path for your Git or SVN executable where provided (this shouldn't be needed, but may)
 - Click `Apply`
 - Restart RStudio
-
-**If that hasn't worked**, have a look at the installation section of [Happy Git with R](https://happygitwithr.com/) to troubleshoot...
 
 Lastly, you need to install the [_Tidyverse_](https://www.tidyverse.org/) set of R packages. This can be done using the code `install.packages("tidyverse")`.
