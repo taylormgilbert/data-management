@@ -150,7 +150,10 @@ Since I gave you the link to a Google Sheet above, you should be able to read th
 library(tidyverse)
 library(googlesheets4) # while googlesheets4 is part of the tidyverse, and installed when you install the tidyverse, it isn't a core package, so you have to call it separately
 
-# Now let's have a look at the names of the worksheets (tabs) within hte spreadsheet
+# You may need to tell Googlesheets what account to use (of your own) using the function gs4_auth(), e.g. gs4_auth(email = "myemail@gmail.com"), but in this case we can just tell it not to authenticate as the Google Sheet is publicly accessible
+gs4_deauth()
+
+# Now let's have a look at the names of the worksheets (tabs) within the spreadsheet
 sheet_names("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing")
 ```
 

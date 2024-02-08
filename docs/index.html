@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>A Minimal Introduction to Reproducible Research</title>
   <meta name="description" content="This is a minimal introduction to reproducible research, including data management and handling data in R, compiled for the Biological Sciences BSc(Honours) class at the University of Cape Town." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="A Minimal Introduction to Reproducible Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2023-03-03" />
+<meta name="date" content="2024-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -185,7 +189,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">A Minimal Introduction to Reproducible Research</h1>
 <p class="author"><em>Jasper Slingsby</em></p>
-<p class="date"><em>2023-03-03</em></p>
+<p class="date"><em>2024-02-08</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -195,7 +199,7 @@ div.csl-indent {
 <p>This really is a minimalist introduction. We only have a week! I’ll focus on providing a broad overview of the general framework and motivation for reproducible research (including good data management), teaching a few practical skills along the way.</p>
 <p>Mostly this is not fun and exciting, but it is important stuff for any biologist to know. I’ll try my best to make it interesting! Hopefully by the end of the module you’ll see the value in it all - both for you as an individual and for science and society in general.</p>
 <blockquote>
-<p><em>“Let us emphasize again this obvious conclusion: a scholar’s positive contribution is measured by the sum of the original data that [they] contributes. Hypotheses come and go but data remain. Theories desert us, while data defend us. They are our true resources, our real estate, and our best pedigree. In the eternal shifting of things, only they will save us from the ravages of time and from the forgetfulness or injustice of [people]. To risk everything on the success of one idea is to forget that every fifteen or twenty years theories are replaced or revised. So many apparently conclusive theories in physics, chemistry, geology, and biology have collapsed in the last few decades!”</em> - Santiago Ramón y Cajal, 1906 Nobel Laureate, from <em>Advice for a Young Investigator</em> 1898 <span class="citation">(<a href="#ref-Ramon1999" role="doc-biblioref">Ramón y Cajal 1999</a>)</span></p>
+<p><em>“Let us emphasize again this obvious conclusion: a scholar’s positive contribution is measured by the sum of the original data that [they] contributes. Hypotheses come and go but data remain. Theories desert us, while data defend us. They are our true resources, our real estate, and our best pedigree. In the eternal shifting of things, only they will save us from the ravages of time and from the forgetfulness or injustice of [people]. To risk everything on the success of one idea is to forget that every fifteen or twenty years theories are replaced or revised. So many apparently conclusive theories in physics, chemistry, geology, and biology have collapsed in the last few decades!”</em> - Santiago Ramón y Cajal, 1906 Nobel Laureate, from <em>Advice for a Young Investigator</em> 1898 <span class="citation">(<a href="#ref-Ramon1999">Ramón y Cajal 1999</a>)</span></p>
 </blockquote>
 <p>The core outcomes/concepts I hope you’ll come away with:</p>
 <ul>
@@ -210,17 +214,17 @@ div.csl-indent {
 <p>I’ll be adding to (and mostly teaching from) these online course notes as we go along.</p>
 <p>The schedule of lectures (and readings) is as follows:</p>
 <ul>
-<li>Monday, 27th Feb - Reproducible Research <span class="citation">(<a href="#ref-Peng2011" role="doc-biblioref">Peng 2011</a>; <a href="#ref-Baker2016" role="doc-biblioref">Baker 2016</a>; <a href="#ref-Markowetz2015" role="doc-biblioref">Markowetz 2015</a>)</span></li>
-<li>Tuesday, 28th Feb - Data Management <span class="citation">(<a href="#ref-Michener2012" role="doc-biblioref">Michener and Jones 2012</a>)</span></li>
-<li>Wednesday, 29th Feb - GitHub, Tidy Data and Data Wrangling <span class="citation">(<a href="#ref-Wickham2014" role="doc-biblioref">Wickham 2014</a>; <a href="#ref-Wickham2019" role="doc-biblioref">Wickham et al. 2019</a>)</span></li>
-<li>Thursday, 30th Feb - Tidy Data and Data Wrangling continued (your turn)</li>
+<li>Monday, 12th Feb - Reproducible Research <span class="citation">(<a href="#ref-Peng2011">Peng 2011</a>; <a href="#ref-Baker2016">Baker 2016</a>; <a href="#ref-Markowetz2015">Markowetz 2015</a>)</span></li>
+<li>Tuesday, 13th Feb - Data Management <span class="citation">(<a href="#ref-Michener2012">Michener and Jones 2012</a>)</span></li>
+<li>Wednesday, 14th Feb - GitHub, Tidy Data and Data Wrangling <span class="citation">(<a href="#ref-Wickham2014">Wickham 2014</a>; <a href="#ref-Wickham2019">Wickham et al. 2019</a>)</span></li>
+<li>Thursday, 15th Feb - Tidy Data and Data Wrangling continued (your turn)</li>
+<li>Friday, 16th Feb - We can discuss if you need me available to help. Possibly online.</li>
 </ul>
-<p>Friday we head off on the field trip…</p>
 </div>
 <div id="deliverables" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> Deliverables (Due Thursday the 9th March)<a href="index.html#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li><p>A draft Data Management Plan (DMP) for your Honours Project using <a href="https://dmp.lib.uct.ac.za/">UCT’s Online DMP Tool</a>. Please use the “University of Cape Town (UCT) - Full DMP” template.</p></li>
+<li><p>A draft Data Management Plan (DMP) for your Honours Project (or mock project) using <a href="https://dmp.lib.uct.ac.za/">UCT’s Online DMP Tool</a>. Please use the “University of Cape Town (UCT) - Full DMP” template.</p></li>
 <li><p>A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you’ll develop based on Wednesday’s tutorial), all in line with best practice as per the content of this module.</p></li>
 </ol>
 <ul>
@@ -249,7 +253,7 @@ div.csl-indent {
 </ol>
 <p>Now you have RStudio, R and Git installed, and you have a working GitHub account that lets you do stuff online, but what remains is to get GitHub working locally and configuring RStudio to use GitHub.</p>
 <ol start="6" style="list-style-type: decimal">
-<li>Install <a href="https://github.com/cli/cli#installation">GitHub CLI</a> (Command Line Interface). For Windows you can download the installer <a href="https://cli.github.com/">here</a></li>
+<li>Install <a href="https://cli.github.com/">GitHub CLI</a> (Command Line Interface).</li>
 <li>Open RStudio.</li>
 </ol>
 <ul>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Reproducible research | A Minimal Introduction to Reproducible Research</title>
   <meta name="description" content="This is a minimal introduction to reproducible research, including data management and handling data in R, compiled for the Biological Sciences BSc(Honours) class at the University of Cape Town." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Reproducible research | A Minimal Introduction to Reproducible Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2023-03-03" />
+<meta name="date" content="2024-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -255,14 +259,14 @@ div.csl-indent {
 <div id="the-reproducibility-crisis" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> The Reproducibility Crisis<a href="reproducibility.html#the-reproducibility-crisis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <blockquote>
-<p><em>“<strong>Replication</strong> is the ultimate standard by which scientific claims are judged.”</em> <span class="citation">(<a href="#ref-Peng2011" role="doc-biblioref">Peng 2011</a>)</span></p>
+<p><em>“<strong>Replication</strong> is the ultimate standard by which scientific claims are judged.”</em> <span class="citation">(<a href="#ref-Peng2011">Peng 2011</a>)</span></p>
 </blockquote>
 <p><strong><em>Replication is one of the fundamental tenets of science</em></strong> and if the results of a study or experiment cannot by replicated by an independent set of investigators then whatever scientific claims were made should be treated with caution! At best, it suggests that evidence for the claim is weak or mixed, or specific to particular ecosystems or other circumstances and cannot be generalized. At worst, there was error (or even dishonesty) in the original study and the claims were plainly false.</p>
 <p>In other words, published research should be robust enough and the methods described in enough detail that anyone else should be able to repeat the study (using the publication only) and find similar results. Sadly, this is rarely the case!!!</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:reprocrisis"></span>
 <img src="data-management_files/figure-html/reprocrisis-1.png" alt="'Is there a reproducibility* crisis?' Results from a survey of &gt;1500 top scientists [@Baker2016; @Penny2016]. *Note that they did not discern between reproducibility and replicability, and that the terms are often used interchangeably." width="125%" />
 <p class="caption">
-Figure 2.1: ‘Is there a reproducibility* crisis?’ Results from a survey of &gt;1500 top scientists <span class="citation">(<a href="#ref-Baker2016" role="doc-biblioref">Baker 2016</a>; <a href="#ref-Penny2016" role="doc-biblioref">Penny 2016</a>)</span>. *Note that they did not discern between reproducibility and replicability, and that the terms are often used interchangeably.
+Figure 2.1: ‘Is there a reproducibility* crisis?’ Results from a survey of &gt;1500 top scientists <span class="citation">(<a href="#ref-Baker2016">Baker 2016</a>; <a href="#ref-Penny2016">Penny 2016</a>)</span>. *Note that they did not discern between reproducibility and replicability, and that the terms are often used interchangeably.
 </p>
 </div>
 <p><br></p>
@@ -280,7 +284,7 @@ Figure 2.1: ‘Is there a reproducibility* crisis?’ Results from a survey of &
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:peng"></span>
 <img src="img/peng_reproducibility.jpg" alt="The Reproducibility Spectrum [@Peng2011]." width="640" />
 <p class="caption">
-Figure 2.2: The Reproducibility Spectrum <span class="citation">(<a href="#ref-Peng2011" role="doc-biblioref">Peng 2011</a>)</span>.
+Figure 2.2: The Reproducibility Spectrum <span class="citation">(<a href="#ref-Peng2011">Peng 2011</a>)</span>.
 </p>
 </div>
 <p><br></p>
@@ -446,45 +450,45 @@ Figure 2.4: ‘Documents’ from <a href="https://xkcd.com/1459">xkcd.com/1459</
 <p>Another issue is that <strong>software and hardware change with upgrades, new versions or changes in the preferences within user communities</strong> (e.g. you’ll all know MicroSoft Excel, but have you heard of Quattro Pro or Lotus that were the preferred spreadsheet software of yesteryear?).</p>
 <p>Just sharing your code, data and workflow does not make your work reproducible if we don’t know what language the code is written in or if functions change or are deprecated in newer versions, breaking your code.</p>
 <p>The <strong>simplest way</strong> to avert this problem is to <strong>carefully document the hardware and versions of software</strong> used in your analyses so that others can recreate that computing environment if needed. This is very easy in R, because you can simply run the <code>sessionInfo()</code> function, like so:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="reproducibility.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
-<pre><code>## R version 4.2.2 (2022-10-31)
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="reproducibility.html#cb1-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.3.2 (2023-10-31)
 ## Platform: aarch64-apple-darwin20 (64-bit)
 ## Running under: macOS Ventura 13.0
 ## 
 ## Matrix products: default
-## LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+## BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 ## 
 ## locale:
 ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## time zone: Africa/Johannesburg
+## tzcode source: internal
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] googlesheets4_1.0.1 readxl_1.4.2        forcats_0.5.2       stringr_1.5.0      
-##  [5] dplyr_1.0.10        purrr_1.0.1         readr_2.1.3         tidyr_1.3.0        
-##  [9] tibble_3.1.8        ggplot2_3.4.0       tidyverse_1.3.2    
+##  [1] googlesheets4_1.1.1 readxl_1.4.3        lubridate_1.9.3     forcats_1.0.0      
+##  [5] stringr_1.5.1       dplyr_1.1.4         purrr_1.0.2         readr_2.1.5        
+##  [9] tidyr_1.3.0         tibble_3.2.1        ggplot2_3.4.4       tidyverse_2.0.0    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] httr_1.4.4         sass_0.4.5         jsonlite_1.8.4     modelr_0.1.10     
-##  [5] bslib_0.4.2        assertthat_0.2.1   highr_0.10         cellranger_1.1.0  
-##  [9] yaml_2.3.7         pillar_1.8.1       backports_1.4.1    glue_1.6.2        
-## [13] digest_0.6.31      RColorBrewer_1.1-3 promises_1.2.0.1   rvest_1.0.3       
-## [17] colorspace_2.1-0   htmltools_0.5.4    httpuv_1.6.9       plyr_1.8.8        
-## [21] pkgconfig_2.0.3    broom_1.0.3        haven_2.5.1        bookdown_0.32     
-## [25] scales_1.2.1       jpeg_0.1-10        later_1.3.0        tzdb_0.3.0        
-## [29] timechange_0.2.0   googledrive_2.0.0  generics_0.1.3     farver_2.1.1      
-## [33] ellipsis_0.3.2     cachem_1.0.6       withr_2.5.0        cli_3.6.0         
-## [37] magrittr_2.0.3     crayon_1.5.2       evaluate_0.20      GGally_2.1.2      
-## [41] fs_1.6.0           fansi_1.0.4        xml2_1.3.3         tools_4.2.2       
-## [45] hms_1.1.2          gargle_1.2.1       lifecycle_1.0.3    munsell_0.5.0     
-## [49] reprex_2.0.2       compiler_4.2.2     jquerylib_0.1.4    rlang_1.0.6       
-## [53] grid_4.2.2         rstudioapi_0.14    rappdirs_0.3.3     labeling_0.4.2    
-## [57] rmarkdown_2.20     gtable_0.3.1       DBI_1.1.3          reshape_0.8.9     
-## [61] curl_5.0.0         R6_2.5.1           lubridate_1.9.1    knitr_1.42        
-## [65] fastmap_1.1.0      utf8_1.2.2         stringi_1.7.12     Rcpp_1.0.10       
-## [69] vctrs_0.5.2        png_0.1-8          dbplyr_2.3.0       tidyselect_1.2.0  
-## [73] xfun_0.36</code></pre>
+##  [1] rappdirs_0.3.3     sass_0.4.8         utf8_1.2.4         generics_0.1.3    
+##  [5] jpeg_0.1-10        stringi_1.8.3      hms_1.1.3          digest_0.6.34     
+##  [9] magrittr_2.0.3     evaluate_0.23      grid_4.3.2         timechange_0.3.0  
+## [13] RColorBrewer_1.1-3 bookdown_0.37      fastmap_1.1.1      cellranger_1.1.0  
+## [17] plyr_1.8.9         jsonlite_1.8.8     googledrive_2.1.1  httr_1.4.7        
+## [21] GGally_2.2.0       fansi_1.0.6        scales_1.3.0       jquerylib_0.1.4   
+## [25] cli_3.6.2          rlang_1.1.3        munsell_0.5.0      withr_3.0.0       
+## [29] cachem_1.0.8       yaml_2.3.8         tools_4.3.2        tzdb_0.4.0        
+## [33] gargle_1.5.2       colorspace_2.1-0   ggstats_0.5.1      curl_5.2.0        
+## [37] png_0.1-8          vctrs_0.6.5        R6_2.5.1           lifecycle_1.0.4   
+## [41] fs_1.6.3           pkgconfig_2.0.3    pillar_1.9.0       bslib_0.6.1       
+## [45] gtable_0.3.4       glue_1.7.0         Rcpp_1.0.12        highr_0.10        
+## [49] xfun_0.41          tidyselect_1.2.0   rstudioapi_0.15.0  knitr_1.45        
+## [53] farver_2.1.1       htmltools_0.5.7    labeling_0.4.3     rmarkdown_2.25    
+## [57] compiler_4.3.2     askpass_1.2.0      openssl_2.1.1</code></pre>
 <p><br></p>
 <p><strong>Containers</strong></p>
 <p><strong>A “better” way</strong> to do this is to use <strong>containers</strong> like <a href="https://www.docker.com/">docker</a> or <a href="https://sylabs.io/singularity/">singularity</a>. These are contained, lightweight computing environments similar to <a href="https://en.wikipedia.org/wiki/Virtual_machine">virtual machines</a>, that you can package with your software/workflow. You set your container up to have everything you need to run your code etc (and nothing extra), so anyone can download (or clone) your container, code and data and run your analyses perfectly first time.</p>
@@ -498,7 +502,7 @@ Figure 2.4: ‘Documents’ from <a href="https://xkcd.com/1459">xkcd.com/1459</
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:reproducibilitysteps"></span>
 <img src="img/alstonreproducibility.jpg" alt="A 3-step, 10-point checklist to guide researchers toward greater reproducibility in their research [@Alston2021]." width="60%" />
 <p class="caption">
-Figure 2.5: A 3-step, 10-point checklist to guide researchers toward greater reproducibility in their research <span class="citation">(<a href="#ref-Alston2021" role="doc-biblioref">Alston and Rick 2021</a>)</span>.
+Figure 2.5: A 3-step, 10-point checklist to guide researchers toward greater reproducibility in their research <span class="citation">(<a href="#ref-Alston2021">Alston and Rick 2021</a>)</span>.
 </p>
 </div>
 <p><br></p>
@@ -514,12 +518,12 @@ Figure 2.6: Let’s start being more specific about our miracles… Cartoon © S
 </div>
 <p><br></p>
 <p><strong><em>In addition to basic scientific rigour, working reproducibly is hugely valuable, because:</em></strong></p>
-<p>(Adapted from “<em>Five selfish reasons to work reproducibly</em>” <span class="citation">(<a href="#ref-Markowetz2015" role="doc-biblioref">Markowetz 2015</a>)</span>)</p>
+<p>(Adapted from “<em>Five selfish reasons to work reproducibly</em>” <span class="citation">(<a href="#ref-Markowetz2015">Markowetz 2015</a>)</span>)</p>
 <ol style="list-style-type: decimal">
 <li><em><strong>Its transparent and open, helping us avoid mistakes and/or track down errors in analyses</strong></em></li>
 </ol>
 <ul>
-<li>This is what highlighted the importance of working reproducibly for me. In 2017 I published the first evidence of observed climate change impacts on biodiversity in the Fynbos Biome <span class="citation">(<a href="#ref-Slingsby2017" role="doc-biblioref">Slingsby et al. 2017</a>)</span>. The analyses were quite complicated, and when working on the revisions I found an error in my R code. Fortunately, it didn’t change the results qualitatively, but it made me realize how easy it is to make a mistake and potentially put the wrong message out there! This encouraged me to make all data and R code from the paper available, so that anyone is free to check my data and analyses and let me (and/or the world) know if they find any errors.</li>
+<li>This is what highlighted the importance of working reproducibly for me. In 2017 I published the first evidence of observed climate change impacts on biodiversity in the Fynbos Biome <span class="citation">(<a href="#ref-Slingsby2017">Slingsby et al. 2017</a>)</span>. The analyses were quite complicated, and when working on the revisions I found an error in my R code. Fortunately, it didn’t change the results qualitatively, but it made me realize how easy it is to make a mistake and potentially put the wrong message out there! This encouraged me to make all data and R code from the paper available, so that anyone is free to check my data and analyses and let me (and/or the world) know if they find any errors.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li><em><strong>It makes it easier to write papers</strong></em></li>
@@ -569,7 +573,7 @@ Figure 2.6: Let’s start being more specific about our miracles… Cartoon © S
 <li><em><strong>It makes it easy to repeat the same analyses when new data are collected or added</strong></em></li>
 </ol>
 <ul>
-<li>This is key for iterative forecasting, but also useful if you want to apply the same method/model to a new data set (e.g. applying <span class="citation">Merow et al. (<a href="#ref-Merow2014" role="doc-biblioref">2014</a>)</span>’s analysis on all 26 Proteaceae studied by <span class="citation">Treurnicht et al. (<a href="#ref-Treurnicht2016" role="doc-biblioref">2016</a>)</span>).</li>
+<li>This is key for iterative forecasting, but also useful if you want to apply the same method/model to a new data set (e.g. applying <span class="citation">Merow et al. (<a href="#ref-Merow2014">2014</a>)</span>’s analysis on all 26 Proteaceae studied by <span class="citation">Treurnicht et al. (<a href="#ref-Treurnicht2016">2016</a>)</span>).</li>
 </ul>
 <ol start="9" style="list-style-type: decimal">
 <li><em><strong>Most skills and software used in Reproducible Research are very useful beyond Reproducible Research alone!</strong></em></li>
@@ -594,7 +598,7 @@ Figure 2.6: Let’s start being more specific about our miracles… Cartoon © S
 </div>
 <div id="barriers-to-working-reproducibly" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Barriers to working reproducibly<a href="reproducibility.html#barriers-to-working-reproducibly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>(Adapted from “A Beginner’s Guide to Conducting Reproducible Research” <span class="citation">(<a href="#ref-Alston2021" role="doc-biblioref">Alston and Rick 2021</a>)</span>)</p>
+<p>(Adapted from “A Beginner’s Guide to Conducting Reproducible Research” <span class="citation">(<a href="#ref-Alston2021">Alston and Rick 2021</a>)</span>)</p>
 <p><strong>1. Complexity</strong></p>
 <ul>
 <li>There can be a bit of a learning curve in getting to know and use the tools for reproducible research effectively.</li>

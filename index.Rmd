@@ -45,16 +45,15 @@ I’ll be adding to (and mostly teaching from) these online course notes as we g
 
 The schedule of lectures (and readings) is as follows:
 
-- Monday, 27th Feb - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
-- Tuesday, 28th Feb - Data Management [@Michener2012]
-- Wednesday, 29th Feb - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
-- Thursday, 30th Feb - Tidy Data and Data Wrangling continued (your turn) 
-
-Friday we head off on the field trip...
+- Monday, 12th Feb - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
+- Tuesday, 13th Feb - Data Management [@Michener2012]
+- Wednesday, 14th Feb - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
+- Thursday, 15th Feb - Tidy Data and Data Wrangling continued (your turn) 
+- Friday, 16th Feb - We can discuss if you need me available to help. Possibly online.
 
 ## Deliverables (Due Thursday the 9th March) {#deliverables}
 
-1. A draft Data Management Plan (DMP) for your Honours Project using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "University of Cape Town (UCT) - Full DMP" template.
+1. A draft Data Management Plan (DMP) for your Honours Project (or mock project) using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "University of Cape Town (UCT) - Full DMP" template.
 
 2. A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you'll develop based on Wednesday's tutorial), all in line with best practice as per the content of this module. 
   - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
@@ -83,7 +82,7 @@ Then get started with GitHub:
 
 Now you have RStudio, R and Git installed, and you have a working GitHub account that lets you do stuff online, but what remains is to get GitHub working locally and configuring RStudio to use GitHub.
 
-6. Install [GitHub CLI](https://github.com/cli/cli#installation) (Command Line Interface). For Windows you can download the installer [here](https://cli.github.com/)
+6. Install [GitHub CLI](https://cli.github.com/) (Command Line Interface). 
 7. Open RStudio. 
 - Select the `Terminal` tab (top left, next to `Console`)
 - Enter `gh auth login`, then follow the prompts:
