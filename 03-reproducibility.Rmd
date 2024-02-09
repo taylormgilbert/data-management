@@ -150,7 +150,7 @@ knitr::include_graphics("img/gitrepofolders.png")
 - Within "Data" I often have separate folders of "Raw" and "Processed" data. 
   - If the data files are big and used across multiple projects (e.g. GIS files), then they'll often be in a separate folder elsewhere on my computer, but this is well-documented in my code.
 - "Output" contains figures and tables, often in separate folders.
-- I also often have a "Manuscript" folder if I'm working in LaTeX/Sweave or RMarkdown, although this is often in the "Code" folder (since you can embed code in RMarkdown and Sweave documents).
+- I also often have a "Manuscript" folder if I'm working in LaTeX/Sweave, RMarkdown or Quarto, although this is often in the "Code" folder (since you can embed code in RMarkdown, Quarto and Sweave documents).
 
 <br>
 
@@ -201,9 +201,9 @@ It's easy to write messy code. This can make it virtually indecipherable to othe
 - use consistent, meaningful and distinct names for variables and functions
 - use consistent code and formatting style
 - use commenting to document and explain what you're doing at each step or in each function - purpose, inputs and outputs
-- "notebooks" like RMarkdown or Jupyter Notebooks are very handy for fulfilling roles like documentation, master/makefiles etc and can be developed into reports or manuscripts
+- "notebooks" like RMarkdown, Quarto or Jupyter Notebooks are very handy for fulfilling roles like documentation, master/makefiles etc and can be developed into reports or manuscripts
 - write functions rather than repeating the same code
-- modularize code into manageable steps/chunks
+- modularise code into manageable steps/chunks
   - or even separate them into separate scripts that can all be called in order from a master script or Makefile
 - check for mistakes at every step!!! Beyond errors or warnings, do the outputs make sense?
 - start with a "recipe" that outlines the steps/modules (usually as commented headers etc). This is very valuable for keeping you organized and on track, e.g. a common recipe in R:

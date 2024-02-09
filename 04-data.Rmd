@@ -25,6 +25,11 @@ Here are a bunch of reasons you really want to focus on doing good data manageme
   - to yourself for reuse in future projects, collaborations, etc (i.e. publications and citations), 
   - for others for follow-up studies, or combining multiple datasets for meta-analyses or synthesis
   - for science on general (especially long-term ecology in a time of global change)
+  - here's an [irritating video](https://www.youtube.com/watch?v=N2zK3sAtr-4) about why this is not possible with bad data management...
+  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N2zK3sAtr-4?si=xfnR9B3tqwmZxMEu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<br>
   
 - We've covered this before, but **sharing your data is key for transparency and accountability**.
 - Data collection is expensive, and is often paid for with taxpayers' money. **You owe it to your funder (and humanity in general) to make sure that science gets the most out of your data** in the long term.
@@ -37,7 +42,7 @@ Here are a bunch of reasons you really want to focus on doing good data manageme
   
 If you don't establish these permissions and ground rules early they can result in data loss, not being able to publish the study, damage relationships in collaborations (including student-supervisor), and ultimately damage careers... 
 
-To avoid data (and relationship) decay, and to reap the benefits of good data management, it is important to consider the full *Data Life Cycle*.
+To avoid data (and relationship) decay, and to reap the benefits of good data management, it is important to consider the full _**Data Life Cycle**_.
 
 <br>
 
@@ -45,7 +50,7 @@ To avoid data (and relationship) decay, and to reap the benefits of good data ma
 
 ```{r datalifecycle, echo=FALSE, fig.cap = "The Data Life Cycle, adapted from https://www.dataone.org/", fig.width=6, fig.align = 'center', out.width="110%"}
 # load library
-#library(ggplot2)
+library(ggplot2)
 
 # Create test data.
 data <- data.frame(
@@ -143,7 +148,7 @@ knitr::include_graphics("img/veldwatch.png")
 
 **Tidy Data**
 
-Last, but not least. We haven't discussed different data formats etc, but if you are working with tabular data (i.e. spreadsheets, tables) I strongly recommend you read this short paper on **[how to keep your data Tidy](http://dx.doi.org/10.18637/jss.v059.i10)** [@Wickham2014]. Following these principles will make life much easier for you once you get to the analysis step...
+Last, but not least. We haven't discussed different data formats etc, but if you are working with tabular data (i.e. spreadsheets, tables) then this short paper on **[how to keep your data Tidy](http://dx.doi.org/10.18637/jss.v059.i10)** [@Wickham2014] is for you. Following these principles will make life much easier for you once you get to the analysis step... We will cover this tomorrow.
 
 <br>
 
@@ -306,13 +311,11 @@ There are a few different components to data integration in this context:
 
 <br>
 
-## Data and decisions
+## Other considerations...
 
-This is not part of *The Data Life Cycle* per se, but it's worth remembering that there are some other aspects of data, while still important if the goal is purely academic, that are make-or-break when the goal is informing decisions, e.g. (mostly paraphrased from @Dietze2018):
+This is not part of *The Data Life Cycle* per se, but it's worth remembering that there are some other aspects of data that can be important for your use case:
 
-1. **Latency** - the time between data collection and it's availability for modelling. Depending on the model's need for the latest data, if the latency is too long then it can preclude the ability to make useful forecasts (e.g. it's very difficult to make useful weekly forecasts if you only get new data once a year...).
-2. **Uncertainty** - the model can only ever be as good as the data (**GIGO: garbage in = garbage out**). We'll also see that assimilating data into forecasts requires uncertainty estimates. Not including uncertainty can create **bias or overconfident predictions**... Unfortunately, very rarely does anyone report the uncertainty in their data... Unfortunately, there are also many reasons why **data can never be certain** - sampling variability, random and systematic instrument errors, calibration uncertainty, classification errors (e.g. species identification), transcription errors, corrupt files (or collaborators!) etc. I live by the creed *there is nothing as sinister as a certainty*. If you tell me your model has an $R^2$ of 1, I will tell you (with 100% certainty, ironically) that your model is wrong.
-3. **Repeated sampling** - most forecasts are in time and thus require time-series to develop the models. Frequent repeated sampling can often come at a trade-off with the spatial extent (or spatial replication) of sampling though. Forecasters need to optimize this trade-off to inform the most efficient data collection while also reducing uncertainty in the model.
-4. **Interoperability** - this is largely covered under the *Describe, Preserve, Discover* and *Integrate* steps in *The Data Life Cycle*
+1. **Latency** - the time between data collection and it's availability for analysis/modelling/etc. Depending on the use case, if the latency is too long then the data may not be useful.
+2. **Uncertainty** - your inference can only ever be as good as the data (**GIGO: garbage in = garbage out**). Not including uncertainty can create **bias or overconfident inference or predictions**... Unfortunately, very rarely does anyone report the uncertainty in their data... Unfortunately, there are also many reasons why **data can never be certain** - sampling variability, random and systematic instrument errors, calibration uncertainty, classification errors (e.g. species identification), transcription errors, corrupt files (or collaborators!) etc. I live by the creed *there is nothing as sinister as a certainty*. If you tell me your model has an $R^2$ of 1, I will tell you (with 100% certainty, ironically) that your model is wrong.
 
 <br>
