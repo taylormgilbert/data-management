@@ -45,7 +45,7 @@ I’ll be adding to (and mostly teaching from) these online course notes as we g
 
 The schedule of lectures (and readings) is as follows:
 
-- Monday, 12th Feb - Reproducible Research [@Peng2011; @Baker2016; @Markowetz2015]
+- Monday, 12th Feb - Reproducible Research [@Baker2016; @Peng2011; @Markowetz2015]
 - Tuesday, 13th Feb - Data Management [@Michener2012]
 - Wednesday, 14th Feb - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
 - Thursday, 15th Feb - Tidy Data and Data Wrangling continued (your turn) 
