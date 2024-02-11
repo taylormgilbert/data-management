@@ -37,7 +37,7 @@ preserve
 discover
 integrate
 analyze
-data-and-decisions
+other-considerations
 tidy-data
 data-entry
 reproducibility---start-as-you-mean-to-finish
@@ -59,4 +59,3 @@ pivot_wider
 unite-and-separate
 getting-out-of-the-tidyverse
 joining-dataframes
-other-considerations

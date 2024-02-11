@@ -29,7 +29,7 @@ This really is a minimalist introduction. We only have a week! I’ll focus on p
 
 Mostly this is not fun and exciting, but it is important stuff for any biologist to know. I’ll try my best to make it interesting! Hopefully by the end of the module you’ll see the value in it all - both for you as an individual and for science and society in general.
 
-> _"Let us emphasize again this obvious conclusion: a scholar's positive contribution is measured by the sum of the original data that [they] contributes. Hypotheses come and go but data remain. Theories desert us, while data defend us. They are our true resources, our real estate, and our best pedigree. In the eternal shifting of things, only they will save us from the ravages of time and from the forgetfulness or injustice of [people]. To risk everything on the success of one idea is to forget that every fifteen or twenty years theories are replaced or revised. So many apparently conclusive theories in physics, chemistry, geology, and biology have collapsed in the last few decades!"_ - Santiago Ramón y Cajal, 1906 Nobel Laureate, from _Advice for a Young Investigator_ 1898 [@Ramon1999]
+> _"Let us emphasize again this obvious conclusion: a scholar's positive contribution is measured by the sum of the original data that [they] contribute... Hypotheses come and go but data remain. Theories desert us, while data defend us. They are our true resources, our real estate, and our best pedigree. In the eternal shifting of things, only they will save us from the ravages of time and from the forgetfulness or injustice of [people]. To risk everything on the success of one idea is to forget that every fifteen or twenty years theories are replaced or revised. So many apparently conclusive theories in physics, chemistry, geology, and biology have collapsed in the last few decades!"_ - Santiago Ramón y Cajal, 1906 Nobel Laureate, from _Advice for a Young Investigator_ 1898 [@Ramon1999]
 
 The core outcomes/concepts I hope you’ll come away with:
 
@@ -39,7 +39,7 @@ The core outcomes/concepts I hope you’ll come away with:
 
 ## Lectures/Discussions/Tutorials
 
-These will be held live in person in BIO LT1 from 10AM to 12PM from the 4th to the 7th April unless otherwise announced on Vula. 
+These will be held live in person in BIO LT1 from 10AM to 12PM from the 12th to the 16th February unless otherwise announced on Amathuba. 
 
 I’ll be adding to (and mostly teaching from) these online course notes as we go along.
 
@@ -58,6 +58,8 @@ The schedule of lectures (and readings) is as follows:
 2. A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you'll develop based on Wednesday's tutorial), all in line with best practice as per the content of this module. 
   - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
   - Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (>5MB), then it's best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.
+  
+3. Lastly, I'd like you to spend some time reading up about reproducible research and data management (preferably relevant to our field) and to share any interesting resources you find - a link to a paper, news article, blog, tutorial, etc - with a 50 to 200 word summary of what it is and why its relevant and interesting. These will be collected and shared with the class either via Google Forms or GitHub (just as soon as I've set it up...).
 
 ## Software installation and setup (Due Monday 12th Feb) {#setup}
 
@@ -65,7 +67,7 @@ For the data wrangling exercise and the second deliverable, we'll be using the [
 
 > _**If you already have these installed and set up**_, please make sure you have the latest versions, and check that your installations are working! Please also make sure you have installed (and/or updated) the [_Tidyverse_](https://www.tidyverse.org/) set of R packages. It can be installed using the code `install.packages("tidyverse")` and updated using `update.packages("tidyverse")`.
 
-The installation and setup can be a bit long-winded, but once done you should be good to go until you change or reformat your computer. The steps below are my summary and (hopefully) more intuitive adaptation of the instructions provided for setting up [GitHub](https://docs.github.com/en/get-started/quickstart/set-up-git?email_source=welcome) and [version control with R](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN). If my steps don't work its probably best to read up there.
+The installation and setup can be a bit long-winded, but once done you should be good to go until you change or reformat your computer. The steps below are my summary and (hopefully) more intuitive adaptation of the instructions provided for setting up [GitHub](https://docs.github.com/en/get-started/quickstart/set-up-git?email_source=welcome) and [version control with R](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN). If my steps don't work its probably best to read up there, or at [Happy Git with R](https://happygitwithr.com/).
 
 <br>
 
@@ -74,13 +76,10 @@ First we'll start with the necessary software.
 1. Download and install the ***latest*** version of [R](https://cran.r-project.org/)
 2. Download and install the ***latest*** free version of [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/)
 3. Download and install the latest version of [Git](https://git-scm.com/) - **accept all the defaults**
-
-Then get started with GitHub (**If any of this does't worked**, have a look at the installation section of [Happy Git with R](https://happygitwithr.com/) to troubleshoot...):
-
 4. Create a [GitHub](https://github.com/) account
 5. Run through the [10 minute GitHub tutorial](https://guides.github.com/activities/hello-world/) that is offered when you activate your GitHub Account (It'll really help you get the idea behind what Git does!)
 
-Now you have RStudio, R and Git installed, and you have a working GitHub account that lets you do stuff online, but what remains is to get GitHub working locally and configuring RStudio to use GitHub.
+Now you have RStudio, R and Git installed, and you have a working GitHub account that lets you do stuff online, but what remains is to get GitHub working locally and configuring RStudio to use GitHub. **If any of the following doesn't work**, have a look at the installation section of [Happy Git with R](https://happygitwithr.com/) to troubleshoot:
 
 6. Install [GitHub CLI](https://cli.github.com/) (Command Line Interface). 
 7. Open RStudio. 
