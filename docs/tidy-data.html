@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2024-02-11" />
+<meta name="date" content="2024-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -494,20 +494,20 @@ div.csl-indent {
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tidy-data.html#cb21-1" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C1:H15&quot;</span>),</span>
 <span id="cb21-2"><a href="tidy-data.html#cb21-2" tabindex="-1"></a>      <span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Sites&quot;</span>, <span class="at">range =</span> <span class="st">&quot;C16:H25&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 23 × 12
-##    SitePoint       PercentBareSoil SoilPH SoilColour  Dung Densiometer invasion_SW `10.0` `3.93`
-##    &lt;chr&gt;                     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
-##  1 grass_SE                      0   4.6  7.5YR3/2       0          15 &lt;NA&gt;            NA     NA
-##  2 renosterveld_SE               5   5.4  10YR3/2        3          14 &lt;NA&gt;            NA     NA
-##  3 invasion_SE                   0   3.79 10YR2/1        0           0 &lt;NA&gt;            NA     NA
-##  4 sand_SE                      10   4.82 10YR6/4        0           5 &lt;NA&gt;            NA     NA
-##  5 sandstone_SE                  5   4.91 10YR3/2        0           2 &lt;NA&gt;            NA     NA
-##  6 limestone_SE                  0   6.48 10YR2/1        0           9 &lt;NA&gt;            NA     NA
-##  7 grass_NE                      0   5.13 10YR2/2        0          13 &lt;NA&gt;            NA     NA
-##  8 renosterveld_NE              30   5.7  7.5YR4/3       2          20 &lt;NA&gt;            NA     NA
-##  9 invasion_NE                   5   3.7  10YR5/1        0           0 &lt;NA&gt;            NA     NA
-## 10 sand_NE                       8   4.54 10YR4/3        0           4 &lt;NA&gt;            NA     NA
+##    SitePoint PercentBareSoil SoilPH SoilColour  Dung Densiometer invasion_SW `10.0` `3.93` `5Y2.5/1` `0.0`
+##    &lt;chr&gt;               &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+##  1 grass_SE                0   4.6  7.5YR3/2       0          15 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  2 renoster…               5   5.4  10YR3/2        3          14 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  3 invasion…               0   3.79 10YR2/1        0           0 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  4 sand_SE                10   4.82 10YR6/4        0           5 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  5 sandston…               5   4.91 10YR3/2        0           2 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  6 limeston…               0   6.48 10YR2/1        0           9 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  7 grass_NE                0   5.13 10YR2/2        0          13 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  8 renoster…              30   5.7  7.5YR4/3       2          20 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+##  9 invasion…               5   3.7  10YR5/1        0           0 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
+## 10 sand_NE                 8   4.54 10YR4/3        0           4 &lt;NA&gt;            NA     NA &lt;NA&gt;         NA
 ## # ℹ 13 more rows
-## # ℹ 3 more variables: `5Y2.5/1` &lt;chr&gt;, `0.0` &lt;dbl&gt;, `3.0` &lt;dbl&gt;</code></pre>
+## # ℹ 1 more variable: `3.0` &lt;dbl&gt;</code></pre>
 <p>Note that the <code>skip =</code> and <code>nmax =</code> options are somewhat related and tell the function the number of rows to skip before reading anything and the maximum number of rows to read respectively.</p>
 <p><br></p>
 </div>
@@ -543,8 +543,8 @@ div.csl-indent {
 <p><br></p>
 <p>Here’re some code examples to try to drive this home, using the built in vector <code>letters</code></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="tidy-data.html#cb23-1" tabindex="-1"></a>letters</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot;
-## [24] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot;
+## [26] &quot;z&quot;</code></pre>
 <p>You can check the class of data using the function <code>class()</code></p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="tidy-data.html#cb25-1" tabindex="-1"></a><span class="fu">class</span>(letters)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
@@ -765,18 +765,18 @@ div.csl-indent {
 <p>First, let’s look at the raw data:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="tidy-data.html#cb69-1" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 419 × 12
-##    Site     Point Photo Family   Genus Species AddOn FieldName FullName WorkingName Alien FullID
-##    &lt;chr&gt;    &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;
-##  1 invasion SE    NA    Asparag… Aspa… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      Asparag… Asparagus      NA     NA
-##  2 invasion SE    NA    Poaceae  Cape… arundi… &lt;NA&gt;  &lt;NA&gt;      Capeoch… Capeochloa…    NA     NA
-##  3 invasion SE    NA    Proteac… Leuc… salign… &lt;NA&gt;  &lt;NA&gt;      Leucade… Leucadendr…    NA      1
-##  4 invasion SE    NA    Poaceae  &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;  Small gr… &lt;NA&gt;     Small grass    NA     NA
-##  5 invasion SE    NA    Ericace… Erica &lt;NA&gt;    smal… &lt;NA&gt;      Erica s… Erica smal…    NA     NA
-##  6 invasion SE    NA    Rhamnac… Phyl… ericoi… &lt;NA&gt;  &lt;NA&gt;      Phylica… Phylica er…    NA      1
-##  7 invasion SE    NA    Fabaceae Acac… saligna &lt;NA&gt;  &lt;NA&gt;      Acacia … Acacia sal…     1      1
-##  8 invasion SE    NA    Cyperac… Scho… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      Schoenus Schoenus       NA     NA
-##  9 invasion SE    NA    Pinaceae Pinus &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      Pinus    Pinus           1     NA
-## 10 invasion SE    NA    Fabaceae Acac… pycnan… &lt;NA&gt;  &lt;NA&gt;      Acacia … Acacia pyc…     1      1
+##    Site     Point Photo Family       Genus       Species AddOn FieldName FullName WorkingName Alien FullID
+##    &lt;chr&gt;    &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;
+##  1 invasion SE    NA    Asparagaceae Asparagus   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      Asparag… Asparagus      NA     NA
+##  2 invasion SE    NA    Poaceae      Capeochloa  arundi… &lt;NA&gt;  &lt;NA&gt;      Capeoch… Capeochloa…    NA     NA
+##  3 invasion SE    NA    Proteaceae   Leucadendr… salign… &lt;NA&gt;  &lt;NA&gt;      Leucade… Leucadendr…    NA      1
+##  4 invasion SE    NA    Poaceae      &lt;NA&gt;        &lt;NA&gt;    &lt;NA&gt;  Small gr… &lt;NA&gt;     Small grass    NA     NA
+##  5 invasion SE    NA    Ericaceae    Erica       &lt;NA&gt;    smal… &lt;NA&gt;      Erica s… Erica smal…    NA     NA
+##  6 invasion SE    NA    Rhamnaceae   Phylica     ericoi… &lt;NA&gt;  &lt;NA&gt;      Phylica… Phylica er…    NA      1
+##  7 invasion SE    NA    Fabaceae     Acacia      saligna &lt;NA&gt;  &lt;NA&gt;      Acacia … Acacia sal…     1      1
+##  8 invasion SE    NA    Cyperaceae   Schoenus    &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      Schoenus Schoenus       NA     NA
+##  9 invasion SE    NA    Pinaceae     Pinus       &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      Pinus    Pinus           1     NA
+## 10 invasion SE    NA    Fabaceae     Acacia      pycnan… &lt;NA&gt;  &lt;NA&gt;      Acacia … Acacia pyc…     1      1
 ## # ℹ 409 more rows</code></pre>
 <p>A bit messy, but in this case it is presence-only data and all we want are “Site”, “Point” and “WorkingName”, so if we just select those we’ll be close to having our long format data, like so:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="tidy-data.html#cb71-1" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
@@ -814,12 +814,12 @@ div.csl-indent {
 ##  9 renosterveld SE            0                        0                       0             0
 ## 10 invasion     SW            0                        1                       0             0
 ## # ℹ 14 more rows
-## # ℹ 180 more variables: `Erica small invasion` &lt;dbl&gt;, `Phylica ericoides` &lt;dbl&gt;,
-## #   `Acacia saligna` &lt;dbl&gt;, Schoenus &lt;dbl&gt;, Pinus &lt;dbl&gt;, `Acacia pycnantha` &lt;dbl&gt;,
-## #   `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;, `Restio tetragonus` &lt;dbl&gt;,
-## #   `Helichrysum crispa` &lt;dbl&gt;, `Cynodon dactylon` &lt;dbl&gt;, `Briza major` &lt;dbl&gt;, Metalasia &lt;dbl&gt;,
-## #   Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;, `Sporobolus africanus` &lt;dbl&gt;, Rhus &lt;dbl&gt;,
-## #   Eragrostis &lt;dbl&gt;, Oedera &lt;dbl&gt;, `Ehrharta calycina` &lt;dbl&gt;, …</code></pre>
+## # ℹ 180 more variables: `Erica small invasion` &lt;dbl&gt;, `Phylica ericoides` &lt;dbl&gt;, `Acacia saligna` &lt;dbl&gt;,
+## #   Schoenus &lt;dbl&gt;, Pinus &lt;dbl&gt;, `Acacia pycnantha` &lt;dbl&gt;, `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;,
+## #   `Restio tetragonus` &lt;dbl&gt;, `Helichrysum crispa` &lt;dbl&gt;, `Cynodon dactylon` &lt;dbl&gt;, `Briza major` &lt;dbl&gt;,
+## #   Metalasia &lt;dbl&gt;, Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;, `Sporobolus africanus` &lt;dbl&gt;, Rhus &lt;dbl&gt;,
+## #   Eragrostis &lt;dbl&gt;, Oedera &lt;dbl&gt;, `Ehrharta calycina` &lt;dbl&gt;, `Pennisetum clandestinum` &lt;dbl&gt;,
+## #   Carex &lt;dbl&gt;, `Aspalathus yellow furry` &lt;dbl&gt;, Lobelia &lt;dbl&gt;, `Osteospermum monilifera` &lt;dbl&gt;, …</code></pre>
 <blockquote>
 <p>Note the use of <code>mutate</code> to add a column of ones. You could also use <code>add_column</code>.</p>
 </blockquote>
@@ -839,32 +839,32 @@ div.csl-indent {
 <span id="cb75-4"><a href="tidy-data.html#cb75-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Presence =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column called &quot;Presence&quot; filled with &quot;1&quot;</span></span>
 <span id="cb75-5"><a href="tidy-data.html#cb75-5" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> WorkingName, <span class="at">values_from =</span> Presence, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 185
-##    SitePoint       Asparagus `Capeochloa arundinacea` `Leucadendron salignum` `Small grass`
-##    &lt;chr&gt;               &lt;dbl&gt;                    &lt;dbl&gt;                   &lt;dbl&gt;         &lt;dbl&gt;
-##  1 invasion_SE             1                        1                       1             1
-##  2 renosterveld_SW         0                        0                       1             0
-##  3 grass_NE                1                        0                       0             0
-##  4 grass_NW                0                        0                       0             0
-##  5 grass_SE                1                        0                       0             0
-##  6 grass_SW                1                        0                       0             0
-##  7 renosterveld_NE         0                        0                       0             0
-##  8 renosterveld_NW         0                        0                       0             0
-##  9 renosterveld_SE         0                        0                       0             0
-## 10 invasion_SW             0                        1                       0             0
+##    SitePoint  Asparagus Capeochloa arundinac…¹ Leucadendron salignu…² `Small grass` `Erica small invasion`
+##    &lt;chr&gt;          &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;         &lt;dbl&gt;                  &lt;dbl&gt;
+##  1 invasion_…         1                      1                      1             1                      1
+##  2 renosterv…         0                      0                      1             0                      0
+##  3 grass_NE           1                      0                      0             0                      0
+##  4 grass_NW           0                      0                      0             0                      0
+##  5 grass_SE           1                      0                      0             0                      0
+##  6 grass_SW           1                      0                      0             0                      0
+##  7 renosterv…         0                      0                      0             0                      0
+##  8 renosterv…         0                      0                      0             0                      0
+##  9 renosterv…         0                      0                      0             0                      0
+## 10 invasion_…         0                      1                      0             0                      0
 ## # ℹ 14 more rows
-## # ℹ 180 more variables: `Erica small invasion` &lt;dbl&gt;, `Phylica ericoides` &lt;dbl&gt;,
-## #   `Acacia saligna` &lt;dbl&gt;, Schoenus &lt;dbl&gt;, Pinus &lt;dbl&gt;, `Acacia pycnantha` &lt;dbl&gt;,
-## #   `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;, `Restio tetragonus` &lt;dbl&gt;,
+## # ℹ abbreviated names: ¹​`Capeochloa arundinacea`, ²​`Leucadendron salignum`
+## # ℹ 179 more variables: `Phylica ericoides` &lt;dbl&gt;, `Acacia saligna` &lt;dbl&gt;, Schoenus &lt;dbl&gt;, Pinus &lt;dbl&gt;,
+## #   `Acacia pycnantha` &lt;dbl&gt;, `Acacia mearnsii` &lt;dbl&gt;, Platycaulos &lt;dbl&gt;, `Restio tetragonus` &lt;dbl&gt;,
 ## #   `Helichrysum crispa` &lt;dbl&gt;, `Cynodon dactylon` &lt;dbl&gt;, `Briza major` &lt;dbl&gt;, Metalasia &lt;dbl&gt;,
-## #   Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;, `Sporobolus africanus` &lt;dbl&gt;, Rhus &lt;dbl&gt;,
-## #   Eragrostis &lt;dbl&gt;, Oedera &lt;dbl&gt;, `Ehrharta calycina` &lt;dbl&gt;, …</code></pre>
+## #   Thesium &lt;dbl&gt;, `Helichrysum rosum` &lt;dbl&gt;, `Sporobolus africanus` &lt;dbl&gt;, Rhus &lt;dbl&gt;, Eragrostis &lt;dbl&gt;,
+## #   Oedera &lt;dbl&gt;, `Ehrharta calycina` &lt;dbl&gt;, `Pennisetum clandestinum` &lt;dbl&gt;, Carex &lt;dbl&gt;, …</code></pre>
 <p>You can also split values using <code>separate</code>. For example, you may want to split the Latin names into genus and species.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="tidy-data.html#cb77-1" tabindex="-1"></a><span class="fu">read_xlsx</span>(<span class="st">&quot;data/pracdatasheet.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb77-2"><a href="tidy-data.html#cb77-2" tabindex="-1"></a>  <span class="fu">separate</span>(WorkingName, <span class="fu">c</span>(<span class="st">&quot;Gen&quot;</span>, <span class="st">&quot;Sp&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb77-3"><a href="tidy-data.html#cb77-3" tabindex="-1"></a>  <span class="fu">select</span>(Gen, Sp)</span></code></pre></div>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 5 rows [5, 29, 145, 223, 401].</code></pre>
-<pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 58 rows [1, 8, 9, 12, 17, 18, 21, 23, 24,
-## 28, 30, 32, 34, 37, 38, 41, 45, 48, 49, 50, ...].</code></pre>
+<pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 58 rows [1, 8, 9, 12, 17, 18, 21, 23, 24, 28, 30,
+## 32, 34, 37, 38, 41, 45, 48, 49, 50, ...].</code></pre>
 <pre><code>## # A tibble: 419 × 2
 ##    Gen          Sp         
 ##    &lt;chr&gt;        &lt;chr&gt;      
