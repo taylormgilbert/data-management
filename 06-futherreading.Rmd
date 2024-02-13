@@ -8,7 +8,7 @@ Here are some extra resources researched and shared by the class.
 
 1) Go to [the repository](https://github.com/jslingsby/data-management) for this web-book on GitHub.
 2) Click on the "Fork" button towards the upper right to make your own copy of the repository in your own GitHub profile.
-3) In _**your copy**_ of the repository on GitHub (online), open "06-references.Rmd".
+3) In _**your copy**_ of the repository on GitHub (online), open "06-futherreading.Rmd".
 4) Copy (don't just edit!) the example text* between the lines below, paste it below the lines, and replace with your link, name, text etc. You don't have to add your name if you don't want to, as long as I know your Git username.
 5) Save and add a `commit` message along the lines of "Added new resource under further reading"
 6) Next you want to perform a "pull request", which will send a request to me to pull your new code into the main (my) version of the repository. 
