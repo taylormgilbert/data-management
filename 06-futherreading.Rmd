@@ -28,3 +28,11 @@ That should be it!
 > Contributor: Jasper
 
 ---
+
+## Lisa DeBruine and Dale Barr (2021) “Data Skills for Reproducible Research”. Zenodo. doi: 10.5281/zenodo.6527195. [https://psyteachr.github.io/reprores-v2/repro.html]
+
+Producing reproducible research requires learning certain skills and tools which allow for efficiently managing your data and record details of your analysis. DeBruine and Barr first show how to create a project in R Studio and the benefits for your reproducible workflow in doing so as you have a clear filing system which makes reading in data easy, for example. Secondly, an introductory tutorial on R Markdown is covered including how to embed exploratory visual analyses, such as figures, and tables, and preliminary analysis results in your R Markdown script. Finally, citing statistical packages is covered, which is essential in making the process of your data analysis more transparent and easier to replicate. 
+
+> Contributor: Ash S
+
+---
