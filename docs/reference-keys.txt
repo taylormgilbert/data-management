@@ -49,6 +49,7 @@ the-dataset
 motivation
 reading-in-data
 read-google-sheets-with-googlesheets4
+downloading-google-sheets-with-r
 read-microsoft-excel-files-with-readxl
 reading-text-files-with-readr
 a-quick-aside-on-data-types
@@ -61,5 +62,4 @@ getting-out-of-the-tidyverse
 joining-dataframes
 further
 libraryosfr-for-interacting-with-the-open-science-framework-osf-from-r
-lisa-debruine-and-dale-barr-2021-data-skills-for-reproducible-research.-zenodo.-doi-10.5281zenodo.6527195.-httpspsyteachr.github.ioreprores-v2repro.html
 lisa-debruine-and-dale-barr-2021-data-skills-for-reproducible-research
