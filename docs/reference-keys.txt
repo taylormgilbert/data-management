@@ -60,5 +60,6 @@ unite-and-separate
 getting-out-of-the-tidyverse
 joining-dataframes
 further
-why-do-you-need-to-manage-your-data-1
 libraryosfr-for-interacting-with-the-open-science-framework-osf-from-r
+lisa-debruine-and-dale-barr-2021-data-skills-for-reproducible-research.-zenodo.-doi-10.5281zenodo.6527195.-httpspsyteachr.github.ioreprores-v2repro.html
+lisa-debruine-and-dale-barr-2021-data-skills-for-reproducible-research
