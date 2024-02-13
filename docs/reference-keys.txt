@@ -59,3 +59,6 @@ pivot_wider
 unite-and-separate
 getting-out-of-the-tidyverse
 joining-dataframes
+further
+why-do-you-need-to-manage-your-data-1
+libraryosfr-for-interacting-with-the-open-science-framework-osf-from-r
