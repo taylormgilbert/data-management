@@ -38,3 +38,12 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
+
+## Grames, E.M. and Elphick, C.S., 2020. Use of study design principles would increase the reproducibility of reviews in conservation biology. Biological Conservation, 241, p.108385.
+
+This scientific article highlights the dangers of biological reviews if not conducted in a reproducible way. Biological reviews are very useful when researching to gain an overview of the topic and the trends seen worldwide. However, these reviews need to be taken with a pinch of salt as one should conduct a thorough assessment of the methods before taking the review into account. Grames and Elphick (2020) suggest five steps to conduct a review to have the same reproducible standard that experiments, and field studies have. The first step is “searching for studies” and most reviews they found do not explain how they found the studies used in the review. This highlights the potential for selection bias based on familiarity, access, and time when the search was done. Trying to repeat a review without the full methods of how the search was conducted would be impossible.  The second step is “selecting studies for inclusion” as reviews must define their selection criteria. Without defining these criteria clearly, selection bias can occur based on familiarity or choosing studies that agree with the result that the reviewer wishes to achieve. The third step is to “critically appraising the quality of included studies” as different studies are carried out with to a different level and thus have varying evidence strengths. The fourth step is “coding studies and extracting data”. Variables need to be defined, just like in regular studies. The fifth step is “synthesizing results” and many reviews do not explain how the results are synthesized leading these reviews to be irreproducible. This paper ends off by emphasizing the need for biological reviews to have a standardised format to ensure reproducibility. 
+
+I chose this paper as I have read and used many reviews in projects and research tasks. It makes me question their methods and how one must be careful when using a review paper. They are still valuable but need to be well scrutinised. 
+
+> Constributor: Hannah Glanvill
+---
