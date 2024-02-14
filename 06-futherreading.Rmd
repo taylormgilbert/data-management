@@ -51,3 +51,60 @@ Open Science Framework repository (accessible at https://osf.io/bypfm/; Braga et
 > Contributor: Ongezile Mpehle
 
 ---
+
+## Grames, E.M. and Elphick, C.S., 2020. Use of study design principles would increase the reproducibility of reviews in conservation biology. Biological Conservation, 241, p.108385.
+
+This scientific article highlights the dangers of biological reviews if not conducted in a reproducible way. Biological reviews are very useful when researching to gain an overview of the topic and the trends seen worldwide. However, these reviews need to be taken with a pinch of salt as one should conduct a thorough assessment of the methods before taking the review into account. Grames and Elphick (2020) suggest five steps to conduct a review to have the same reproducible standard that experiments, and field studies have. The first step is “searching for studies” and most reviews they found do not explain how they found the studies used in the review. This highlights the potential for selection bias based on familiarity, access, and time when the search was done. Trying to repeat a review without the full methods of how the search was conducted would be impossible.  The second step is “selecting studies for inclusion” as reviews must define their selection criteria. Without defining these criteria clearly, selection bias can occur based on familiarity or choosing studies that agree with the result that the reviewer wishes to achieve. The third step is to “critically appraising the quality of included studies” as different studies are carried out with to a different level and thus have varying evidence strengths. The fourth step is “coding studies and extracting data”. Variables need to be defined, just like in regular studies. The fifth step is “synthesizing results” and many reviews do not explain how the results are synthesized leading these reviews to be irreproducible. This paper ends off by emphasizing the need for biological reviews to have a standardised format to ensure reproducibility. 
+
+I chose this paper as I have read and used many reviews in projects and research tasks. It makes me question their methods and how one must be careful when using a review paper. They are still valuable but need to be well scrutinised. 
+
+> Constributor: Hannah Glanvill
+
+---
+
+## Kellie, D. and Westgate, M. (2023) Improving code reproducibility: Small steps with big impacts, Research Communities by Springer Nature. Available at: https://communities.springernature.com/posts/improving-code-reproducibility-small-steps-with-big-impacts (Accessed: 12 February 2024). 
+
+This is a short blog about reproducible research. It mentions how despite the push to make data openly available, these studies are still not reproducible. Despite tools being developed to aid improving reproducibility, the authors argue that alongside an academics busy schedule, it doesn't seem realistic to go through the time and effort to learn these tools. Subsequently, the authors find it frustrating how learning these tools are often the solution provided by papers to aid reproducibility. As creators of such tools to aid the reproducibility of the Atlas of Living Australia, the authors have learnt much about code reproducibility and share three achievable steps to increase reproducibility: have a shareable work environment (i.e. use code and repositories); ensure you code and notes are understandable and lastly, save your code (including wrangling steps) as a document, preferably with Quarto. The latter for sharing, efficiency and if code breaks. 
+
+This blog raised the relevant issue of not knowing where to start to improve reproducibility. There are many suggestions before, during and after data collection, with many aided with complex tools. This can quickly become overwhelming, causing one to avoid reproducibility altogether. To avoid this, three straightforward steps within the coding process were presented, offering a practical starting point to enhancing reproducibility. Additionally, this blog being published in Research Communities, a forum for people interested in research, enhances its importance. Raising awareness to research-orientated people will help to create a culture of reproducibility. 
+
+
+> Contributor: Lauren Schoeman 
+
+---
+
+## Powers *et al.* (2019) "Open science, reproducibility and transparency in ecology" 
+
+Powers et al. (2019) outline “open science” as the best standard both for individual researchers and broader science. Open science they define as the sharing of code, data and metadata and continuous public communication, which roughly coincides with the definition of reproducible research in other papers (e.g. Peng 2011) although Powers et al. (2019) stresses the use of social media and online forums. This allows “peer review on the fly” they argue, which makes the final study more rigorous than it would otherwise be. They note the difficulties with reproducing ecological studies and the hesitancy to publicize the location of threatened species but note that the benefits outweigh the costs. These general benefits are: faster collaborations and sharing of ideas, avoiding time-wasting exercises and building public trust in governmental research agencies. Personal benefits include high citations and there is a strong tendency for the foremost scientists in any field to be the most prolific data sharers. 
+
+Overall, Powers et al. (2019) is similar to other papers on the subject, although they are the first I have seen to emphasize public feedback during the research. This has potential to be very useful but premature exposure to the public runs the risk of circumventing the peer review process. Care should be taken to ensure continuous feedback is from appropriate sources. 
+References: 
+Peng, R.D., 2011. Reproducible research in computational science. Science, 334(6060), pp.1226-1227.
+Powers, S.M. and Hampton, S.E., 2019. Open science, reproducibility, and transparency in ecology. Ecological applications, 29(1), p.e01822.
+
+
+See https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/eap.1822 for more 
+
+> Contributor: Ben W
+
+---
+
+## Zuduo Zheng (2021) "Reasons, challenges, and some tools for doing reproducible transportation research"
+
+This paper outlines the context for reproducible research, and many of the challenges we have already discussed. However, it also outlines some key benfits to both the researcher and the readers. Zheng states that making research reproducible can elevate your reputation as an academic, and often comes with more citations. Once in the habit of working reproducibly, it also helps you work efficiently while reducing the probability of making critical mistakes. Benefits to the reader are that they can trust the research, it is easy to reproduce the analysis and this creates a more productive work flow.
+
+See doi.org/10.1016/j.commtr.2021.100004 or https://www.sciencedirect.com/science/article/pii/S2772424721000044?via%3Dihub
+
+> Contributor: Mia S
+
+---
+
+## TED Talk about Reproducibility Crisis
+
+For those who grasp concepts better with videos - this TED Talk goes over the Baker (2016) paper and the reproducibility crisis. 
+
+https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
+
+> Contributor: Emm
+
+
