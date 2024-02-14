@@ -39,6 +39,16 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 
 ---
 
+## The British Ecological Society (2017) "A Guide to Reproducible Code in Ecology and Evolution" 
+
+The guide created by the British Ecological society, is a fully comprehensive practical guide on achieving reproducibility in ecological and evolutionary research. The guide covers a wide range of topics, from the initial steps needed to create a project workflow, to organising projects, programming, version control and report writing. This guide makes use of clear and easy to follow instructions, “do’s and don’t’s” and examples of code, naming files or documents, citations et. These recommendations and tools are tailored to specific challenges and contexts of data analysis and report writing within ecological and evolutionary research. Where necessary, clear, and concise definitions are provided for the reader, these help to unpack the foreign and often confusing terms that come with learning new software like Git. This guide is particularly helpful in explaining how different packages can be beneficial in streamlining the entire report writing process for example, finely controlling how figures are generated and placed within your report using the package “knitr”.  
+
+See https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf for more.
+
+> Contributor: Robyn 
+
+---
+
 ## Six factors affecting reproducibility in life science research and how to handle them
 
 https://www.nature.com/articles/d42473-019-00004-y
@@ -50,7 +60,7 @@ The article gives a good overview of the topic of reproducibility. It starts by 
 
 ---
 
-##Braga et al. (2023) "Not just for programmers: How GitHub can accelerate collaborative and reproducible research in ecology and evolution. Methods in Ecology and Evolution"
+## Braga et al. (2023) "Not just for programmers: How GitHub can accelerate collaborative and reproducible research in ecology and evolution. Methods in Ecology and Evolution"
 
 (https://doi.org/10.1111/2041-210X.14108) This article provides practical guidance for researchers in the field Ecology and Evolutionary biology on how to use GitHub. In the article GitHub is described as “the most used web-based platform which has features for more collaborative, transparent, and reproducible research”.
 Furthermore, the article outlines features from low to high technical difficulties one might experiences with using GitHub including, code and coding management, writing a manuscript, conducting peer review, using automated and continuous integration to streamline analyses which allows for early detection and correction of errors, potentially improving confidence in scientific development.
