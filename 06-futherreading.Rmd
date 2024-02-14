@@ -38,3 +38,13 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
+
+## Six factors affecting reproducibility in life science research and how to handle them
+https://www.nature.com/articles/d42473-019-00004-y
+
+The article gives a good overview of the topic of reproducibility. It starts by outlining what reproducibility is, and how it has been problematic in science since the majority of published papers are currently not reproducible. The article then explains several factors, that cause the lack of reproducibility. These include the inaccessibility of methodological details, the use of misidentified of contaminated samples in microbiology, the difficulty many researchers have with managing complex datasets, bad experimental designs and research practices, cognitive bias, and the pressure to publish novel and extradentary findings.  The article then goes on to recommend ways that help in producing reproducible research, and outlines the work of several initiatives, that address and support the issues in research reproducibility. 
+
+
+> Contributor: Svenja
+
+---
