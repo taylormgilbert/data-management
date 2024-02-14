@@ -38,3 +38,15 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
+
+## Kellie, D. and Westgate, M. (2023) Improving code reproducibility: Small steps with big impacts, Research Communities by Springer Nature. Available at: https://communities.springernature.com/posts/improving-code-reproducibility-small-steps-with-big-impacts (Accessed: 12 February 2024). 
+
+This is a short blog about reproducible research. It mentions how despite the push to make data openly available, these studies are still not reproducible. Despite tools being developed to aid improving reproducibility, the authors argue that alongside an academics busy schedule, it doesn't seem realistic to go through the time and effort to learn these tools. Subsequently, the authors find it frustrating how learning these tools are often the solution provided by papers to aid reproducibility. As creators of such tools to aid the reproducibility of the Atlas of Living Australia, the authors have learnt much about code reproducibility and share three achievable steps to increase reproducibility: have a shareable work environment (i.e. use code and repositories); ensure you code and notes are understandable and lastly, save your code (including wrangling steps) as a document, preferably with Quarto. The latter for sharing, efficiency and if code breaks. 
+
+This blog raised the relevant issue of not knowing where to start to improve reproducibility. There are many suggestions before, during and after data collection, with many aided with complex tools. This can quickly become overwhelming, causing one to avoid reproducibility altogether. To avoid this, three straightforward steps within the coding process were presented, offering a practical starting point to enhancing reproducibility. Additionally, this blog being published in Research Communities, a forum for people interested in research, enhances its importance. Raising awareness to research-orientated people will help to create a culture of reproducibility. 
+
+
+> Contributor: Lauren Schoeman 
+
+---
+
