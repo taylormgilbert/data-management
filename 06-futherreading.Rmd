@@ -46,3 +46,14 @@ This paper outlines the context for reproducible research, and many of the chall
 See doi.org/10.1016/j.commtr.2021.100004 or https://www.sciencedirect.com/science/article/pii/S2772424721000044?via%3Dihub
 
 > Contributor: Mia S
+
+---
+
+## TED Talk about Reproducibility Crisis
+
+For those who grasp concepts better with videos - this TED Talk goes over the Baker (2016) paper and the reproducibility crisis. 
+
+https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
+
+> Contributor: Emm
+

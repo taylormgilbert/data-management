@@ -4,6 +4,14 @@ This section is aimed at helping you develop a relatively simple reproducible wo
 
 $^*$But note that the content of the previous 2 sections are important for the deliverable too.
 
+<br>
+
+Ultimately, tidying your data is the first step in your data analysis and communication workflow.
+
+![_The core components of most data analysis workflows [@Wickham2019]._ ](img/tidy_workflow.png)
+
+<br>
+
 But first you need to get your data into a digital format...
 
 <br>
