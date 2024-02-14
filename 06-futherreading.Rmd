@@ -38,3 +38,11 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
+
+## Zuduo Zheng (2021) "Reasons, challenges, and some tools for doing reproducible transportation research"
+
+This paper outlines the context for reproducible research, and many of the challenges we have already discussed. However, it also outlines some key benfits to both the researcher and the readers. Zheng states that making research reproducible can elevate your reputation as an academic, and often comes with more citations. Once in the habit of working reproducibly, it also helps you work efficiently while reducing the probability of making critical mistakes. Benefits to the reader are that they can trust the research, it is easy to reproduce the analysis and this creates a more productive work flow.
+
+See doi.org/10.1016/j.commtr.2021.100004 or https://www.sciencedirect.com/science/article/pii/S2772424721000044?via%3Dihub
+
+> Contributor: Mia S
