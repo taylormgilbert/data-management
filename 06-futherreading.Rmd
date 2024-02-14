@@ -38,36 +38,6 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
-# Further Reading {#further}
-
-Here are some extra resources researched and shared by the class. 
-
----
-
-**To add a section, please:**
-
-1) Go to [the repository](https://github.com/jslingsby/data-management) for this web-book on GitHub.
-2) Click on the "Fork" button towards the upper right to make your own copy of the repository in your own GitHub profile.
-3) In _**your copy**_ of the repository on GitHub (online), open "06-futherreading.Rmd".
-4) Copy (don't just edit!) the example text* between the lines below, paste it below the lines, and replace with your link, name, text etc. You don't have to add your name if you don't want to, as long as I know your Git username.
-5) Save and add a `commit` message along the lines of "Added new resource under further reading"
-6) Next you want to perform a "pull request", which will send a request to me to pull your new code into the main (my) version of the repository. 
-  - From your Github repo (not mine!), click on `Pull requests` (top left) and hit the green `New Pull Request` button.
-  - Follow the instructions, creating a title, message, and confirming that you want to create the pull request (you may be asked to confirm a couple of times).
-
-That should be it!
-
-> *Note: For the example below, I copied, pasted and minimally edited text directly from the resource. This is ok, because they shared the resource under an MIT licence and I'm acknowledging them, but for this exercise I would like you to use your own words as far as possible.
-
----
-
-## library(osfr) for interacting with the [Open Science Framework (OSF)](https://osf.io/) from R
-
-[library(osfr)](https://docs.ropensci.org/osfr/) is an R package that allows you to interact with OSF directly from R. OSF is a free and open source project management repository designed to support researchers across their entire project lifecycle. The service includes unlimited cloud storage and file version history, providing a centralized location for all your research materials that can be kept private, shared with select collaborators, or made publicly available with citable DOIs. You can use library(osfr) to explore publicly accessible projects and download the associated files — all you need to get started is the project’s URL or GUID (global unique identifier). library(osfr) can also be used for project management by creating projects, add sub-components or directories, and uploading files.
-
-> Contributor: Jasper
-
----
 
 ## Powers *et al.* (2019) "Open science, reproducibility and transparency in ecology" 
 
@@ -84,3 +54,23 @@ See https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/eap.1822 for mo
 > Contributor: Ben W
 
 ---
+
+## Zuduo Zheng (2021) "Reasons, challenges, and some tools for doing reproducible transportation research"
+
+This paper outlines the context for reproducible research, and many of the challenges we have already discussed. However, it also outlines some key benfits to both the researcher and the readers. Zheng states that making research reproducible can elevate your reputation as an academic, and often comes with more citations. Once in the habit of working reproducibly, it also helps you work efficiently while reducing the probability of making critical mistakes. Benefits to the reader are that they can trust the research, it is easy to reproduce the analysis and this creates a more productive work flow.
+
+See doi.org/10.1016/j.commtr.2021.100004 or https://www.sciencedirect.com/science/article/pii/S2772424721000044?via%3Dihub
+
+> Contributor: Mia S
+
+---
+
+## TED Talk about Reproducibility Crisis
+
+For those who grasp concepts better with videos - this TED Talk goes over the Baker (2016) paper and the reproducibility crisis. 
+
+https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
+
+> Contributor: Emm
+
+
