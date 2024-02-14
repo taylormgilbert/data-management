@@ -38,3 +38,11 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
+
+## TED Talk about Reproducibility Crisis
+
+For those who grasp concepts better with videos - this TED Talk goes over the Baker (2016) paper and the reproducibility crisis. 
+
+https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
+
+> Contributor: Emm
