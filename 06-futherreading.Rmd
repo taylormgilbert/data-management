@@ -38,3 +38,16 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 > Contributor: Ash S
 
 ---
+
+##Braga et al. (2023) "Not just for programmers: How GitHub can accelerate collaborative and reproducible research in ecology and evolution. Methods in Ecology and Evolution"
+
+(https://doi.org/10.1111/2041-210X.14108) This article provides practical guidance for researchers in the field Ecology and Evolutionary biology on how to use GitHub. In the article GitHub is described as “the most used web-based platform which has features for more collaborative, transparent, and reproducible research”.
+Furthermore, the article outlines features from low to high technical difficulties one might experiences with using GitHub including, code and coding management, writing a manuscript, conducting peer review, using automated and continuous integration to streamline analyses which allows for early detection and correction of errors, potentially improving confidence in scientific development.
+In addition, the article provides definitions for basic concepts of Git (such as commit, push, pull, fork, repository etc), for users who are less familiar with software terms. The article also provides relevant information like how GitHub limits committed file sizes to 100 megabytes, meaning that a person may require external file storage alternatives.
+Furthermore, how long-term management of laboratory materials tool such as notebooks etc can also be done within GitHub. Finally, how GitHub also allows for centralized communication for all project-related conversation and planning for a team, rather than emailing, which makes it easier to keep track of progress throughout the lifespan of a project.
+
+Open Science Framework repository (accessible at https://osf.io/bypfm/; Braga et al., 2023) and GitHub repository (accessible at https://github.com/SORTEE-Github-Hackathon/manuscript) for this study.
+
+> Contributor: Ongezile Mpehle
+
+---
