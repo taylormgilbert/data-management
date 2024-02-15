@@ -134,3 +134,12 @@ https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
 
 > Contributor: Emm
 
+---
+
+## Meng, X. 2020. Reproducibility, Replicability and Reliability
+
+This Article highlights how reproducibility outweighs replicability in terms of the reliability of reported results. The author also brings attention to the issue of the lack of profesional communities focusing on reproducibility verification. The author goes on to argue that reproducibility must adhere to strict rules, while replicability has more felxibility due to inherant uncertainties and possible confounding factors. Meng (2020) also explains why reproducibility is more desireable than replicability in the sense that replicability does not focus on improving upon previous studies, while reproducibility allows for permutations and future improvements. 
+
+DOI:10.1162/99608f92.dbfce7f9
+
+> Contibutor: Shane
