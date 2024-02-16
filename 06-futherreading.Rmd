@@ -134,3 +134,8 @@ https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
 
 > Contributor: Emm
 
+## S. M. Powers, and S. E. Hampton. 2019. Open science, reproducibility, and transparency in ecology. Ecological Applications 29(1):e01822. 10.1002/eap.1822
+
+The paper discusses the challenge ecologists face in replicating observational studies due to the ever-changing natural world and evolving perceptions. While perfect replication may be unattainable, achieving computational reproducibility—generating equivalent analytical outcomes using the same data and code—promotes transparency, crucial for maintaining public trust. Open data facilitates transparency and reproducibility, though rapid scientific progress is often the primary incentive for open science. Making data and code openly accessible allows scientists to build upon previous research and address new questions. The adoption of open research practices is increasing, often driven by ethical, moral, or practical considerations. It's anticipated that more journals will encourage or mandate code archiving in their data policies. The paper emphasises the diminishing excuses for not sharing data and code in publicly accessible archives. As more ecologists engage in open science, tools supporting this transition, such as data management, analysis, and visualisation methods, are proliferating and becoming central to ecological culture.
+
+> Contributor: Sarah 
