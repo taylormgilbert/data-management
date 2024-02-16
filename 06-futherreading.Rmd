@@ -41,20 +41,6 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 
 ## library(osfr) for interacting with the [Open Science Framework (OSF)](https://osf.io/) from R
 
-[library(osfr)](https://www.nature.com/articles/d42473-019-00004-y) discusses Six Factors affecting reproducibility in Life Science research and how to handle them:
-The factors hindering reproducibility specifically within Life Sciences are the:
-1) Difficulties accessing raw data, protocols and research materials.
-2) Cross-contamination or incorrect identification and labelling of cells or microorganisms results in incorrect results and cannot be reproduced.
-3) Insufficient knowledge/tools to manage, store and analyse complex data sets.
-4) Improper experimental design with unclear methods. 
-5) Biases like cognitive bias, confirmation bias, selection bias and reporting bias all lead to slightly unique data and interpretations that cannot be reproduced
-6) New ideas that are published quickly are favoured over negative results, these negative results hold value as they avoid another researcher having to repeat it. 
-The solutions are to:
-1) Make the raw data available helps other researchers, prevents “cherry picking” data and easier reproducibility
-2) With regards to micro-organisms and cells only those that can be verified to confirm specific genotype and phenotype and are not contaminated will make replication possible.
-3) Training for experimental design and statistical analysis
-4) Scientific study proposals should be registered along with proposed methodology
-5) Studies should be published even if they are not high impact or have negative results
-
+[library(osfr)](https://www.youtube.com/watch?v=t-vY9FeIIMk) This YouTube video shows a talk by Dan Chen at the New York 2019 Conference. He gives a very short but concise introduction into reproducibility vs replicability. More importantly he also talks about creating files in such a way to aid in reproducibility (Key Moment: File Inputs), this will also aid you in keeping track of your data. He also gives some useful advice on how to draw out your scripts in a concise way (Key Moment: Draw your build scripts). His talk highlights that reproducible data is not only good scientific practice but creates an environment that is easier for you to manage in the long term. 
 
 > Contributor: Sarah Frances Visser
