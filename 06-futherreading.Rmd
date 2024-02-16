@@ -143,3 +143,16 @@ This Article highlights how reproducibility outweighs replicability in terms of 
 DOI:10.1162/99608f92.dbfce7f9
 
 > Contibutor: Shane
+
+---
+
+## White et al. (2015) "Reproducible research in the study of biological coloration"
+
+https://doi.org/10.1016/j.anbehav.2015.05.007
+
+According to the paper, a study is considered truly reproducible when methods are completely reported, data are archived and publicly available, and every modification of raw data is documented and preserved. In the field of biological coloration, the direct measure of reflectance through spectrometry has been adopted as the standard, however digital photography to quantify color is increasingly gaining popularity. The paper’s guidelines for reporting color analyses details cover the methods of spectral analyses and visual modelling, which are included in metadata and are essential for reproducibility. To assess reporting and reproducibility in the field of biological coloration, the authors searched through journals using phrases such as ‘color’ or ‘spectra’. They also recorded whether the data and/or code were openly available and this information, along with their analysis script, was stored in github. After their survey, they found that there’s inconsistency and incompleteness in commonly reported methodological details from the papers. Some failed to report details such as distance and pixel numbers. They also found that 38% of papers made reference to previous work for details, which were often incomplete as well. Due to this, they suggested reporting all details along with current manuscript. Of the studies analysed, 1.7% openly provided raw data, 31.7% provided processed data, and 66.7% did not provide data. Overall, there’s evidence that this trend is shifting as funders and publishers mandate data release. 
+
+> Contributor: MuanoR
+
+---
+
