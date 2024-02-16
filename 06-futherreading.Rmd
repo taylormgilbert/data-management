@@ -134,3 +134,12 @@ https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
 
 > Contributor: Emm
 
+---
+
+## Ellison (2010) "Repeatability and transparency in Ecological research"
+
+A fundamental in science is that results must be reproducible before they are accepted as fact. However, the context-dependent nature of ecology makes perfect replication virtually impossible. One way to make ecological studies easy to reproduce is through the assembly of derived data sets and their subsequent analysis, this is known as ecological synthesis. The key to ecological synthesis is transparency and full disclosure of all aspects of the study. However, despite mandates from funding agencies that data be made publicly available, raw data are not always easily accessed. Fortunately, data repositories are growing and with descriptive metadata – a method for describing ecological data – data is made easier to interpret and re-use. Once obtained, a data set will require a certain degree of transformation after which it is ready for analysis. It is essential that researchers clearly document steps taken to derive the data as well as record all statistical tools used on the data to ensure reproducibility. Such a record should be a requirement for publication of any meta-analysis. Unfortunately, there are no standards for process meta-data and open-source software tools, while attractive, are constantly evolving. Moving forward, it appears as though more ecologists are recognising that sharing of data benefits the entire scientific enterprise and results in successful collaboration. This has resulted in rapid development of data and sharing tools. 
+
+https://www.jstor.org/stable/27860827
+
+> Contributor: Cailin
