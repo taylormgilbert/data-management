@@ -276,6 +276,14 @@ I'm not going to go through this package, but it's important to note that **both
 
 <br>
 
+### Writing out files!
+
+In previous iteration of this course I didn't cover this as I must have thought it was a given, but you can of course write files out too!
+
+[Here's](https://readr.tidyverse.org/reference/write_delim.html) a bunch of ways to write out different formats with `readr`. As mentioned above, check out Google Sheets options by typing `?googlesheets4::gs4_create()` into your console to find out about creating Google Sheets and `?googlesheets4::write_sheet()` for writing to sheets.
+
+<br>
+
 ## A quick aside on data types
 
 You'll note `<chr>` and `<dbl>` in the output when we print a summary of the data. These indicate that the data types (or classes) for those columns are "character" and "double" respectively...
