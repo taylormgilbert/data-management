@@ -39,6 +39,14 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 
 ---
 
+## library(osfr) for interacting with the [Open Science Framework (OSF)](https://osf.io/) from R
+
+[library(osfr)](https://www.youtube.com/watch?v=t-vY9FeIIMk) This YouTube video shows a talk by Dan Chen at the New York 2019 Conference. He gives a very short but concise introduction into reproducibility vs replicability. More importantly he also talks about creating files in such a way to aid in reproducibility (Key Moment: File Inputs), this will also aid you in keeping track of your data. He also gives some useful advice on how to draw out your scripts in a concise way (Key Moment: Draw your build scripts). His talk highlights that reproducible data is not only good scientific practice but creates an environment that is easier for you to manage in the long term. 
+
+> Contributor: Sarah Frances Visser
+
+---
+
 ## The British Ecological Society (2017) "A Guide to Reproducible Code in Ecology and Evolution" 
 
 The guide, created by the British Ecological society, is a fully comprehensive practical guide on achieving reproducibility in ecological and evolutionary research. The guide covers a wide range of topics, from the initial steps needed to create a project workflow, to organising projects, programming, version control and report writing. This guide makes use of clear and easy to follow instructions, “do’s and don’t’s” and examples of code, naming files or documents, citations etc. These recommendations and tools are tailored to specific challenges and contexts of data analysis and report writing within ecological and evolutionary research. Where necessary, clear and concise definitions are provided for the reader. These help to unpack the foreign and often confusing terms that come with learning new software like Git. This guide is particularly helpful in explaining how different packages can be beneficial in streamlining the entire report writing process. For example, finely controlling how figures are generated and placed within your report using the package “knitr”.  
