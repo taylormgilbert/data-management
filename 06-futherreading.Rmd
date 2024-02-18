@@ -134,3 +134,14 @@ https://www.youtube.com/watch?v=FpCrY7x5nEE&t=190s&ab_channel=TED-Ed
 
 > Contributor: Emm
 
+---
+
+## British Ecological Society (2014) "A Guide to Data Management in Ecology and Evolution"
+
+The Guide to Data Management in Ecology and Evolution is a comprehensive resource for early researchers and focuses on the importance of data management in producing high-quality, easily accessible, and reusable research data. It explains what data and data management is and why it is important as well as provides advice and examples of good data management practices. It covers the various stages of the data lifecycle, including planning, creating, processing, documenting, preserving, sharing, and reusing data. The guide emphasizes the growing importance of collaborative and interdisciplinary research, highlighting the British Ecological Society's (BES) efforts in promoting data archiving and accessibility. It also addresses challenges and best practices in data collection, digitization, processing, documentation, preservation, and sharing of data. The guide also addresses ethical aspects, such as intellectual property rights, licenses, and permissions related to the reuse of data. It provides practical advice on file naming, assuring high-quality data, processing the data, version control, documenting the data, creating metadata, using non-generic file formats, and organizing data effectively.
+
+See: https://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf
+
+> Contributor: Melissa Malan
+
+---
