@@ -4,6 +4,14 @@ This section is aimed at helping you develop a relatively simple reproducible wo
 
 $^*$But note that the content of the previous 2 sections are important for the deliverable too.
 
+<br>
+
+Ultimately, tidying your data is the first step in your data analysis and communication workflow.
+
+![_The core components of most data analysis workflows [@Wickham2019]._ ](img/tidy_workflow.png)
+
+<br>
+
 But first you need to get your data into a digital format...
 
 <br>
@@ -60,7 +68,7 @@ The next 2 sections are covered in the quick start guide you should have worked 
 ### Cloning your repo to your local machine
 
 1. Open RStudio on your laptop (you should already have RStudio and GitHub set up as per the instructions in section \@ref(setup))
-2. Copy the URL to the repo you just created(e.g. https://github.com/jslingsby/demo)
+2. Copy the URL to the repo you just created (e.g. https://github.com/jslingsby/demo)
 3. In RStudio: 
 - in the top-right of the window you'll see `Project: (None)` - click on it and select `New Project` then `Version Control` then `Git`
 - In the `Repository URl:` box paste the URL to your repo
@@ -88,7 +96,23 @@ Once you've added some content to your project (the local version of the Git rep
 
 Now you're finally ready to start interrogating your data! But the raw data probably aren't in a particularly analysis-friendly format, so you need to start with some data tidying and wrangling. You could do this "manually" in a new, appropriately named, copy of your raw data spreadsheet, but then you may not be able to track the changes you've made and errors may creep in. Where possible, it's best to do this step with code. Most of my projects start with a "00_data_cleaning.R" script or similar to read the raw data and create an analysis-ready dataset. If this script takes a long time to run, I may output a new "clean data" file (or files) so that I don't need to rerun the script every time.
 
-As you know from the readings for the course, there are many reasons why you should keep your data in _tidy_ format [@Wickham2014]. Unfortunately, as my spreadsheet above demonstrates, it's not always convenient to enter your data in _tidy_ format, so you inevitably end out needing to do post-entry data formatting. A major problem here is that doing the reformatting manually creates opportunities for introducing errors. This is where it's a major advantage if you know how to _wrangle_ your data in a coding language like R or Python. This is not to say that coded data wrangling cannot introduce errors!!! You should always do sanity checks!!! But I'd suspect that most of the errors you can make with code will be very obvious, because the outcome is usually spectacularly different to the input.
+What is _tidy_ data? I strongly recommend you read this short paper on **[how to keep your data Tidy](http://dx.doi.org/10.18637/jss.v059.i10)** [@Wickham2014]. Following these principles will make life much easier for you once you get to the analysis step...
+
+Here's the basic idea in nice illustrations by \@allison_horst:
+
+![Tidy data principles mean that all datasets follow the same rules. Artwork \@allison_horst](img/tidydata_2.jpg)
+
+<br>
+
+![Following the rules simplifies analysis and reduces the diversity of tools required. Artwork \@allison_horst](img/tidydata_3.jpg)
+
+<br>
+
+![The rules are pretty simple and easy to follow. It's worth investing the effort! Artwork \@allison_horst](img/tidydata_1.jpg)
+
+<br>
+
+These figures, and the readings for the course, highlight that there are many reasons why you should keep your data in _tidy_ format [@Wickham2014]. Unfortunately, as my spreadsheet above demonstrates, it's not always convenient to enter your data in _tidy_ format, so you inevitably end out needing to do post-entry data formatting. A major problem here is that doing the reformatting manually creates opportunities for introducing errors. This is where it's a major advantage if you know how to _wrangle_ your data in a coding language like R or Python. This is not to say that coded data wrangling cannot introduce errors!!! You should always do sanity checks!!! But I'd suspect that most of the errors you can make with code will be very obvious, because the outcome is usually spectacularly different to the input.
 
 The rest of this chapter provides a demonstration of some of the functionality of the [_tidyverse_](https://www.tidyverse.org/) set of R packages, and some of the more common data wrangling errors made in R.
 
@@ -169,6 +193,22 @@ edat <- read_sheet("https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhc
 edat # print a summary of the data
 ```
 
+Note that you can also create and write to a Google Sheet with `gs4_create()` and `write_sheet()`
+
+
+### Downloading Google Sheets with R
+
+If your spreadsheet is large, reading them into R from online Google Sheets can be slow. In this case you may want to download them as local MS Excel (.xlsx) files. Fortunately, even the download step can be scripted in R with functions from `library(googledrive)`.
+
+```{r}
+library(googledrive)
+
+drive_deauth() # Or specify your email with drive_auth(email = "jenny@example.com")
+
+drive_download(file = "https://docs.google.com/spreadsheets/d/1U9yNaJFyd6kb5vlKzHhcgM6sLEzw_xVtQxewpH7k0Ho/edit?usp=sharing", 
+               path = "data/pracdatasheet.xlsx", overwrite = TRUE)
+```
+
 
 ### Read Microsoft Excel files with _readxl_
 
@@ -176,7 +216,7 @@ Reading data in directly from Google Sheets can be super handy, but it requires 
 
 First, we may want to know what files are in our data folder, which we can do with the base R function `list.files()`. Note that this function can be very handy if you have lots of files to process, like photos, etc.
 
-> **NOTE:** you need to replace the working directory folder path ("data" here) with wherever you put the data on your computer.
+> **NOTE:** you need to replace the working directory folder path ("data" here) with wherever you put the data on your computer. In my case, "data" is a folder in the git repo (and thus R project), so R knows where to look.
 
 ```{r}
 # get list of files in the folder (change to your own)
@@ -226,13 +266,21 @@ bind_rows(read_xlsx("data/pracdatasheet.xlsx", sheet = "Sites", range = "C1:H15"
 ```
 
 
-Note that the `skip =` and `nmax =` options are somewhat related and tell the function the number of rows to skip before reading anything and the maximum number of rows to read respectively.
+Note that the `skip =` and `nmax =` options of these functions are somewhat related and tell the function the number of rows to skip before reading anything and the maximum number of rows to read respectively.
 
 <br>
 
 ### Reading text files with _readr_
 
 I'm not going to go through this package, but it's important to note that **both Microsoft Excel and Google Sheets are proprietary**. In other words these are not open formats and are not necessarily stable in the long term. **YOU SHOULD NOT STORE YOUR DATA IN THESE FORMATS**, and as such they should not be used if you want your workflow to be reproducible! The safest is to save each worksheet from the spreadsheet as separate comma or tab delimited text files, which you can read in with functions from _readr_ like `read_csv` or `read_delim`. Try `?readr` for details on the package and functions.
+
+<br>
+
+### Writing out files!
+
+In previous iteration of this course I didn't cover this as I must have thought it was a given, but you can of course write files out too!
+
+[Here's](https://readr.tidyverse.org/reference/write_delim.html) a bunch of ways to write out different formats with `readr`. As mentioned above, check out Google Sheets options by typing `?googlesheets4::gs4_create()` into your console to find out about creating Google Sheets and `?googlesheets4::write_sheet()` for writing to sheets.
 
 <br>
 
@@ -246,7 +294,7 @@ You'll note `<chr>` and `<dbl>` in the output when we print a summary of the dat
     - For reasons I won't explain, storing data as real numbers takes up far more memory than integers. Obviously, lots of numbers we work with are real numbers, so we need to be able to work with them. Interestingly, large data storage and transmission projects (e.g. satellite remote sensing) often do tricks like multiply values by some constant so that all data stored are integers. You need to correct by the constant during your analysis to get values in the actual unit of measurement.
   - `character` is for letters, words, sentences or mixed strings (i.e. letters and digits)
   - `factor` is a set of levels (often treatments) that you'd use in an analysis. They are very useful, but they are also VERY likely to trip you up at some stage (I'll explain why in a minute)!!!
-    - factors are essentially numerical codings of character data in some order. Using mumerical coding is useful, because you can order your levels in an analysis - e.g. _Treatment A, Treatment B, Control,_ etc. They are also useful, because they can store data efficiently. For example, if your analysis has thousands of data points, it uses much less memory to recode the treatments above as _1, 2, 3,_ etc and just store one copy of the levels (what we call the labels in a factor).
+    - factors are essentially numerical codings of character data in some order. Using numerical coding is useful, because you can order your levels in an analysis - e.g. _Treatment A, Treatment B, Control,_ etc. They are also useful, because they can store data efficiently. For example, if your analysis has thousands of data points, it uses much less memory to recode the treatments above as _1, 2, 3,_ etc and just store one copy of the `levels` (what we call the labels in a factor).
   - `logical` is the outcome of a conditional statement (i.e. values can only be `TRUE` or `FALSE`)
     - it is actually just a special case of factor data where FALSE = 0 and TRUE = 1, so if you take the sum of a vector of `logical` values, it will give you a count of the number of `TRUE` cases. That said, R treats logical in specific ways that can't be done with true factors and vice versa, so forget I said that.
   - `date` once again is a special case of a factor, but again, R treats dates in specific ways that it wouldn't treat a normal factor. Dates are thus stored as numbers, where each day has a unique value. For R, by default the numbering begins at the 1st January 1970 (the "origin"), which is coded as "0" - try run the code `as.numeric(as.Date("1970-01-01"))`, which coerced the date "1970-01-01" to a number. You can change the origin to whatever you prefer, and this can be very important, because different software use different origins...
@@ -297,7 +345,9 @@ As I said earlier, storing data as a factor can be less memory intensive. R take
 
 This is great, but it can catch you out as follows. If a column of numbers has any text in it, R will make the whole column class character. If many of the values are repeated, it may even make it class factor for efficiency. **_This happens a lot!_**, especially if someone makes an error and types in an O instead of a 0, or denotes missing data with a "." or anything else other than "NA".
 
-The problem is that even though R typically orders factors in alphabetical or numerical order, **it is possible to create a mismatch between the actual number and the order in the levels.**
+This means that whenever you try to pass the data to a function that's expecting numeric data, it will give you an error. Usually something along the lines of **"Error in ... expected class 'double'"** or **"object cannot be coerced to type 'double'"**, etc. The cause of this error message may not be obvious to the newbie, but now you know.
+
+Another problem is that even though R typically orders factors in alphabetical or numerical order, **it is possible to create a mismatch between the actual number and the order in the levels.** This can create all kinds of issues, sometimes large (which are easier to spot), sometimes subtle (which is often more problematic, because it's harder to spot).
 
 Here are some code examples. Firstly, where a number is treated as a character.
 
