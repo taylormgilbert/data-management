@@ -201,3 +201,13 @@ According to the paper, a study is considered truly reproducible when methods ar
 
 ---
 
+## Voelkl et al. (2020) Reproducibility of animal research in light of biological variation
+
+DOI: 10.1038/s41583-020-0313-3
+
+This paper defines reproducibility as “The ability to produce similar results by an independent replicate experiment using the same methodology in the same or a different laboratory.” Although this definition varies from the one we have been using, the paper’s contents deal largely with the reproducibility crisis (particularly in animal research) and offer a potential cause and solution.
+Scientists often conflate biological variation to noise. They therefore try to homogenise their sample group in order to increase power and thereby use less animals. This approach is typically deemed more ethical. 
+However, homogenisation makes it difficult for future studies to reproduce results, as variation is integral to biology. More tests would therefore have to be performed, which will require more animals in the long run. The authors therefore recommend deliberately including relevant biological variation in the sample group. 
+It is vital for scientists to record every decision and process clearly so that studies may be successfully reproduced in the future. 
+
+> Contributor: Ashleigh Gouws
