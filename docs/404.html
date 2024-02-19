@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2024-02-14" />
+<meta name="date" content="2024-02-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,10 +54,96 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -132,6 +218,7 @@
 <li class="chapter" data-level="4.4.2" data-path="tidy-data.html"><a href="tidy-data.html#downloading-google-sheets-with-r"><i class="fa fa-check"></i><b>4.4.2</b> Downloading Google Sheets with R</a></li>
 <li class="chapter" data-level="4.4.3" data-path="tidy-data.html"><a href="tidy-data.html#read-microsoft-excel-files-with-readxl"><i class="fa fa-check"></i><b>4.4.3</b> Read Microsoft Excel files with <em>readxl</em></a></li>
 <li class="chapter" data-level="4.4.4" data-path="tidy-data.html"><a href="tidy-data.html#reading-text-files-with-readr"><i class="fa fa-check"></i><b>4.4.4</b> Reading text files with <em>readr</em></a></li>
+<li class="chapter" data-level="4.4.5" data-path="tidy-data.html"><a href="tidy-data.html#writing-out-files"><i class="fa fa-check"></i><b>4.4.5</b> Writing out files!</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="tidy-data.html"><a href="tidy-data.html#a-quick-aside-on-data-types"><i class="fa fa-check"></i><b>4.5</b> A quick aside on data types</a></li>
 <li class="chapter" data-level="4.6" data-path="tidy-data.html"><a href="tidy-data.html#learning-to-speak-tidyverse"><i class="fa fa-check"></i><b>4.6</b> Learning to speak <em>Tidyverse</em></a></li>
@@ -148,14 +235,19 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="further.html"><a href="further.html#libraryosfr-for-interacting-with-the-open-science-framework-osf-from-r"><i class="fa fa-check"></i><b>5.1</b> library(osfr) for interacting with the Open Science Framework (OSF) from R</a></li>
 <li class="chapter" data-level="5.2" data-path="further.html"><a href="further.html#lisa-debruine-and-dale-barr-2021-data-skills-for-reproducible-research"><i class="fa fa-check"></i><b>5.2</b> Lisa DeBruine and Dale Barr (2021) “Data Skills for Reproducible Research”</a></li>
-<li class="chapter" data-level="5.3" data-path="further.html"><a href="further.html#the-british-ecological-society-2017-a-guide-to-reproducible-code-in-ecology-and-evolution"><i class="fa fa-check"></i><b>5.3</b> The British Ecological Society (2017) “A Guide to Reproducible Code in Ecology and Evolution”</a></li>
-<li class="chapter" data-level="5.4" data-path="further.html"><a href="further.html#six-factors-affecting-reproducibility-in-life-science-research-and-how-to-handle-them"><i class="fa fa-check"></i><b>5.4</b> Six factors affecting reproducibility in life science research and how to handle them</a></li>
-<li class="chapter" data-level="5.5" data-path="further.html"><a href="further.html#braga-et-al.-2023-not-just-for-programmers-how-github-can-accelerate-collaborative-and-reproducible-research-in-ecology-and-evolution.-methods-in-ecology-and-evolution"><i class="fa fa-check"></i><b>5.5</b> Braga et al. (2023) “Not just for programmers: How GitHub can accelerate collaborative and reproducible research in ecology and evolution. Methods in Ecology and Evolution”</a></li>
-<li class="chapter" data-level="5.6" data-path="further.html"><a href="further.html#grames-e.m.-and-elphick-c.s.-2020.-use-of-study-design-principles-would-increase-the-reproducibility-of-reviews-in-conservation-biology.-biological-conservation"><i class="fa fa-check"></i><b>5.6</b> Grames, E.M. and Elphick, C.S., 2020. Use of study design principles would increase the reproducibility of reviews in conservation biology. Biological Conservation</a></li>
-<li class="chapter" data-level="5.7" data-path="further.html"><a href="further.html#kellie-d.-and-westgate-m.-2023-improving-code-reproducibility-small-steps-with-big-impacts-research-communities-by-springer-nature."><i class="fa fa-check"></i><b>5.7</b> Kellie, D. and Westgate, M. (2023) Improving code reproducibility: Small steps with big impacts, Research Communities by Springer Nature.</a></li>
-<li class="chapter" data-level="5.8" data-path="further.html"><a href="further.html#powers-et-al.-2019-open-science-reproducibility-and-transparency-in-ecology"><i class="fa fa-check"></i><b>5.8</b> Powers <em>et al.</em> (2019) “Open science, reproducibility and transparency in ecology”</a></li>
-<li class="chapter" data-level="5.9" data-path="further.html"><a href="further.html#zuduo-zheng-2021-reasons-challenges-and-some-tools-for-doing-reproducible-transportation-research"><i class="fa fa-check"></i><b>5.9</b> Zuduo Zheng (2021) “Reasons, challenges, and some tools for doing reproducible transportation research”</a></li>
-<li class="chapter" data-level="5.10" data-path="further.html"><a href="further.html#ted-talk-about-reproducibility-crisis"><i class="fa fa-check"></i><b>5.10</b> TED Talk about Reproducibility Crisis</a></li>
+<li class="chapter" data-level="5.3" data-path="further.html"><a href="further.html#libraryosfr-for-interacting-with-the-open-science-framework-osf-from-r-1"><i class="fa fa-check"></i><b>5.3</b> library(osfr) for interacting with the Open Science Framework (OSF) from R</a></li>
+<li class="chapter" data-level="5.4" data-path="further.html"><a href="further.html#the-british-ecological-society-2017-a-guide-to-reproducible-code-in-ecology-and-evolution"><i class="fa fa-check"></i><b>5.4</b> The British Ecological Society (2017) “A Guide to Reproducible Code in Ecology and Evolution”</a></li>
+<li class="chapter" data-level="5.5" data-path="further.html"><a href="further.html#six-factors-affecting-reproducibility-in-life-science-research-and-how-to-handle-them"><i class="fa fa-check"></i><b>5.5</b> Six factors affecting reproducibility in life science research and how to handle them</a></li>
+<li class="chapter" data-level="5.6" data-path="further.html"><a href="further.html#braga-et-al.-2023-not-just-for-programmers-how-github-can-accelerate-collaborative-and-reproducible-research-in-ecology-and-evolution.-methods-in-ecology-and-evolution"><i class="fa fa-check"></i><b>5.6</b> Braga et al. (2023) “Not just for programmers: How GitHub can accelerate collaborative and reproducible research in ecology and evolution. Methods in Ecology and Evolution”</a></li>
+<li class="chapter" data-level="5.7" data-path="further.html"><a href="further.html#grames-e.m.-and-elphick-c.s.-2020.-use-of-study-design-principles-would-increase-the-reproducibility-of-reviews-in-conservation-biology.-biological-conservation"><i class="fa fa-check"></i><b>5.7</b> Grames, E.M. and Elphick, C.S., 2020. Use of study design principles would increase the reproducibility of reviews in conservation biology. Biological Conservation</a></li>
+<li class="chapter" data-level="5.8" data-path="further.html"><a href="further.html#kellie-d.-and-westgate-m.-2023-improving-code-reproducibility-small-steps-with-big-impacts-research-communities-by-springer-nature."><i class="fa fa-check"></i><b>5.8</b> Kellie, D. and Westgate, M. (2023) Improving code reproducibility: Small steps with big impacts, Research Communities by Springer Nature.</a></li>
+<li class="chapter" data-level="5.9" data-path="further.html"><a href="further.html#powers-et-al.-2019-open-science-reproducibility-and-transparency-in-ecology"><i class="fa fa-check"></i><b>5.9</b> Powers <em>et al.</em> (2019) “Open science, reproducibility and transparency in ecology”</a></li>
+<li class="chapter" data-level="5.10" data-path="further.html"><a href="further.html#zuduo-zheng-2021-reasons-challenges-and-some-tools-for-doing-reproducible-transportation-research"><i class="fa fa-check"></i><b>5.10</b> Zuduo Zheng (2021) “Reasons, challenges, and some tools for doing reproducible transportation research”</a></li>
+<li class="chapter" data-level="5.11" data-path="further.html"><a href="further.html#ted-talk-about-reproducibility-crisis"><i class="fa fa-check"></i><b>5.11</b> TED Talk about Reproducibility Crisis</a></li>
+<li class="chapter" data-level="5.12" data-path="further.html"><a href="further.html#s.-m.-powers-and-s.-e.-hampton.-2019.-open-science-reproducibility-and-transparency-in-ecology.-ecological-applications-291e01822.-10.1002eap.1822"><i class="fa fa-check"></i><b>5.12</b> S. M. Powers, and S. E. Hampton. 2019. Open science, reproducibility, and transparency in ecology. Ecological Applications 29(1):e01822. 10.1002/eap.1822</a></li>
+<li class="chapter" data-level="5.13" data-path="further.html"><a href="further.html#ellison-2010-repeatability-and-transparency-in-ecological-research"><i class="fa fa-check"></i><b>5.13</b> Ellison (2010) “Repeatability and transparency in Ecological research”</a></li>
+<li class="chapter" data-level="5.14" data-path="further.html"><a href="further.html#meng-x.-2020.-reproducibility-replicability-and-reliability"><i class="fa fa-check"></i><b>5.14</b> Meng, X. 2020. Reproducibility, Replicability and Reliability</a></li>
+<li class="chapter" data-level="5.15" data-path="further.html"><a href="further.html#white-et-al.-2015-reproducible-research-in-the-study-of-biological-coloration"><i class="fa fa-check"></i><b>5.15</b> White et al. (2015) “Reproducible research in the study of biological coloration”</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -244,6 +336,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
