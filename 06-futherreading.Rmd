@@ -39,9 +39,18 @@ Zenodo DOI: [10.5281/zenodo.6527195](https://doi.org/10.5281/zenodo.6527195), or
 
 ---
 
-## library(osfr) for interacting with the [Open Science Framework (OSF)](https://osf.io/) from R
+## Reproducibility trial: 246 biologists get different results from same data sets
 
-[library(osfr)](https://www.youtube.com/watch?v=t-vY9FeIIMk) This YouTube video shows a talk by Dan Chen at the New York 2019 Conference. He gives a very short but concise introduction into reproducibility vs replicability. More importantly he also talks about creating files in such a way to aid in reproducibility (Key Moment: File Inputs), this will also aid you in keeping track of your data. He also gives some useful advice on how to draw out your scripts in a concise way (Key Moment: Draw your build scripts). His talk highlights that reproducible data is not only good scientific practice but creates an environment that is easier for you to manage in the long term. 
+In this article by Anil Oza, they speak on a paper doing research on the reproducability of ecological data. The paper (which is under peer review) showed that 246 different scientist got widely different results on the same research question and data set. This gives rise to their question of what can be trusted as a true and proper analysis with a correct result. Most of it boils down to not having a structure in place of how to analyse the data provided and different researchers having their own way to analyse the data. Having power-analyses to find the correct sample sizes and other standardised ways of reviewing the data that is not part of our field necessarily, like robustness tests used in economics, is a part of their solution. This article and paper further cements the importance of reproducability and its practices.
+
+Link to article: https://www-nature-com.ezproxy.uct.ac.za/articles/d41586-023-03177-1
+
+> Contributor: Judi
+
+
+## Conference Talk on Building Reproducible and Replicable Projects
+
+[This YouTube video](https://www.youtube.com/watch?v=t-vY9FeIIMk) shows a talk by Dan Chen at the New York 2019 Conference. He gives a very short but concise introduction into reproducibility vs replicability. More importantly he also talks about creating files in such a way to aid in reproducibility (Key Moment: File Inputs), this will also aid you in keeping track of your data. He also gives some useful advice on how to draw out your scripts in a concise way (Key Moment: Draw your build scripts). His talk highlights that reproducible data is not only good scientific practice but creates an environment that is easier for you to manage in the long term. 
 
 > Contributor: Sarah Frances Visser
 
