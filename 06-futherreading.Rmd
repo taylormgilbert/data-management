@@ -56,6 +56,16 @@ Link to article: https://www-nature-com.ezproxy.uct.ac.za/articles/d41586-023-03
 
 ---
 
+## British Ecological Society (2014) "A Guide to Data Management in Ecology and Evolution"
+
+The Guide to Data Management in Ecology and Evolution is a comprehensive resource for early researchers and focuses on the importance of data management in producing high-quality, easily accessible, and reusable research data. It explains what data and data management is and why it is important as well as provides advice and examples of good data management practices. It covers the various stages of the data lifecycle, including planning, creating, processing, documenting, preserving, sharing, and reusing data. The guide emphasizes the growing importance of collaborative and interdisciplinary research, highlighting the British Ecological Society's (BES) efforts in promoting data archiving and accessibility. It also addresses challenges and best practices in data collection, digitization, processing, documentation, preservation, and sharing of data. The guide also addresses ethical aspects, such as intellectual property rights, licenses, and permissions related to the reuse of data. It provides practical advice on file naming, assuring high-quality data, processing the data, version control, documenting the data, creating metadata, using non-generic file formats, and organizing data effectively.
+
+See: https://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf
+
+> Contributor: Melissa Malan
+
+---
+
 ## The British Ecological Society (2017) "A Guide to Reproducible Code in Ecology and Evolution" 
 
 The guide, created by the British Ecological society, is a fully comprehensive practical guide on achieving reproducibility in ecological and evolutionary research. The guide covers a wide range of topics, from the initial steps needed to create a project workflow, to organising projects, programming, version control and report writing. This guide makes use of clear and easy to follow instructions, “do’s and don’t’s” and examples of code, naming files or documents, citations etc. These recommendations and tools are tailored to specific challenges and contexts of data analysis and report writing within ecological and evolutionary research. Where necessary, clear and concise definitions are provided for the reader. These help to unpack the foreign and often confusing terms that come with learning new software like Git. This guide is particularly helpful in explaining how different packages can be beneficial in streamlining the entire report writing process. For example, finely controlling how figures are generated and placed within your report using the package “knitr”.  
