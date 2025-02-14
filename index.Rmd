@@ -51,6 +51,8 @@ The schedule of lectures (and readings) is as follows:
 - Thursday, 20th Feb - Tidy Data and Data Wrangling continued (your turn) 
 - Friday, 21st Feb - We can discuss if you need me available to help. Possibly online.
 
+There will also be an online [UCT Data Management Plan tutorial](https://uct.ac.za.libcal.com/event/13853106) with Sanjin Muftic (UCT Libraries) on Wednesday, 19th Feb at 1PM.
+
 ## Deliverables (Due Thursday the 27th February) {#deliverables}
 
 1. A draft Data Management Plan (DMP) for your Honours Project (or mock project) using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "UCT Student Generic - Full DMP" template. This is a draft, so don't worry too much about getting it perfect, but do try to think about what data you'll be collecting, how you'll store it, how you'll back it up, and how you'll share it. You'll need to submit a link to the DMP with your Honour's project, so it's worth getting a head start on this now.
