@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>A Minimal Introduction to Reproducible Research</title>
   <meta name="description" content="This is a minimal introduction to reproducible research, including data management and handling data in R, compiled for the Biological Sciences BSc(Honours) class at the University of Cape Town." />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="A Minimal Introduction to Reproducible Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2024-02-19" />
+<meta name="date" content="2025-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,70 +54,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -128,6 +64,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -166,8 +103,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.1</b> General</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#lecturesdiscussionstutorials"><i class="fa fa-check"></i><b>1.2</b> Lectures/Discussions/Tutorials</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#deliverables"><i class="fa fa-check"></i><b>1.3</b> Deliverables (Due Thursday the 22nd February)</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i><b>1.4</b> Software installation and setup (Due Monday 12th Feb)</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#deliverables"><i class="fa fa-check"></i><b>1.3</b> Deliverables (Due Thursday the 27th February)</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i><b>1.4</b> Software installation and setup (Due Monday 17th Feb)</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="reproducibility.html"><a href="reproducibility.html"><i class="fa fa-check"></i><b>2</b> Reproducible research</a>
 <ul>
@@ -276,7 +213,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">A Minimal Introduction to Reproducible Research</h1>
 <p class="author"><em>Jasper Slingsby</em></p>
-<p class="date"><em>2024-02-19</em></p>
+<p class="date"><em>2025-02-14</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -297,24 +234,25 @@ div.csl-indent {
 </div>
 <div id="lecturesdiscussionstutorials" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Lectures/Discussions/Tutorials<a href="index.html#lecturesdiscussionstutorials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>These will be held live in person in BIO LT1 from 10AM to 12PM from the 12th to the 16th February unless otherwise announced on Amathuba.</p>
+<p>These will be held live in person in BIO LT1 from 9:30 to 11:30AM from the 17th to the 21st February unless otherwise announced on Amathuba.</p>
 <p>I’ll be adding to (and mostly teaching from) these online course notes as we go along.</p>
 <p>The schedule of lectures (and readings) is as follows:</p>
 <ul>
-<li>Monday, 12th Feb - Reproducible Research <span class="citation">(<a href="#ref-Baker2016">Baker 2016</a>; <a href="#ref-Peng2011">Peng 2011</a>; <a href="#ref-Markowetz2015">Markowetz 2015</a>)</span></li>
-<li>Tuesday, 13th Feb - Data Management <span class="citation">(<a href="#ref-Michener2012">Michener and Jones 2012</a>)</span></li>
-<li>Wednesday, 14th Feb - GitHub, Tidy Data and Data Wrangling <span class="citation">(<a href="#ref-Wickham2014">Wickham 2014</a>; <a href="#ref-Wickham2019">Wickham et al. 2019</a>)</span></li>
-<li>Thursday, 15th Feb - Tidy Data and Data Wrangling continued (your turn)</li>
-<li>Friday, 16th Feb - We can discuss if you need me available to help. Possibly online.</li>
+<li>Monday, 17th Feb - Reproducible Research <span class="citation">(<a href="#ref-Baker2016">Baker 2016</a>; <a href="#ref-Peng2011">Peng 2011</a>; <a href="#ref-Markowetz2015">Markowetz 2015</a>)</span></li>
+<li>Tuesday, 18th Feb - Data Management <span class="citation">(<a href="#ref-Michener2012">Michener and Jones 2012</a>)</span></li>
+<li>Wednesday, 19th Feb - GitHub, Tidy Data and Data Wrangling <span class="citation">(<a href="#ref-Wickham2014">Wickham 2014</a>; <a href="#ref-Wickham2019">Wickham et al. 2019</a>)</span></li>
+<li>Thursday, 20th Feb - Tidy Data and Data Wrangling continued (your turn)</li>
+<li>Friday, 21st Feb - We can discuss if you need me available to help. Possibly online.</li>
 </ul>
 </div>
 <div id="deliverables" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Deliverables (Due Thursday the 22nd February)<a href="index.html#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">1.3</span> Deliverables (Due Thursday the 27th February)<a href="index.html#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li><p>A draft Data Management Plan (DMP) for your Honours Project (or mock project) using <a href="https://dmp.lib.uct.ac.za/">UCT’s Online DMP Tool</a>. Please use the “University of Cape Town (UCT) - Full DMP” template.</p></li>
-<li><p>A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you’ll develop based on Wednesday’s tutorial), all in line with best practice as per the content of this module.</p></li>
+<li><p>A draft Data Management Plan (DMP) for your Honours Project (or mock project) using <a href="https://dmp.lib.uct.ac.za/">UCT’s Online DMP Tool</a>. Please use the “UCT Student Generic - Full DMP” template. This is a draft, so don’t worry too much about getting it perfect, but do try to think about what data you’ll be collecting, how you’ll store it, how you’ll back it up, and how you’ll share it. You’ll need to submit a link to the DMP with your Honour’s project, so it’s worth getting a head start on this now.</p></li>
+<li><p>A fully reproducible GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you’ll develop based on Wednesday’s tutorial), all in line with best practice as per the content of this module.</p></li>
 </ol>
 <ul>
+<li>Again, best if these are data related to your Honour’s project (speak to your supervisor), but it can be a different dataset or a mock dataset if you prefer (e.g. you could simulate the kind of data you expect to be working with for your project).</li>
 <li>More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in <em>tidy</em> format and a summary figure of some kind.</li>
 <li>Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (&gt;5MB), then it’s best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.</li>
 </ul>
@@ -323,7 +261,7 @@ div.csl-indent {
 </ol>
 </div>
 <div id="setup" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Software installation and setup (Due Monday 12th Feb)<a href="index.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">1.4</span> Software installation and setup (Due Monday 17th Feb)<a href="index.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For the data wrangling exercise and the second deliverable, we’ll be using the <a href="https://cran.r-project.org/">R</a> statistical programming language and the <a href="https://git-scm.com/">Git</a> version control system. We’ll also be using an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">integrated development environment (IDE)</a> for each: <a href="https://www.rstudio.com">RStudio</a> and <a href="https://github.com/">GitHub</a>, respectively.</p>
 <blockquote>
 <p><em><strong>If you already have these installed and set up</strong></em>, please make sure you have the latest versions, and check that your installations are working! Please also make sure you have installed (and/or updated) the <a href="https://www.tidyverse.org/"><em>Tidyverse</em></a> set of R packages. It can be installed using the code <code>install.packages("tidyverse")</code> and updated using <code>update.packages("tidyverse")</code>.</p>
@@ -388,7 +326,7 @@ div.csl-indent {
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Baker2016" class="csl-entry">
 Baker, Monya. 2016. <span>“<span class="nocase">1,500 scientists lift the lid on reproducibility</span>.”</span> <em>Nature</em> 533 (7604): 452–54. <a href="https://doi.org/10.1038/533452a">https://doi.org/10.1038/533452a</a>.
 </div>
@@ -471,20 +409,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

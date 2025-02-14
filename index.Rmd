@@ -39,29 +39,30 @@ The core outcomes/concepts I hope you’ll come away with:
 
 ## Lectures/Discussions/Tutorials
 
-These will be held live in person in BIO LT1 from 10AM to 12PM from the 12th to the 16th February unless otherwise announced on Amathuba. 
+These will be held live in person in BIO LT1 from 9:30 to 11:30AM from the 17th to the 21st February unless otherwise announced on Amathuba. 
 
 I’ll be adding to (and mostly teaching from) these online course notes as we go along.
 
 The schedule of lectures (and readings) is as follows:
 
-- Monday, 12th Feb - Reproducible Research [@Baker2016; @Peng2011; @Markowetz2015]
-- Tuesday, 13th Feb - Data Management [@Michener2012]
-- Wednesday, 14th Feb - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
-- Thursday, 15th Feb - Tidy Data and Data Wrangling continued (your turn) 
-- Friday, 16th Feb - We can discuss if you need me available to help. Possibly online.
+- Monday, 17th Feb - Reproducible Research [@Baker2016; @Peng2011; @Markowetz2015]
+- Tuesday, 18th Feb - Data Management [@Michener2012]
+- Wednesday, 19th Feb - GitHub, Tidy Data and Data Wrangling [@Wickham2014; @Wickham2019]
+- Thursday, 20th Feb - Tidy Data and Data Wrangling continued (your turn) 
+- Friday, 21st Feb - We can discuss if you need me available to help. Possibly online.
 
-## Deliverables (Due Thursday the 22nd February) {#deliverables}
+## Deliverables (Due Thursday the 27th February) {#deliverables}
 
-1. A draft Data Management Plan (DMP) for your Honours Project (or mock project) using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "University of Cape Town (UCT) - Full DMP" template.
+1. A draft Data Management Plan (DMP) for your Honours Project (or mock project) using [UCT's Online DMP Tool](https://dmp.lib.uct.ac.za/). Please use the "UCT Student Generic - Full DMP" template. This is a draft, so don't worry too much about getting it perfect, but do try to think about what data you'll be collecting, how you'll store it, how you'll back it up, and how you'll share it. You'll need to submit a link to the DMP with your Honour's project, so it's worth getting a head start on this now.
 
-2. A GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you'll develop based on Wednesday's tutorial), all in line with best practice as per the content of this module. 
+2. A fully reproducible GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you'll develop based on Wednesday's tutorial), all in line with best practice as per the content of this module. 
+  - Again, best if these are data related to your Honour's project (speak to your supervisor), but it can be a different dataset or a mock dataset if you prefer (e.g. you could simulate the kind of data you expect to be working with for your project).
   - More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in _tidy_ format and a summary figure of some kind.
   - Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (>5MB), then it's best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.
   
 3. Lastly, I'd like you to spend some time reading up about reproducible research and data management (preferably relevant to our field) and to share any interesting resources you find - a link to a paper, news article, blog, tutorial, etc - with a 50 to 200 word summary of what it is and why its relevant and interesting. These will be collected and shared with the class either via Google Forms or GitHub (just as soon as I've set it up...).
 
-## Software installation and setup (Due Monday 12th Feb) {#setup}
+## Software installation and setup (Due Monday 17th Feb) {#setup}
 
 For the data wrangling exercise and the second deliverable, we'll be using the [R](https://cran.r-project.org/) statistical programming language and the [Git](https://git-scm.com/) version control system. We'll also be using an [integrated development environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) for each: [RStudio](https://www.rstudio.com) and [GitHub](https://github.com/), respectively.
 
