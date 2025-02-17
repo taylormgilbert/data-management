@@ -80,3 +80,4 @@ ellison-2010-repeatability-and-transparency-in-ecological-research
 meng-x.-2020.-reproducibility-replicability-and-reliability
 white-et-al.-2015-reproducible-research-in-the-study-of-biological-coloration
 voelkl-et-al.-2020-reproducibility-of-animal-research-in-light-of-biological-variation
+learning-objectives

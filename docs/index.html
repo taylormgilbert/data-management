@@ -23,7 +23,7 @@
 <meta name="author" content="Jasper Slingsby" />
 
 
-<meta name="date" content="2025-02-14" />
+<meta name="date" content="2025-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -101,7 +101,10 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.1</b> General</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.1</b> General</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1.1</b> Learning Objectives</a></li>
+</ul></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#lecturesdiscussionstutorials"><i class="fa fa-check"></i><b>1.2</b> Lectures/Discussions/Tutorials</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#deliverables"><i class="fa fa-check"></i><b>1.3</b> Deliverables (Due Thursday the 27th February)</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i><b>1.4</b> Software installation and setup (Due Monday 17th Feb)</a></li>
@@ -213,7 +216,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">A Minimal Introduction to Reproducible Research</h1>
 <p class="author"><em>Jasper Slingsby</em></p>
-<p class="date"><em>2025-02-14</em></p>
+<p class="date"><em>2025-02-17</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -225,12 +228,16 @@ div.csl-indent {
 <blockquote>
 <p><em>“Let us emphasize again this obvious conclusion: a scholar’s positive contribution is measured by the sum of the original data that [they] contribute… Hypotheses come and go but data remain. Theories desert us, while data defend us. They are our true resources, our real estate, and our best pedigree. In the eternal shifting of things, only they will save us from the ravages of time and from the forgetfulness or injustice of [people]. To risk everything on the success of one idea is to forget that every fifteen or twenty years theories are replaced or revised. So many apparently conclusive theories in physics, chemistry, geology, and biology have collapsed in the last few decades!”</em> - Santiago Ramón y Cajal, 1906 Nobel Laureate, from <em>Advice for a Young Investigator</em> 1898 <span class="citation">(<a href="#ref-Ramon1999">Ramón y Cajal 1999</a>)</span></p>
 </blockquote>
+<p>i.e. ideas are cheap, data are priceless</p>
+<div id="learning-objectives" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Learning Objectives<a href="index.html#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The core outcomes/concepts I hope you’ll come away with:</p>
 <ul>
 <li>Familiarity with the concepts and understand the need for Open, Reproducible Science</li>
 <li>Familiarity with The Data Life Cycle</li>
 <li>Some data management and handling skills</li>
 </ul>
+</div>
 </div>
 <div id="lecturesdiscussionstutorials" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Lectures/Discussions/Tutorials<a href="index.html#lecturesdiscussionstutorials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -250,12 +257,12 @@ div.csl-indent {
 <h2><span class="header-section-number">1.3</span> Deliverables (Due Thursday the 27th February)<a href="index.html#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li><p>A draft Data Management Plan (DMP) for your Honours Project (or mock project) using <a href="https://dmp.lib.uct.ac.za/">UCT’s Online DMP Tool</a>. Please use the “UCT Student Generic - Full DMP” template. This is a draft, so don’t worry too much about getting it perfect, but do try to think about what data you’ll be collecting, how you’ll store it, how you’ll back it up, and how you’ll share it. You’ll need to submit a link to the DMP with your Honour’s project, so it’s worth getting a head start on this now.</p></li>
-<li><p>A fully reproducible GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you’ll develop based on Wednesday’s tutorial), all in line with best practice as per the content of this module.</p></li>
+<li><p>A fully reproducible GitHub repository containing suitably named sub-folders, data files (if small) and the R scripts (that you’ll develop based on Wednesday’s tutorial), all in line with best practice as per the content of this module. It will also need have a mybinder.org badge in the README that works and allows me to execute your code online.</p></li>
 </ol>
 <ul>
 <li>Again, best if these are data related to your Honour’s project (speak to your supervisor), but it can be a different dataset or a mock dataset if you prefer (e.g. you could simulate the kind of data you expect to be working with for your project).</li>
-<li>More about the R script during the Tidy data tutorial, but it must be easily executable by one of your classmates, and output your data in <em>tidy</em> format and a summary figure of some kind.</li>
-<li>Since you may not want your data to be public, it is best to create a private repository and invite me as a collaborator. If your data are large (&gt;5MB), then it’s best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.</li>
+<li>More about the R script during the Tidy data tutorial, but it must be easily executable by Binder, and output your data in <em>tidy</em> format and a summary figure of some kind.</li>
+<li>Since it will be public, it is best to censor or obfuscate your data if they are not open access. If your data are large (&gt;5MB), then it’s best to create and only upload a smaller subset of the data. Note that your R script must still work with the reduced dataset, since part of your mark will be based on whether your script runs and the output reproducible.</li>
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li>Lastly, I’d like you to spend some time reading up about reproducible research and data management (preferably relevant to our field) and to share any interesting resources you find - a link to a paper, news article, blog, tutorial, etc - with a 50 to 200 word summary of what it is and why its relevant and interesting. These will be collected and shared with the class either via Google Forms or GitHub (just as soon as I’ve set it up…).</li>
