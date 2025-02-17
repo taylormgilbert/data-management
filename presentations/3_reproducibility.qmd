@@ -35,11 +35,12 @@ Sadly, we have a problem...
 <br>
 
 -   Makes use of modern software tools to share data, code, etc to allow others to reproduce the same result as the original study, thus ***making all analyses open and transparent**.*
--   This is ***central to scientific progress!!!***
+
+    -   This is ***central to scientific progress!!!***
 
 <br>
 
--   BONUS: working reproducibly ***facilitates automated workflows*** needed for iterative ecological forecasting!
+-   BONUS: working reproducibly ***facilitates automated workflows***, which is useful for applications like iterative near-term ecological forecasting!
 
 <br>
 
@@ -75,7 +76,7 @@ Sadly, we have a problem...
 
 1.  Its ***transparent and open*** - helping avoid mistakes or track down errors
 2.  It makes it ***easier to write papers*** - faster tracking of changes and manuscript updates
-3.  It ***helps the review process*** - reviewers can actually see what you did
+3.  It ***helps the review process*** - reviewers can actually see (and do!) what you did
 4.  It ***enables continuity*** of research - simplifying project handover (esp. past to future you!)
 5.  It builds ***reputation*** - showing integrity and gaining credit where your work is reused
 
@@ -83,22 +84,22 @@ Sadly, we have a problem...
 
 <br>
 
-Some less selfish reasons (and relevant for ecoforecasting):
+Some less selfish reasons:
 
-6.  It ***speeds progress in science*** by allowing you (or others) to rapidly build on previous findings and analyses
+6.  It ***speeds scientific progress*** facilitating building on previous findings and analyses
 
 7.  It ***allows easy comparison*** of new analytical approaches to older ones
 
 8.  It makes it easy to ***repeat analyses on new data***, e.g. for ecological forecasting or LTER[^3_reproducibility-1]
 
-9.  The tools used are ***useful beyond Reproducible Research***, e.g. building websites
+9.  The tools are ***useful beyond research***, e.g. making websites, presentations
 
 10. Reproducible research ***skills are highly sought after!***
 
-[^3_reproducibility-1]: Long Term Ecological Research
-
 -   Skills are important should you decide to leave science...
 -   Within science, more and more environmental organizations and NGOs are hiring data scientists or scientists with strong data and quantitative skills
+
+[^3_reproducibility-1]: Long Term Ecological Research studies that require frequent updates
 
 ## Barriers to working reproducibly {.smaller background-color="#33431e"}
 
@@ -106,28 +107,30 @@ From "A Beginner's Guide to Conducting Reproducible Research" [@Alston2021]:
 
 <br>
 
-**1. Complexity**
+### 1. Complexity
 
--   There's a learning curve in getting to know and use the tools effectively
--   One is always tempted by the "easy option" of doing it the way you already know or using "user-friendly" proprietary software
+-   There's a *learning curve* in getting to know and use the tools effectively
+    -   One is always tempted by the "easy option" of doing it the way you already know or using "user-friendly" proprietary software
 
-**2. Technological change**
+### 2. Technological change
 
--   Hardware and software used in analyses change over time, making it very difficult to rerun old analyses etc
+-   Hardware and software change over time, making it difficult to rerun old analyses
     -   This should be less of a problem as more tools like contained computing environments become available
 
 ## Barriers to working reproducibly {.smaller background-color="#33431e"}
 
-**3. Human error**
+<br>
+
+### 3. Human error
 
 -   Simple mistakes or poor documentation can easily make a study irreproducible.
--   Most reproducible research tools are actually aimed at solving this problem!
+    -   Most reproducible research tools are actually aimed at solving this problem!
 
-**4. Intellectual property rights**
+### 4. Intellectual property rights
 
 -   Rational self-interest can lead to hesitation to share data and code via many pathways:
     -   Fear of not getting credit; Concern that the materials shared will be used incorrectly or unethically; etc
--   Hopefully most of these issues will be solved by better awareness of licensing issues, attribution, etc, as the culture of reproducible research grows
+    -   Hopefully most of these issues will be solved by better awareness of licensing issues, attribution, etc, as the culture of reproducible research grows
 
 ## Reproducible Scientific Workflows {.smaller background-color="#33431e"}
 
@@ -141,15 +144,126 @@ Working reproducibly requires careful planning and documentation of each step in
 
 Entail overlapping/intertwined components, namely:
 
-1.  Data management (more on this in a later lecture)
+1.  Data management
 2.  File and folder management
 3.  Coding and code management (data manipulation and analyses)
 4.  Computing environment and software
 5.  Sharing of the data, metadata, code, publications and any other relevant materials
 
+## 1. Data management {background-color="#33431e"}
+
+<br/>
+
+This is a big topic and has a separate section in my notes.
+
+<br/>
+
+***Read the notes*** as this is NB information for you to know.
+
+## 1. Data management {.smaller background-color="#33431e"}
+
+Data loss is the norm... Good data management is key!!!
+
+```{r datadecay, echo=FALSE, fig.cap = "The 'Data Decay Curve' [@Michener1997]", fig.width=3, fig.align = 'center', out.width="75%"}
+knitr::include_graphics("img/datadecaycurve.jpg")
+```
+
+## 1. Data management {.smaller background-color="#33431e"}
+
+```{r datalifecycle, echo=FALSE, fig.cap = "The Data Life Cycle, adapted from https://www.dataone.org/", fig.width=6, fig.align = 'center', out.width="100%"}
+# load library
+library(ggplot2)
+
+# Create test data.
+data <- data.frame(
+  category=c("1.Plan", "2.Collect", "3.Assure", "4.Describe", "5.Preserve", "6.Discover", "7.Integrate", "8.Analyze"),
+  count=rep(12.5, 8)
+)
+ 
+# Compute percentages
+data$fraction <- data$count / sum(data$count)
+
+# Compute the cumulative percentages (top of each rectangle)
+data$ymax <- cumsum(data$fraction)
+
+# Compute the bottom of each rectangle
+data$ymin <- c(0, head(data$ymax, n=-1))
+
+# Compute label position
+data$labelPosition <- (data$ymax + data$ymin) / 2
+
+# Compute a good label
+data$label <- paste0(data$category, "\n value: ", data$count)
+
+# Make the plot
+ggplot(data, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=category)) +
+  geom_rect() +
+  geom_text(x=3.5, aes(y=labelPosition, label=category)) + #, color=category)) + # x here controls label position (inner / outer)
+  scale_fill_brewer(palette="Blues") +
+#  scale_color_brewer(palette="Blues", direction = -1) +
+  coord_polar(theta="y") +
+  xlim(c(2, 4.5)) +
+  theme_void() +
+  theme(legend.position = "none")
+```
+
+## Plan {.smaller background-color="#c2c190"}
+
+Good data management begins with planning. You essentially **outline the plan for every step of the cycle in as much detail as possible**.
+
+Fortunately, there are **online data management planning tools** that make it easy to develop a **Data Management Plan (DMP)**.
+
+```{r uctdmp, echo=FALSE, fig.cap = "Screenshot of [UCT's Data Management Planning Tool's Data Management Checklist.](http://www.digitalservices.lib.uct.ac.za/dls/systems/uct-dmp)", fig.width=3, fig.align = 'center', out.width="90%"}
+knitr::include_graphics("img/UCTDMP.png")
+```
+
+**A DMP is a living document and should be regularly revised during the life of a project!**
+
+## Collect & Assure {.smaller background-color="#c2c190"}
+
+I advocate that ***it is foolish to collect data without doing quality assurance and quality control (QA/QC) as you go***, irrespective of how you are collecting the data.
+
+```{r appsheet, echo=FALSE, fig.cap = "An example data collection app I built in [AppSheet](https://www.appsheet.com) that allows you to log GPS coordinates, take photos, record various fields, etc.", fig.width=3, fig.align = 'center', out.width="80%"}
+knitr::include_graphics("img/veldwatch.png")
+```
+
+There are many tools that allow you to do quality assurance and quality control as you collect the data (or progressively shortly after data collection events). Even just MS Excel or GoogleSheets with controlled fields etc.
+
+## Describe, Preserve, Discover {.smaller background-color="#c2c190"}
+
+::::: columns
+::: {.column width="55%"}
+```{r fairdata, echo=FALSE, fig.cap = "The FAIR data principles [ErrantScience.com](https://errantscience.com/).", fig.width=3, fig.align = 'center', out.width="100%"}
+knitr::include_graphics("img/fairdata.jpg")
+```
+:::
+
+::: {.column width="40%"}
+**Global databases:**
+
+-   [GenBank](https://www.ncbi.nlm.nih.gov/genbank/) - for molecular data
+-   [TRY](https://www.try-db.org/TryWeb/Home.php) - for plant traits
+-   [Dryad](https://datadryad.org) - for general biological and environmental data
+
+**South African databases:**
+
+-   [SANBI](https://www.sanbi.org/resources/infobases/) (biodiversity), [SAEON](https://catalogue.saeon.ac.za/) (environmental and biodiversity)
+
+**"Generalist" repositories:**
+
+-   [FigShare](https://figshare.com/) (incl. UCT's [ZivaHub](https://zivahub.uct.ac.za/)), [Zenodo](https://zenodo.org/)
+:::
+:::::
+
+## Integrate & Analyse {.smaller background-color="#c2c190"}
+
+"The fun bit", but again, there are many things to bear in mind and keep track of so that your analysis is repeatable. This is largely covered by the sections on *Coding and code management* and *Computing environment and software* below
+
+![Artwork \@allison_horst](img/tidydata_5.jpg)
+
 ## 2. File and folder management {.smaller background-color="#33431e"}
 
-::: columns
+::::: columns
 ::: {.column width="45%"}
 !['Documents' from [xkcd.com/1459](https://xkcd.com/1459), used under a [CC-BY-NC 2.5 license](https://creativecommons.org/licenses/by-nc/2.5/).](img/documentnaming.png)
 :::
@@ -166,13 +280,13 @@ The main considerations are:
 -   defining a simple, common, intuitive folder structure
 -   using informative file names
 -   version control where possible
-    -   e.g. GitHub or Google Docs
+    -   e.g. GitHub, Google Docs, etc
 :::
-:::
+:::::
 
 ##  {.smaller background-color="#c2c190"}
 
-::: columns
+::::::: columns
 ::: {.column width="46%"}
 ### Folders
 
@@ -184,14 +298,14 @@ Here's how I usually manage my folders:
 
 -   "code"contains code for analyses
 -   "data" often has separate "raw" and "processed" (or "clean") folders
-    -   Large files may be stored elsewhere
+    -   Large files (e.g. GIS) may be stored elsewhere
 -   "output" contains figures and tables
 :::
 
 ::: {.column width="4%"}
 :::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: fragment
 ### Names should be
 
@@ -204,16 +318,14 @@ Here's how I usually manage my folders:
     -   numeric or character prefixes separate files by component or step
     -   folder structure helps here too
 :::
-:::
-:::
+::::
+:::::::
 
 ## 3. Coding and code management {.smaller background-color="#33431e"}
 
-<br>
-
 ### Why write code?
 
-"Point-and-click" software like Excel, Statistica, etc may seem easier, but you'll regret it in the long run...
+"Point-and-click" software like Excel, Statistica, SPSS etc may seem easier, but you'll regret it in the long run... e.g. When you have to rerun or remember what you did?[^3_reproducibility-3]
 
 <br>
 
@@ -230,6 +342,8 @@ Coding is communication. Messy code is bad communication. Bad communication hamp
 
 [Streamline, collaborate, reuse, contribute, and fail safely...](https://www.openscapes.org/blog/2022/05/27/github-illustrated-series/)
 :::
+
+[^3_reproducibility-3]: Although to be fair many of these softwares now allow you to save what you did as a "macro" or similar
 
 ## Why write code? {.smaller background-color="#c2c190"}
 
@@ -249,16 +363,20 @@ It'seasytowritemessyindecipherablecode!!! - ***Write code for people, not comput
 
 <br>
 
+::: {.incremental}
+
 Check out the [Tidyverse style guide](https://style.tidyverse.org/index.html) for R-specific guidance, but here are some basics:
 
 -   use consistent, meaningful and distinct **names** for variables and functions
 -   use consistent code and **formatting style** - indents, spaces, line-breaks, etc
 -   **modularize code** into manageable steps/chunks
     -   or separate scripts that can be called in order from a master script or Makefile
+    -   write **functions** rather than repeating the same code
 -   use **commenting** to explain what you're doing at each step or in each function
-    -   "notebooks" like RMarkdown, Quarto, Jupyter or Sweave allow embedded code, simplifying documentation, master/Makefiles, etc and can used to write manuscripts, presentations or websites (e.g. all my teaching materials)
--   write **functions** rather than repeating the same code
+    -   "notebooks" like RMarkdown, Quarto, Jupyter or Sweave allow embedded code, simplifying documentation, master/Makefiles, etc and can be used to write manuscripts, presentations or websites (e.g. all my teaching materials)
 -   **check for mistakes** at every step!!! Do the outputs make sense?
+
+:::
 
 ## Some coding rules continued... {.smaller background-color="#c2c190"}
 
@@ -291,6 +409,8 @@ Version control tools can be challenging , but also hugely simplify your workflo
 
 The advantages of version control[^3_reproducibility-2]:
 
+::: {.incremental}
+
 [^3_reproducibility-2]: We'll use Git and [GitHub](https://github.com/), but most have similar functions. You can look up `technical terms` [here](https://docs.github.com/en/get-started/quickstart).
 
 -   They generally help project management, especially **collaborations**
@@ -299,25 +419,42 @@ The advantages of version control[^3_reproducibility-2]:
 -   **Changes are tracked and reversible** through `commits`
     -   Any changes in a repo must be `commit`ed with a `commit message`. Each `commit` is a recoverable `version` that can be `compared` or `reverted` to
     -   This is **the essence of version control** and magically frees you from duplicated files!
+    
+:::
 
 ## Version control continued... {.smaller background-color="#c2c190"}
 
 -   Users can easily **adapt or build on each others' code** by `forking` repos and working on their own `branch`.
     -   This allows you to **repeat/replicate analyses** or even build websites (like this one!)
+
+::: {.incremental}
 -   Collaborators can **propose changes** via `pull requests`
     -   Repo `owners` can **accept and integrate changes seamlessly** by `review` and `merge` the *forked branch* back to the `main` branch
     -   Comments associated with `commit` or `pull request`s provide a **written record of changes** and track the user, date, time, etc - all of which and are useful tracking mistakes and `blaming` when things go wrong
 -   You can `assign`, log and track `issues` and `feature requests`
 
-This should all make more sense after the practical, but here are some pretty pictures to drive some of this home...
+:::
 
-## Version control {.smaller background-color="#c2c190"}
+
+## Version control in pretty pictures {.smaller background-color="#c2c190"}
 
 ![Artwork by \@allison_horst [CC-BY-4.0](https://github.com/allisonhorst/stats-illustrations/blob/main/license)](img/git_commit.png)
 
-## Version control {.smaller background-color="#c2c190"}
+## Version control in pretty pictures {.smaller background-color="#c2c190"}
 
 ![Artwork by \@allison_horst [CC-BY-4.0](https://github.com/allisonhorst/stats-illustrations/blob/main/license)](img/git_navigate.png)
+
+
+## Version control - example workflow {.smaller background-color="#c2c190"}
+
+![](img/GitDiagram.drawio.png)
+
+## Version control - example workflow {.smaller background-color="#c2c190"}
+
+![](img/git_paircoding.png)
+
+Interestingly, since all that's tracked are the _commits_, whereby versions are named (the nodes in the image). All that the online Git repo records is this figure below. The black is the the OWNER's _main_ branch and the blue is the COLLABORATOR's _fork_.
+
 
 ## 4. Computing environment {.smaller background-color="#33431e"}
 
@@ -349,27 +486,31 @@ These are contained, lightweight computing environments similar to [virtual mach
 
 <br>
 
-You set your container up to have everything you need to run your workflow (and nothing extra), so anyone can download (or clone) your container, code and data and run your analyses perfectly first time.
+You set your container up to have everything you need to run your workflow (and nothing extra), so anyone can download (or clone) your container, code and data and run your analyses perfectly every time.
 
 <br>
 
 ## 5. Sharing data, code, publication etc {.smaller background-color="#33431e"}
 
-::: columns
-::: {.column width="45%"}
-This is covered in more detail in the data management lecture, but suffice to say there's no point working reproducibly if you're not going to share all the components necessary to complete your workflow...
+:::::: columns
+::: {.column width="50%"}
+This is covered in more detail in the data management section, but suffice to say there's no point working reproducibly if you're not going to share all the components necessary to complete your workflow...
 
 <br>
 
-Another key component here is that ideally all your data, code, publication etc are shared *Open Access* - i.e. they are not stuck behind some paywall...
+Another key component here is that ideally all your data, code, publication etc are shared *Open Access*
+
+-   not stuck behind some paywall!
+-   shared with a permissable use license
+    -   e.g. [Creative Commons](https://creativecommons.org/licenses/)
 :::
 
-::: {.column width="10%"}
+::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
 ![A 3-step, 10-point checklist to guide researchers toward greater reproducibility [@Alston2021].](img/alstonreproducibility.jpg)
 :::
-:::
+::::::
 
 ## References {.smaller background-color="#33431e"}
