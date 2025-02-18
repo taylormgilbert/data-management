@@ -1,5 +1,5 @@
 # Reproducible research {#reproducibility}
-
+ 
 This section is also available as a slideshow. Right click or hold `Ctrl` or `Command` and [click this link](presentations/3_reproducibility.html) to view in full screen.
 
 <div>
