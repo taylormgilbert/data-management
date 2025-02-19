@@ -35,6 +35,8 @@ I'm sure there are plenty of other online resources too.
 
 **One thing I really like** about Google Sheets is that you can set your sheet to work in "offline mode" on your phone or tablet, which allows you to do data entry directly into the sheet in the field, which then syncs to your Google Drive when you go back online (I'd imagine you can do the same with MS Excel and One Drive, but I've never tried it). This really saves time (and errors) on entering written field data sheets into a spreadsheet later, and allows you to take advantage of the data validation rules in the field, which are harder to set up with pen or pencil... The only issue is that if you make a typo etc that isn't caught by the data validation you're likely to be stuck with it...
 
+Take lots of photos (preferably geotagged)!!! It often helps you identify and fix errors later, and is great for getting context for your data or for working out why some sites have weird values etc.
+
 <br>
 
 ## Reproducibility - start as you mean to finish
