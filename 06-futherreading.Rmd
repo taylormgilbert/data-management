@@ -215,11 +215,13 @@ It is vital for scientists to record every decision and process clearly so that 
 
 ---
 
-## Key Challenges in Life Science Research Reproducibility and Strategies for Improvement
+## Reproducible Research and Public Data-Sharing in Ecology: A Q&A with LAGOS Creators
 
-An important component of advances in science is reproducibility and data management, which makes it possible to validate, store and expand on research findings. Many studies, however, do not generate consistent results, which raises questions about resource waste, scientific credibility, and even public trust. Poor research methods, a lack of data accessibility, misidentified biological materials, inability to manage datasets that are complex, cognitive bias, and a competitive culture that values new discoveries above replication are some of the six main causes of this problem that are examined in this article. Better research design training, open data sharing, pre-registration of scientific studies, and encouraging the disclosure of unfavourable findings are all initiatives to increase reproducibility. To address these issues, a number of organisations are putting rules and programs into place, including the ASCB (American Society for Cell Biology) and ATCC (American Type Culture Collection). Through the promotion of transparency and strict techniques, the scientific community may improve the confidence of research and work towards meaningful advancements in life sciences. 
+A recent study published in GigaScience introduces LAGOS (LAke multi-scaled GeOSpatial and temporal database), an open database compiling hundreds of ecological datasets. LAGOS supports macrosystems ecology research, which analyses ecological interactions at regional and continental scales.
+Professor Pat Soranno of Michigan State University introduces the motivations behind LAGOS, emphasizing the need to study large ecological patterns, such as freshwater ecosystems' role in global carbon cycles, however, A key challenge in ecology is "dark data", when valuable datasets are trapped on individual researchers’ computers, making it inaccessible. LAGOS therefore, addresses this problem by integrating diverse datasets into a reproducible, publicly available resource. By making data more accessible, LAGOS enables scientists to ask large-scale, impactful ecological questions and contribute to a growing movement of data-sharing in environmental research.
 
-Link to article: https://www.nature.com/articles/d42473-019-00004-y 
+Link to article: https://blogs.biomedcentral.com/on-biology/2015/07/01/reproducible-research-public-data-sharing-ecology-qa-lagos-creators/ 
 
+> Contributor: Robyn 
 
-> Contributor: Robyn B
+---
