@@ -28,6 +28,14 @@ That should be it!
 > Contributor: Jasper
 
 ---
+## Ocean FAIR Data Services (Tanhua et al., 2019)
+
+Well-established data management systems are crucial for ocean observing systems as they ensure essential data is collected, preserved, and accessible for current and future users. Effective management involves collaboration in various areas such as observations, data and metadata assembly, quality assurance/control, and publication. To promote long-term usability, ocean data should follow the FAIR principles—Findable, Accessible, Interoperable, and Reusable—which help transition unstructured data into organized, standardized datasets. As ocean observing systems evolve, new autonomous platforms collect more essential ocean variables, necessitating modern data infrastructures to automate the data life cycle. However, several challenges exist in implementing FAIR data management, including the diverse oceanographic data; wide range of different data management structures; high data volumes; new sensor formats; formats not universally applicable; gaps between data producers and end-users; slow development of common protocols; and poorly defined best practices. The paper discusses solutions to these challenges, enabling scientists and developers to download data and apply traditional analysis techniques. This also allows for the utilization of modern tools to transform, manipulate, visualize, and innovate with data. The solutions promote reusability by making sure data can be understood by those who did not produce the data.
+It is essential to explain the importance and implementation of FAIR data principles to early career marine scientists. This understanding will help ensure that these principles and effective data management practices become second nature and an integral part of ocean observations.
+
+Link: https://doi.org/10.3389/fmars.2019.00440
+
+> Contributor: Kayla Heuer
 
 ## Lisa DeBruine and Dale Barr (2021) "Data Skills for Reproducible Research" 
 
