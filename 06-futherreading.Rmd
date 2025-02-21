@@ -225,3 +225,16 @@ Link to article: https://blogs.biomedcentral.com/on-biology/2015/07/01/reproduci
 > Contributor: Robyn 
 
 ---
+
+## "Wildlife Biology, Big Data, and Reproducible Research" by Keith P. Lewis, Eric Vander Wal and David A. Fifield (2018)
+
+Historically, the field of wildlife biology has been regarded as data poor, and certain study topics, like animal movement, were not even regarded as part of mainstream ecology because of the lack of data. However, technological advancements (e.g., GPS tags and camera traps) have allowed scientists to produce larger, more accurate data sets, which allow wildlife biologists to conduct analyses over large spatial and temporal scales. This has shifted wildlife biology into the realm of “big data”. However, these changes also mean that the way in which wildlife biologists need to manage, analyse and store data must change. 
+The following paper by [Lewis et al. (2018)] (https://doi.org/10.1002/wsb.847) provides a conceptual framework for reproducible research in wildlife biology. They also present case studies which further emphasise the importance and advantages of using reproducible research practices in the field.  
+The authors conclude that with the advances in the complexity of technology and studies requires a simultaneous change in the way wildlife biologists conduct research and teach others to conduct research. 
+
+References
+LEWIS, K. P., VANDER WAL, E., & FIFIELD, D. A. (2018). Wildlife Biology, Big Data, and Reproducible Research. Wildlife Society Bulletin (2011), 42(1), 172–179. https://doi.org/10.1002/wsb.847
+
+> Contributor: Muhammad Uzair Davids
+
+---
