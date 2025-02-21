@@ -81,3 +81,8 @@ meng-x.-2020.-reproducibility-replicability-and-reliability
 white-et-al.-2015-reproducible-research-in-the-study-of-biological-coloration
 voelkl-et-al.-2020-reproducibility-of-animal-research-in-light-of-biological-variation
 learning-objectives
+reproducible-research-and-public-data-sharing-in-ecology-a-qa-with-lagos-creators
+wildlife-biology-big-data-and-reproducible-research-by-keith-p.-lewis-eric-vander-wal-and-david-a.-fifield-2018
+reproducible-research-can-still-be-wrong-adopting-a-prevention-approach-leek-peng-2015
+ocean-fair-data-services-tanhua-et-al.-2019
+the-tao-of-open-science-for-ecology-a-path-towards-effective-data-management-and-reproducibility.
