@@ -238,3 +238,14 @@ LEWIS, K. P., VANDER WAL, E., & FIFIELD, D. A. (2018). Wildlife Biology, Big Dat
 > Contributor: Muhammad Uzair Davids
 
 ---
+
+## Reproducible research can still be wrong: Adopting a prevention approach (Leek & Peng, 2015)
+
+https://doi.org/10.1073/pnas.1421412111open_in_new
+
+This article seeks to look beyond the problem of reproducible research and makes an appeal for greater education in actual data analysis and study design. Essentially it highlights that although reproducible research is very important in diagnosing faults within the methodology / data / analysis it doesn't fix the faulty thinking that created the problem. From the perspective of the authors reproducibility is a "treatment" against "poor data analyses" (Leek & Peng, 2015) but it is not a preventative measure. With increasingly complicated data and analyses, and higher rates of paper submissions to journals, even if there is transparency and full reproducibility mistakes may not be intercepted in time to prevent negative effects.
+They propose scaling up data science education through massive online open courses (MOOCs) and crowed sourced short courses in data analysis. These will be focused on teaching methods which are the most reproducible and replicable for the novice data analyst. Part of the challenge in implementing this is the need to find the current most efficient statistical methods, analyses types and software for the job. The authors call this method "evidence-based data analysis".
+
+J.T. Leek, & R.D. Peng, Reproducible research can still be wrong: Adopting a prevention approach, Proc. Natl. Acad. Sci. U.S.A. 112 (6) 1645-1646, https://doi.org/10.1073/pnas.1421412111 (2015).
+
+> Contributor: Nic van Tol
