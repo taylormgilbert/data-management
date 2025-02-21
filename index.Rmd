@@ -16,6 +16,9 @@ description: "This is a minimal introduction to reproducible research, including
 
 This is a minimal introduction to reproducible research, including data management and handling data in R, compiled for the Biological Sciences BSc(Honours) class at the University of Cape Town.
 
+This is a living document, and I will be updating it as we go along. It is written in [R Markdown](https://rmarkdown.rstudio.com/) and compiled using [bookdown](https://bookdown.org/). The source code for this document is available on [GitHub](https://github.com/jslingsby/data-management) and is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/deed.en). You are free to use and adapt the material as you see fit, but please provide attribution to the original author.
+
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
