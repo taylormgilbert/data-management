@@ -212,3 +212,16 @@ However, homogenisation makes it difficult for future studies to reproduce resul
 It is vital for scientists to record every decision and process clearly so that studies may be successfully reproduced in the future. 
 
 > Contributor: Ashleigh Gouws
+
+---
+
+## Reproducible Research and Public Data-Sharing in Ecology: A Q&A with LAGOS Creators
+
+A recent study published in GigaScience introduces LAGOS (LAke multi-scaled GeOSpatial and temporal database), an open database compiling hundreds of ecological datasets. LAGOS supports macrosystems ecology research, which analyses ecological interactions at regional and continental scales.
+Professor Pat Soranno of Michigan State University introduces the motivations behind LAGOS, emphasizing the need to study large ecological patterns, such as freshwater ecosystems' role in global carbon cycles, however, A key challenge in ecology is "dark data", when valuable datasets are trapped on individual researchers’ computers, making it inaccessible. LAGOS therefore, addresses this problem by integrating diverse datasets into a reproducible, publicly available resource. By making data more accessible, LAGOS enables scientists to ask large-scale, impactful ecological questions and contribute to a growing movement of data-sharing in environmental research.
+
+Link to article: https://blogs.biomedcentral.com/on-biology/2015/07/01/reproducible-research-public-data-sharing-ecology-qa-lagos-creators/ 
+
+> Contributor: Robyn 
+
+---
