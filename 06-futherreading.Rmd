@@ -268,4 +268,11 @@ Hampton et al. (2015) logically and enthusiastically advocate for a shift in min
 Link: https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/ES14-00402.1
 
 > Contributor: Arwenn
+Summary: The importance of reproducible research and data managementGithub username: @taylormgilbert See: https://www.youtube.com/watch?v=58FUfrIM6bE 
 
+## Keeping a Paper Trail: Data Management Skills for Reproducible Science (Dr K. Laskowski)
+Github username: @taylormgilbert 
+See: https://www.youtube.com/watch?v=58FUfrIM6bE 
+
+This YouTube video provides an insightful overview of the importance of data integrity in reproducible research, using an analogy of the data life cycle as the growth of a child. It mentions how the development of the child (data) from birth to maturity (collection to publication) must be documented by you, the parent (author). The video outlines several practices for maintaining data quality, including documenting each stage of the data collection process, carefully entering and cleaning data, and using tools like R and GitHub to track changes. Now that I have acquired the skill of using those software tools, I too understand the value of using them to track changes. The use of RMarkdown is highlighted as a useful tool to generate reproducible results by combining code and output in a single document. The final step is to deposit both data and code into a public repository, making research open and available for collaboration and correction of errors. This is crucial for reproducible science, as it enables transparency and helps avoid mistakes. The video's message emphasizes the relevance of reproducible research and data management in ensuring the credibility and reliability of scientific findings, particularly in the context of biology, where data accuracy and integrity is vital for understanding complex systems, which cannot communicate (through language, at least) themselves.
+> Contributor: Taylor
